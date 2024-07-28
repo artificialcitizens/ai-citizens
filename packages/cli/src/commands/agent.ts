@@ -55,6 +55,7 @@ export default class Agent extends Command {
     };
 
     const chatLoop = async () => {
+      // @ts-ignore
       const { userInput } = await inquirer.prompt([
         {
           message: "User:",
@@ -79,6 +80,7 @@ export default class Agent extends Command {
         );
         this.log("Generated command:", generatedCommand);
 
+        // @ts-ignore
         const { execute } = await inquirer.prompt([
           {
             choices: [
