@@ -117,7 +117,7 @@ export default class Agent extends Command {
           return;
         } else {
           this.log(
-            "Command not executed, enter new request or type /exit to quit."
+            "Command not executed, enter new request or type exit to quit."
           );
           this.lastCommandOutput = "";
         }
