@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ci:publish": "pnpm publish -r",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ci:version": "changeset version && pnpm install --no-frozen-lockfile && git add ."
   },
   "keywords": [],
   "author": "",
