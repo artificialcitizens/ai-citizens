@@ -9,7 +9,7 @@ import "dotenv/config";
 import inquirer from "inquirer";
 import { exec } from "node:child_process";
 
-import modelManager from "../lib/model-manager.js";
+import { getModel } from "@acai/llm";
 
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 const MAX_OUTPUT_LINES = 100; // Adjust this value as needed
@@ -32,7 +32,7 @@ export default class Agent extends Command {
   private lastCommandOutput = "";
 
   public async run(): Promise<void> {
-    const model = modelManager.anthropicModel({
+    const model = getModel({
       model: "claude-3-haiku-20240307",
     });
     const parser = new StringOutputParser();

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,16 +20,19 @@
     "topicSeparator": " "
   },
   "dependencies": {
-    "@oclif/core": "^4.0.17",
-    "clipboardy": "^4.0.0",
-    "inquirer": "^10.1.4",
+    "@acai/llm": "workspace:*",
     "@langchain/anthropic": "^0.2.10",
     "@langchain/google-genai": "^0.0.23",
     "@langchain/groq": "^0.0.15",
     "@langchain/ollama": "^0.0.2",
-    "@langchain/openai": "^0.2.5"
+    "@langchain/openai": "^0.2.5",
+    "@oclif/core": "^4.0.17",
+    "clipboardy": "^4.0.0",
+    "dotenv": "^16.4.5",
+    "inquirer": "^9.2.23"
   },
   "devDependencies": {
+    "@types/inquirer": "^9.0.7",
     "@types/node": "^18",
     "ts-node": "^10.9.2"
   },

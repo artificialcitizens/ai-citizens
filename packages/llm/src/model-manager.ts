@@ -121,7 +121,7 @@ const ollamaModel = ({
   temperature?: number;
 }) => new ChatOllama({ baseUrl, checkOrPullModel: false, model, temperature });
 
-const getModel = ({
+export const getModel = ({
   baseUrl,
   maxTokens = 1024,
   model,
@@ -168,12 +168,3 @@ const getModel = ({
   throw new Error(`Unsupported model: ${model}`);
 };
 
-export default {
-  anthropicModel,
-  getModel,
-  googleModel,
-  groqModel,
-  localModel,
-  ollamaModel,
-  openAiModel,
-};
