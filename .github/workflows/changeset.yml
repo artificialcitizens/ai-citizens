@@ -32,6 +32,9 @@ jobs:
           commit: "chore: update versions"
           title: "chore: update versions"
           publish: pnpm ci:publish --no-git-checks
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Debug NPM_TOKEN
         run: |
           if [ -n "$NPM_TOKEN" ]; then
