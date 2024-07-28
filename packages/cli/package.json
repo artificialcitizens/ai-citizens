@@ -1,0 +1,38 @@
+{
+  "name": "@acai/ava",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "ava": "./bin/run.js"
+  },
+  "oclif": {
+    "bin": "ava",
+    "commands": "./dist/commands",
+    "dirname": "ava",
+    "topicSeparator": " "
+  },
+  "dependencies": {
+    "@oclif/core": "^4.0.17",
+    "clipboardy": "^4.0.0",
+    "inquirer": "^10.1.4",
+    "@langchain/anthropic": "^0.2.10",
+    "@langchain/google-genai": "^0.0.23",
+    "@langchain/groq": "^0.0.15",
+    "@langchain/ollama": "^0.0.2",
+    "@langchain/openai": "^0.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18",
+    "ts-node": "^10.9.2"
+  },
+  "peerDependencies": {
+    "@langchain/core": "^0.2.18"
+  }
+}
