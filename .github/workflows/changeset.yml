@@ -21,18 +21,17 @@ jobs:
           node-version: 18
       - name: install pnpm
         run: npm i pnpm@latest -g
-      - name: Setup npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
       - name: setup pnpm config
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
       - name: install dependencies
-        run: pnpm install
+        run: pnpm install | grep -v "^npm notice"
       - name: create and publish versions
         uses: changesets/action@v1
         with:
           version: pnpm ci:version
           commit: "chore: update versions"
           title: "chore: update versions"
-          publish: pnpm ci:publish --no-git-checks
+          publish: pnpm ci:publish | grep -v "^npm notice"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
