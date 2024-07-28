@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ci:version": "changeset version && pnpm install --no-frozen-lockfile && git add ."
+    "ci:publish": "pnpm publish -r --no-git-checks"
   },
   "keywords": [],
   "author": "",
