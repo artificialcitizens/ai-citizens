@@ -1,5 +1,13 @@
 # @ai-citizens/ava
 
+## 0.0.6
+
+### Patch Changes
+
+- 2c5f067: update to include cjs build
+- Updated dependencies [2c5f067]
+  - @ai-citizens/llm@0.0.2
+
 ## 0.0.5
 
 ### Patch Changes
