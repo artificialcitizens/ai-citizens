@@ -4,3 +4,4 @@ node_modules/
 .env
 .changeset/README.md
 .changeset/*.tmp.md
+oclif.manifest.json

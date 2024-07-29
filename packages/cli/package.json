@@ -4,22 +4,27 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "author": "Josh Mabry",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
+    "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
-    "oclif-manifest": "oclif manifest",
-    "oclif-readme": "oclif readme",
+    "prepack": "oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "npm run oclif-readme && git add README.md"
+    "version": "oclif readme && git add README.md"
   },
   "types": "dist/index.d.ts",
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "bin": {
     "ava": "./bin/run.js"
   },
+  "files": [
+    "/bin",
+    "/dist",
+    "/oclif.manifest.json"
+  ],
   "oclif": {
     "bin": "ava",
     "commands": "./dist/commands",
