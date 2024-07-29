@@ -18,6 +18,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
+          registry-url: "https://npm.pkg.github.com"
           node-version: 20
       - name: install pnpm
         run: npm i pnpm@latest -g
