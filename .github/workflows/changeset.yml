@@ -22,6 +22,8 @@ jobs:
           node-version: 20
       - name: install pnpm
         run: npm i pnpm@latest -g
+      - name: Install oclif globally
+        run: npm install -g oclif
       - name: Setup npmrc
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
