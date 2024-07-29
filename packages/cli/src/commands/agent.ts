@@ -5,12 +5,13 @@ import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { RunnableWithMessageHistory } from "@langchain/core/runnables";
 import { Command } from "@oclif/core";
 import clipboardy from "clipboardy";
-import "dotenv/config";
 import inquirer from "inquirer";
 import { exec } from "node:child_process";
-
-import { getModel } from "@acai/llm";
-
+import { getModel } from "@artificialcitizens/llm";
+import { config } from "dotenv";
+config({
+  path: ["~/ava.env"],
+});
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 const MAX_OUTPUT_LINES = 100; // Adjust this value as needed
 

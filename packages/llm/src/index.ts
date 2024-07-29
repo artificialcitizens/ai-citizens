@@ -1,1 +1,1 @@
-export { getModel } from "./model-manager.js";
+export * from "./model-manager.js";

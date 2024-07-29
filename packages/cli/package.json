@@ -1,6 +1,6 @@
 {
-  "name": "@acai/ava",
-  "version": "0.0.0",
+  "name": "@artificialcitizens/ava",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -20,7 +20,7 @@
     "topicSeparator": " "
   },
   "dependencies": {
-    "@acai/llm": "workspace:*",
+    "@artificialcitizens/llm": "workspace:*",
     "@langchain/anthropic": "^0.2.10",
     "@langchain/google-genai": "^0.0.23",
     "@langchain/groq": "^0.0.15",

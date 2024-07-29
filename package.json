@@ -2,7 +2,6 @@
   "name": "acai-monorepo",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "ci:publish": "pnpm publish -r --no-git-checks"
   },
@@ -11,7 +10,6 @@
   "license": "ISC",
   "devDependencies": {
     "@changesets/cli": "^2.27.7",
-    "dotenv-cli": "^7.4.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   },

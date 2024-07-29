@@ -3,7 +3,6 @@ import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ChatGroq } from "@langchain/groq";
 import { ChatOllama } from "@langchain/ollama";
 import { ChatOpenAI } from "@langchain/openai";
-import "dotenv/config";
 
 const modelConfig = {
   anthropic: [
@@ -45,7 +44,7 @@ export type Model =
   | OllamaModel
   | OpenAIModel;
 
-const openAiModel = ({
+export const openAiModel = ({
   baseUrl = "https://api.openai.com/v1",
   maxTokens = 1024,
   model = "gpt-3.5-turbo",
@@ -63,7 +62,7 @@ const openAiModel = ({
     temperature,
   });
 
-const groqModel = ({
+export const groqModel = ({
   maxTokens = 1024,
   model = "mixtral-8x7b-32768",
   temperature = 0.5,
@@ -71,9 +70,14 @@ const groqModel = ({
   maxTokens?: number;
   model?: GroqModel;
   temperature?: number;
-}) => new ChatGroq({ maxTokens, model, temperature });
+}) =>
+  new ChatGroq({
+    maxTokens,
+    model,
+    temperature,
+  });
 
-const anthropicModel = ({
+export const anthropicModel = ({
   maxTokens = 1024,
   model = "claude-3-sonnet-20240229",
   temperature = 0.5,
@@ -81,9 +85,14 @@ const anthropicModel = ({
   maxTokens?: number;
   model?: AnthropicModel;
   temperature?: number;
-}) => new ChatAnthropic({ maxTokens, model, temperature });
+}) =>
+  new ChatAnthropic({
+    maxTokens,
+    model,
+    temperature,
+  });
 
-const googleModel = ({
+export const googleModel = ({
   maxTokens = 1024,
   model = "gemini-1.5-pro",
   temperature = 0.5,
@@ -98,7 +107,7 @@ const googleModel = ({
     temperature,
   });
 // Any OpenAI compatible endpoint should work here, tested with llama.cpp server
-const localModel = ({
+export const localModel = ({
   baseURL = "http://localhost:8080/v1",
   maxTokens = 1024,
   model = "hermes-2-pro-llama-3-8b",
@@ -109,9 +118,14 @@ const localModel = ({
   model?: string;
   temperature?: number;
 }) =>
-  new ChatOpenAI({ configuration: { baseURL }, maxTokens, model, temperature });
+  new ChatOpenAI({
+    configuration: { baseURL },
+    maxTokens,
+    model,
+    temperature,
+  });
 
-const ollamaModel = ({
+export const ollamaModel = ({
   baseUrl = "http://localhost:11434",
   model = "llama3.1",
   temperature = 0.1,
@@ -167,4 +181,3 @@ export const getModel = ({
 
   throw new Error(`Unsupported model: ${model}`);
 };
-

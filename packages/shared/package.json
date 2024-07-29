@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@langchain/core": "^0.2.18"
+  },
+  "peerDependencies": {
+    "dotenv": "^16.4.3"
   }
 }

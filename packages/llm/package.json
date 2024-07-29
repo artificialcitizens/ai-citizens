@@ -1,6 +1,6 @@
 {
-  "name": "@acai/llm",
-  "version": "0.0.0",
+  "name": "@artificialcitizens/llm",
+  "version": "0.0.1",
   "description": "",
   "type": "module",
   "main": "dist/index.js",
@@ -17,5 +17,11 @@
     "@langchain/groq": "^0.0.15",
     "@langchain/ollama": "^0.0.2",
     "@langchain/openai": "^0.2.5"
+  },
+  "peerDependencies": {
+    "dotenv": "^16.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18"
   }
 }
