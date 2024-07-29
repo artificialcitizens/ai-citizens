@@ -27,6 +27,7 @@ const modelConfig = {
     "gpt-4-0125-preview",
     "gpt-4-turbo",
     "gpt-4o",
+    "gpt-4o-mini",
   ] as const,
 };
 
