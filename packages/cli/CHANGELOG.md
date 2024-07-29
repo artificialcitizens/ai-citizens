@@ -1,5 +1,11 @@
 # @ai-citizens/ava
 
+## 0.0.4
+
+### Patch Changes
+
+- f9898a4: update readme
+
 ## 0.0.3
 
 ### Patch Changes
