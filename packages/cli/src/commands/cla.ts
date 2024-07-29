@@ -3,11 +3,11 @@ import { AIMessage, HumanMessage } from "@langchain/core/messages";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { RunnableWithMessageHistory } from "@langchain/core/runnables";
-import { Command } from "@oclif/core";
+import { Command, Flags } from "@oclif/core";
 import clipboardy from "clipboardy";
 import inquirer from "inquirer";
 import { exec } from "node:child_process";
-import { getModel } from "@artificialcitizens/llm";
+import { Model, getModel } from "@artificialcitizens/llm";
 import { config } from "dotenv";
 config({
   path: ["~/ava.env"],
@@ -27,14 +27,22 @@ const prompt = ChatPromptTemplate.fromMessages([
 ]);
 
 export default class CLA extends Command {
+  static override flags = {
+    model: Flags.string({
+      description: "The model to use",
+      required: false,
+    }),
+  };
   static override description =
     "Interactive AI agent to generate and execute commands based on natural language input";
 
   private lastCommandOutput = "";
 
   public async run(): Promise<void> {
+    const { flags } = await this.parse(CLA);
+    const m = (flags.model as Model) || "gpt-3.5-turbo";
     const model = getModel({
-      model: "claude-3-haiku-20240307",
+      model: m,
     });
     const parser = new StringOutputParser();
     const chain = prompt.pipe(model).pipe(parser);
