@@ -1,5 +1,11 @@
 # @ai-citizens/ava
 
+## 0.0.3
+
+### Patch Changes
+
+- a4230eb: updates tsconfig
+
 ## 0.0.2
 
 ### Patch Changes
