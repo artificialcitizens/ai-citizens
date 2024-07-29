@@ -2,4 +2,4 @@
 "@ai-citizens/ava": patch
 ---
 
-updates packaging scripts
+updates build pipeline

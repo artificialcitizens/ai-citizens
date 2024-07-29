@@ -1,5 +1,11 @@
 # @ai-citizens/ava
 
+## 0.0.2
+
+### Patch Changes
+
+- 499ddd9: updates packaging scripts
+
 ## 0.0.1
 
 ### Patch Changes
