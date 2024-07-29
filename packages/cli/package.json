@@ -2,8 +2,6 @@
   "name": "@ai-citizens/ava",
   "version": "0.0.4",
   "description": "",
-  "main": "index.js",
-  "type": "module",
   "author": "Josh Mabry",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
