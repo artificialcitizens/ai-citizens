@@ -3,6 +3,7 @@
   "version": "0.0.4",
   "description": "",
   "author": "Josh Mabry",
+  "type": "module",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
