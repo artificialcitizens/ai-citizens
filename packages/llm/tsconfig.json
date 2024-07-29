@@ -4,8 +4,8 @@
     "target": "ESNext",
     "module": "ESNext",
     "declaration": true,
-    "outDir": "dist",
     "esModuleInterop": true,
+    "outDir": "./dist/esm",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "Bundler",
@@ -16,5 +16,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
