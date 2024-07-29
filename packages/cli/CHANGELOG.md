@@ -1,5 +1,11 @@
 # @ai-citizens/ava
 
+## 0.0.5
+
+### Patch Changes
+
+- 7558677: update build process
+
 ## 0.0.4
 
 ### Patch Changes
