@@ -7,9 +7,7 @@
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
-    "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
-    "prepack": "npm run oclif-manifest && npm run oclif-readme",
     "oclif-manifest": "oclif manifest",
     "oclif-readme": "oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
