@@ -7,7 +7,7 @@ import { Command, Flags } from "@oclif/core";
 import clipboardy from "clipboardy";
 import inquirer from "inquirer";
 import { exec } from "node:child_process";
-import { Model, getModel, isAllModel } from "@artificialcitizens/llm";
+import { getModel, isAllModel } from "@ai-citizens/llm";
 import { config } from "dotenv";
 config({
   path: ["~/ava.env"],

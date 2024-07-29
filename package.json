@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "ci:publish": "pnpm publish -r --no-git-checks"
+    "build": "pnpm -r run build",
+    "publish": "pnpm publish -r --filter \"@ai-citizens/*\" --no-git-checks",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && pnpm version-packages && pnpm publish"
   },
   "keywords": [],
   "author": "",

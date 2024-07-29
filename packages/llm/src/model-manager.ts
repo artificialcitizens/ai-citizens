@@ -55,8 +55,8 @@ export type Model =
 export const openAiModel = ({
   baseUrl = "https://api.openai.com/v1",
   maxTokens = 1024,
-  model = "gpt-3.5-turbo",
-  temperature = 0.9,
+  model = "gpt-4o-mini",
+  temperature = 0.5,
 }: {
   baseUrl?: string;
   maxTokens?: number;
@@ -72,7 +72,7 @@ export const openAiModel = ({
 
 export const groqModel = ({
   maxTokens = 1024,
-  model = "mixtral-8x7b-32768",
+  model = "llama-3.1-8b-instant",
   temperature = 0.5,
 }: {
   maxTokens?: number;
@@ -87,7 +87,7 @@ export const groqModel = ({
 
 export const anthropicModel = ({
   maxTokens = 1024,
-  model = "claude-3-sonnet-20240229",
+  model = "claude-3-haiku-20240307",
   temperature = 0.5,
 }: {
   maxTokens?: number;
@@ -116,7 +116,7 @@ export const googleModel = ({
   });
 // Any OpenAI compatible endpoint should work here, tested with llama.cpp server
 export const localModel = ({
-  baseURL = "http://localhost:8080/v1",
+  baseURL = "http://192.168.4.195:8080/v1",
   maxTokens = 1024,
   model = "hermes-2-pro-llama-3-8b",
   temperature = 0.5,
@@ -134,7 +134,7 @@ export const localModel = ({
   });
 
 export const ollamaModel = ({
-  baseUrl = "http://localhost:11434",
+  baseUrl = "http://127.0.0.1:11434",
   model = "llama3.1",
   temperature = 0.1,
 }: {

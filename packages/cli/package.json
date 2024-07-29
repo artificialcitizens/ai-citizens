@@ -1,6 +1,6 @@
 {
-  "name": "@artificialcitizens/ava",
-  "version": "0.0.2",
+  "name": "@ai-citizens/ava",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -27,13 +27,15 @@
     "topicSeparator": " "
   },
   "dependencies": {
-    "@artificialcitizens/llm": "workspace:*",
+    "@ai-citizens/llm": "workspace:*",
     "@langchain/anthropic": "^0.2.10",
     "@langchain/google-genai": "^0.0.23",
     "@langchain/groq": "^0.0.15",
     "@langchain/ollama": "^0.0.2",
     "@langchain/openai": "^0.2.5",
     "@oclif/core": "^4.0.17",
+    "@oclif/plugin-help": "^6",
+    "@oclif/plugin-plugins": "^5",
     "clipboardy": "^4.0.0",
     "dotenv": "^16.4.5",
     "inquirer": "^9.2.23"

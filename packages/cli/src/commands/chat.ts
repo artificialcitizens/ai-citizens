@@ -9,7 +9,7 @@ config({
   path: ["~/ava.env"],
 });
 
-import { getModel, isAllModel } from "@artificialcitizens/llm";
+import { getModel, isAllModel } from "@ai-citizens/llm";
 
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 
@@ -36,6 +36,7 @@ export default class Chat extends Command {
     if (!isAllModel(modelName)) {
       throw new Error(`Invalid model: ${modelName}`);
     }
+
     const model = getModel({ model: modelName });
 
     const parser = new StringOutputParser();
