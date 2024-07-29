@@ -9,9 +9,11 @@
     "lint": "eslint . --ext .ts",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
-    "prepack": "oclif manifest && oclif readme",
+    "prepack": "npm run oclif-manifest && npm run oclif-readme",
+    "oclif-manifest": "oclif manifest",
+    "oclif-readme": "oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif readme && git add README.md"
+    "version": "npm run oclif-readme && git add README.md"
   },
   "types": "dist/index.d.ts",
   "keywords": [],
@@ -41,6 +43,7 @@
     "inquirer": "^9.2.23"
   },
   "devDependencies": {
+    "@oclif/dev-cli": "^1.26.10",
     "@types/inquirer": "^9.0.7",
     "@types/node": "^18",
     "ts-node": "^10.9.2",
