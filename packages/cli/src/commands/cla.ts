@@ -26,7 +26,7 @@ const prompt = ChatPromptTemplate.fromMessages([
   ["human", "{input}"],
 ]);
 
-export default class Agent extends Command {
+export default class CLA extends Command {
   static override description =
     "Interactive AI agent to generate and execute commands based on natural language input";
 
@@ -66,7 +66,7 @@ export default class Agent extends Command {
       ]);
 
       if (userInput.toLowerCase() === "exit") {
-        this.log("Agent session ended. Goodbye!");
+        this.log("Command Line Agent session ended. Goodbye!");
         return;
       }
 
@@ -130,7 +130,7 @@ export default class Agent extends Command {
     };
 
     this.log(
-      "Welcome to the AI Agent. Type your requests in natural language, or type /exit to quit."
+      "Welcome to the Command Line Agent. Type your command in natural language, or type exit to quit."
     );
     await chatLoop();
   }
