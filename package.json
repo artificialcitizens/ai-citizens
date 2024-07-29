@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "pnpm -r run build",
-    "ci:publish": "pnpm publish -r --filter \"@ai-citizens/*\" --no-git-checks",
+    "ci:publish": "pnpm publish --access public -r --filter \"@ai-citizens/*\" --no-git-checks",
     "publish": "pnpm publish -r --filter \"@ai-citizens/*\" --no-git-checks",
     "changeset": "changeset",
     "version-packages": "changeset version",
