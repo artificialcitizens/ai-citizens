@@ -105,15 +105,6 @@ importers:
         specifier: ^18
         version: 18.19.42
 
-  packages/shared:
-    dependencies:
-      '@langchain/core':
-        specifier: ^0.2.18
-        version: 0.2.18(openai@4.53.2)
-      dotenv:
-        specifier: ^16.4.3
-        version: 16.4.5
-
   packages/ui:
     dependencies:
       react:
