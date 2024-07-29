@@ -1,11 +1,5 @@
 # @ai-citizens/ava
 
-## 0.0.3
-
-### Patch Changes
-
-- 5ee34dc: updates build pipeline
-
 ## 0.0.2
 
 ### Patch Changes
