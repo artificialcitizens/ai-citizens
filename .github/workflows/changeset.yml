@@ -18,30 +18,21 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 14
       - name: install pnpm
         run: npm i pnpm@latest -g
+      - name: Setup npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
       - name: setup pnpm config
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
       - name: install dependencies
-        run: pnpm install | grep -v "^npm notice"
+        run: pnpm install
       - name: create and publish versions
         uses: changesets/action@v1
         with:
           version: pnpm ci:version
           commit: "chore: update versions"
           title: "chore: update versions"
-          publish: pnpm ci:publish --no-git-checks
+          publish: pnpm ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Debug NPM_TOKEN
-        run: |
-          if [ -n "$NPM_TOKEN" ]; then
-            echo "NPM_TOKEN is set"
-          else
-            echo "NPM_TOKEN is not set"
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
