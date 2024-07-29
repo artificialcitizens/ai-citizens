@@ -31,6 +31,13 @@ const modelConfig = {
   ] as const,
 };
 
+export type AllModels = (typeof modelConfig)[keyof typeof modelConfig][number];
+export function isAllModel(model: string): model is AllModels {
+  return Object.values(modelConfig).some((models) =>
+    // @ts-expect-error this could be anything
+    models.includes(model)
+  );
+}
 type OpenAIModel = (typeof modelConfig.openAI)[number];
 type GroqModel = (typeof modelConfig.groq)[number];
 type AnthropicModel = (typeof modelConfig.anthropic)[number];

@@ -9,7 +9,7 @@ config({
   path: ["~/ava.env"],
 });
 
-import { getModel, Model } from "@artificialcitizens/llm";
+import { getModel, isAllModel } from "@artificialcitizens/llm";
 
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 
@@ -31,9 +31,12 @@ export default class Chat extends Command {
   public async run(): Promise<void> {
     const { args, flags } = await this.parse(Chat);
 
-    // check if flags.model is of Model union type
-    const m = (flags.model as Model) || "gpt-3.5-turbo" || "gemma2-9b-it";
-    const model = getModel({ model: m });
+    const modelName = flags.model || "gpt-4o-mini";
+
+    if (!isAllModel(modelName)) {
+      throw new Error(`Invalid model: ${modelName}`);
+    }
+    const model = getModel({ model: modelName });
 
     const parser = new StringOutputParser();
     const chain = prompt.pipe(model);
@@ -68,7 +71,7 @@ export default class Chat extends Command {
         return;
       }
 
-      process.stdout.write("Assistant: ");
+      process.stdout.write("Ava: ");
       try {
         for await (const chunk of await withMessageHistory.stream(
           { input: userInput },

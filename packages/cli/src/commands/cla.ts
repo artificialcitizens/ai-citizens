@@ -7,7 +7,7 @@ import { Command, Flags } from "@oclif/core";
 import clipboardy from "clipboardy";
 import inquirer from "inquirer";
 import { exec } from "node:child_process";
-import { Model, getModel } from "@artificialcitizens/llm";
+import { Model, getModel, isAllModel } from "@artificialcitizens/llm";
 import { config } from "dotenv";
 config({
   path: ["~/ava.env"],
@@ -40,9 +40,13 @@ export default class CLA extends Command {
 
   public async run(): Promise<void> {
     const { flags } = await this.parse(CLA);
-    const m = (flags.model as Model) || "gpt-3.5-turbo";
+    const modelName = flags.model || "gpt-4o-mini";
+
+    if (!isAllModel(modelName)) {
+      throw new Error(`Invalid model: ${modelName}`);
+    }
     const model = getModel({
-      model: m,
+      model: modelName,
     });
     const parser = new StringOutputParser();
     const chain = prompt.pipe(model).pipe(parser);
