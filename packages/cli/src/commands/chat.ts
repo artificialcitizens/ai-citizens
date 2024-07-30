@@ -5,9 +5,22 @@ import { RunnableWithMessageHistory } from "@langchain/core/runnables";
 import { Command, Flags } from "@oclif/core";
 import inquirer from "inquirer";
 import { config } from "dotenv";
+
+const configPath = path.join(
+  process.env.ACAI_CONFIG_PATH || process.cwd(),
+  "acai.config.json"
+);
 config({
   path: ["~/ava.env"],
 });
+
+import fs from "fs";
+import path from "path";
+
+function getModelConfig() {
+  const configFile = fs.readFileSync(configPath, "utf8");
+  return JSON.parse(configFile).modelConfig;
+}
 
 import { getModel, isAllModel } from "@ai-citizens/llm";
 
@@ -25,13 +38,49 @@ export default class Chat extends Command {
       description: "The model to use",
       required: false,
     }),
+    modelSelect: Flags.boolean({
+      description: "Select a model",
+      required: false,
+      char: "m",
+    }),
   };
   static override description = "Interactive chat with the AI assistant";
 
   public async run(): Promise<void> {
     const { flags } = await this.parse(Chat);
 
-    const modelName = flags.model || "gpt-4o-mini";
+    let modelName = flags.model || "gpt-4o-mini";
+    if (!isAllModel(modelName)) {
+      this.log(
+        `------------------------------------------------\n\n Invalid model: ${modelName} \n\n Use the --modelSelect || -m flag to select a model\n\n------------------------------------------------`
+      );
+    }
+
+    if (flags.modelSelect) {
+      const modelConfig = getModelConfig();
+
+      // First, select the model provider
+      const { selectedProvider } = await inquirer.prompt([
+        {
+          type: "list",
+          name: "selectedProvider",
+          message: "Select a model provider:",
+          choices: Object.keys(modelConfig),
+        },
+      ]);
+
+      // Then, select the specific model from the chosen provider
+      const { selectedModel } = await inquirer.prompt([
+        {
+          type: "list",
+          name: "selectedModel",
+          message: `Select a ${selectedProvider} model:`,
+          choices: modelConfig[selectedProvider],
+        },
+      ]);
+
+      modelName = selectedModel;
+    }
 
     if (!isAllModel(modelName)) {
       throw new Error(`Invalid model: ${modelName}`);
