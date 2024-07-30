@@ -32,6 +32,7 @@ const modelConfig = {
 };
 
 export type AllModels = (typeof modelConfig)[keyof typeof modelConfig][number];
+export const allModels = Object.values(modelConfig).flat();
 export function isAllModel(model: string): model is AllModels {
   return Object.values(modelConfig).some((models) =>
     // @ts-expect-error this could be anything
