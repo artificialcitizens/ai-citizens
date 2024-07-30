@@ -18,6 +18,16 @@ export function getModelConfig() {
   }
   const configFile = fs.readFileSync(configPath, "utf8");
   const modelConfig = JSON.parse(configFile).modelConfig;
-  modelConfigCache[configPath] = modelConfig;
-  return modelConfig;
+
+  // Filter out empty arrays from the modelConfig
+  const filteredModelConfig = Object.entries(modelConfig).reduce<
+    Record<string, any>
+  >((acc, [key, value]) => {
+    if (!Array.isArray(value) || value.length > 0) {
+      acc[key] = value;
+    }
+    return acc;
+  }, {});
+  modelConfigCache[configPath] = filteredModelConfig;
+  return filteredModelConfig;
 }

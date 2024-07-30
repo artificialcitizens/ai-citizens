@@ -17,21 +17,23 @@
 
 This is the `oclif` CLI for the [Open CLI Framework](https://github.com/oclif/core), that supports the development of oclif plugins and CLIs.
 
-<!-- [See the docs for more information](http://oclif.io).
+<!-- <!-- [See the docs for more information](http://oclif.io). -->
 
 # 🚀 Getting Started Tutorial
 
-The [Getting Started tutorial](http://oclif.io/docs/introduction) is a step-by-step guide to introduce you to oclif. If you have not developed anything in a command line before, this tutorial is a great place to get started.
+Install the CLI globally:
 
-See [Usage](#-usage) below for an overview of the `oclif` CLI.
+`npm i -g @ai-citizens/ava`
+
+Run `ava --help` to see what commands are available.
 
 # 📌 Requirements
 
 Currently, Node 18+ is supported. We support the [LTS versions](https://nodejs.org/en/about/releases) of Node. You can add the [node](https://www.npmjs.com/package/node) package to your CLI to ensure users are running a specific version of Node.
 
-# 📌 Migrating from V1
+<!-- # 📌 Migrating from V1
 
-If you have been using version 1 of the [`oclif` CLI](https://github.com/oclif/oclif/tree/v1.18.4) there are some important differences to note when using the latest version.
+If you have been using version 1 of the [`oclif` CLI](https://github.com/oclif/oclif/tree/v1.18.4) there are some important differences to note when using the latest version. -->
 
 ## Breaking Changes
 
