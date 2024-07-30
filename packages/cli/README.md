@@ -93,61 +93,29 @@ hello world! (./src/commands/hello/world.ts)
 # 🔨 Commands
 
 <!-- commands -->
-* [`ava chat`](#ava-chat)
-* [`ava cla`](#ava-cla)
-* [`ava init [CONFIGPATH]`](#ava-init-configpath)
+* [`ava util process dir [INPUTDIR]`](#ava-util-process-dir-inputdir)
 
-## `ava chat`
+## `ava util process dir [INPUTDIR]`
 
-Interactive chat with the AI assistant
+Converts a directory of files to a text file
 
 ```
 USAGE
-  $ ava chat [--model <value>]
-
-FLAGS
-  --model=<value>  The model to use
-
-DESCRIPTION
-  Interactive chat with the AI assistant
-```
-
-## `ava cla`
-
-Interactive AI agent to generate and execute commands based on natural language input
-
-```
-USAGE
-  $ ava cla [--model <value>]
-
-FLAGS
-  --model=<value>  The model to use
-
-DESCRIPTION
-  Interactive AI agent to generate and execute commands based on natural language input
-```
-
-## `ava init [CONFIGPATH]`
-
-Initialize Ava configuration
-
-```
-USAGE
-  $ ava init [CONFIGPATH] [-f]
+  $ ava util process dir [INPUTDIR] [-g <value>] [-i <value>] [-o <value>]
 
 ARGUMENTS
-  CONFIGPATH  Optional path for the config file
+  INPUTDIR  input directory to convert to text file
 
 FLAGS
-  -f, --force  Overwrite existing config file
+  -g, --gitIgnore=<value>   use .gitignore file to ignore files and directories
+  -i, --ignore=<value>      ignore files and directories using comma separated string
+  -o, --outputFile=<value>  output file to write to
 
 DESCRIPTION
-  Initialize Ava configuration
+  Converts a directory of files to a text file
 
 EXAMPLES
-  $ ava init
-
-  $ ava init /custom/path/ava.env
+  $ ava util process dir
 ```
 <!-- commandsstop -->
 
