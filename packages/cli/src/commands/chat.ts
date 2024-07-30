@@ -29,7 +29,7 @@ export default class Chat extends Command {
   static override description = "Interactive chat with the AI assistant";
 
   public async run(): Promise<void> {
-    const { args, flags } = await this.parse(Chat);
+    const { flags } = await this.parse(Chat);
 
     const modelName = flags.model || "gpt-4o-mini";
 
@@ -37,7 +37,7 @@ export default class Chat extends Command {
       throw new Error(`Invalid model: ${modelName}`);
     }
 
-    const model = getModel({ model: modelName });
+    const model = await getModel({ model: modelName });
 
     const parser = new StringOutputParser();
     const chain = prompt.pipe(model);

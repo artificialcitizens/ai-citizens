@@ -1,12 +1,22 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@ai-citizen/*": ["../*"],
+      "@ai-citizen/utils": ["../utils"]
+    },
     "declaration": true,
     "module": "Node16",
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "./src",
+    "composite": true,
     "strict": true,
     "target": "es2022",
-    "moduleResolution": "node16"
+    "moduleResolution": "node16",
+    "typeRoots": ["node_modules/@types", "node_modules/@ai-citizen/types"]
+  },
+  "ts-node": {
+    "esm": true
   },
   "include": ["./src/**/*"]
 }

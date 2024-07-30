@@ -3,15 +3,12 @@ import { AIMessage, HumanMessage } from "@langchain/core/messages";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { RunnableWithMessageHistory } from "@langchain/core/runnables";
-import { Command, Flags } from "@oclif/core";
 import clipboardy from "clipboardy";
 import inquirer from "inquirer";
 import { exec } from "node:child_process";
 import { getModel, isAllModel } from "@ai-citizens/llm";
-import { config } from "dotenv";
-config({
-  path: ["~/ava.env"],
-});
+import Chat from "./chat.js";
+
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 const MAX_OUTPUT_LINES = 100; // Adjust this value as needed
 
@@ -26,13 +23,7 @@ const prompt = ChatPromptTemplate.fromMessages([
   ["human", "{input}"],
 ]);
 
-export default class CLA extends Command {
-  static override flags = {
-    model: Flags.string({
-      description: "The model to use",
-      required: false,
-    }),
-  };
+export default class CLA extends Chat {
   static override description =
     "Interactive AI agent to generate and execute commands based on natural language input";
 
@@ -45,7 +36,7 @@ export default class CLA extends Command {
     if (!isAllModel(modelName)) {
       throw new Error(`Invalid model: ${modelName}`);
     }
-    const model = getModel({
+    const model = await getModel({
       model: modelName,
     });
     const parser = new StringOutputParser();
