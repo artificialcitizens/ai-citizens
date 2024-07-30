@@ -1,0 +1,31 @@
+{
+  "name": "@ai-citizens/utils",
+  "version": "0.0.0",
+  "description": "a collection of utility functions for AI powered applications",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./process": {
+      "import": "./dist/esm/process/index.js",
+      "require": "./dist/cjs/process/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "typescript": "workspace:*",
+    "@types/node": "workspace:*"
+  },
+  "devDependencies": {}
+}
