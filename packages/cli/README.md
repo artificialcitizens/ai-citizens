@@ -1,30 +1,23 @@
-<img src="https://user-images.githubusercontent.com/449385/38243295-e0a47d58-372e-11e8-9bc0-8c02a6f4d2ac.png" width="260" height="73">
-
 # `oclif` CLI
 
-[![Version](https://img.shields.io/npm/v/oclif.svg)](https://npmjs.org/package/oclif)
+<!-- [![Version](https://img.shields.io/npm/v/oclif.svg)](https://npmjs.org/package/oclif)
 [![Downloads/week](https://img.shields.io/npm/dw/oclif.svg)](https://npmjs.org/package/oclif/oclif)
-[![License](https://img.shields.io/npm/l/oclif.svg)](https://github.com/oclif/oclif/blob/main/package.json)
+[![License](https://img.shields.io/npm/l/oclif.svg)](https://github.com/oclif/oclif/blob/main/package.json) -->
 
 <!-- toc -->
-* [`oclif` CLI](#oclif-cli)
-* [🗒 Description](#-description)
-* [🚀 Getting Started Tutorial](#-getting-started-tutorial)
-* [📌 Requirements](#-requirements)
-* [📌 Migrating from V1](#-migrating-from-v1)
-* [🏗 Usage](#-usage)
-* [📚 Examples](#-examples)
-* [🔨 Commands](#-commands)
-* [🚀 Contributing](#-contributing)
-* [🏭 Related Repositories](#-related-repositories)
-* [🦔 Learn More](#-learn-more)
+
+- [🗒 Description](#-description)
+- [🔨 Commands](#-commands)
+- [🚀 Contributing](#-contributing)
+- [🏭 Related Repositories](#-related-repositories)
+- [🦔 Learn More](#-learn-more)
 <!-- tocstop -->
 
 # 🗒 Description
 
 This is the `oclif` CLI for the [Open CLI Framework](https://github.com/oclif/core), that supports the development of oclif plugins and CLIs.
 
-[See the docs for more information](http://oclif.io).
+<!-- [See the docs for more information](http://oclif.io).
 
 # 🚀 Getting Started Tutorial
 
@@ -88,12 +81,13 @@ hello world! (./src/commands/hello/world.ts)
 
 - [Hello-World](https://github.com/oclif/hello-world)
 - [Salesforce CLI](https://github.com/salesforcecli/cli)
-- [Heroku CLI](https://github.com/heroku/cli)
+- [Heroku CLI](https://github.com/heroku/cli) -->
 
 # 🔨 Commands
 
 <!-- commands -->
-* [`ava util process dir [INPUTDIR]`](#ava-util-process-dir-inputdir)
+
+- [`ava util process dir [INPUTDIR]`](#ava-util-process-dir-inputdir)
 
 ## `ava util process dir [INPUTDIR]`
 
@@ -117,6 +111,7 @@ DESCRIPTION
 EXAMPLES
   $ ava util process dir
 ```
+
 <!-- commandsstop -->
 
 # 🚀 Contributing

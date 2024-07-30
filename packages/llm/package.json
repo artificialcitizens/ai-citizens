@@ -27,7 +27,7 @@
     "@langchain/openai": "^0.2.5"
   },
   "peerDependencies": {
-    "dotenv": "^16.4.3"
+    "dotenv": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^18"

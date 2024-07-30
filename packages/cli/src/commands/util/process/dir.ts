@@ -28,7 +28,8 @@ export default class Dir extends Command {
   static override flags = {
     gitIgnore: Flags.string({
       char: "g",
-      description: "use .gitignore file to ignore files and directories",
+      description:
+        "path to .gitignore file to use for ignoring files and directories",
     }),
     ignore: Flags.string({
       char: "i",

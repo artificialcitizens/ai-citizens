@@ -131,7 +131,7 @@ export const googleModel = ({
 };
 // Any OpenAI compatible endpoint should work here, tested with llama.cpp server
 export async function localModel({
-  baseURL = "http://192.168.4.195:8080/v1",
+  baseURL = process.env.LOCAL_OPENAI_BASE_URL || "http://localhost:8080/v1",
   maxTokens = 1024,
   model = "hermes-2-pro-llama-3-8b",
   temperature = 0.5,
@@ -155,7 +155,7 @@ export async function localModel({
 }
 
 export const ollamaModel = async ({
-  baseUrl = "http://127.0.0.1:11434",
+  baseUrl = process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434",
   model = "llama3.1",
   temperature = 0.1,
 }: {

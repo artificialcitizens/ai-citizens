@@ -25,7 +25,7 @@ export default class Init extends Command {
 
   static override examples = [
     "<%= config.bin %> <%= command.id %>",
-    "<%= config.bin %> <%= command.id %> /custom/path/ava.env",
+    "<%= config.bin %> <%= command.id %> /custom/path",
   ];
 
   static override flags = {

@@ -10,7 +10,7 @@ import { getModel, isAllModel } from "@ai-citizens/llm";
 import Chat from "./chat.js";
 
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
-const MAX_OUTPUT_LINES = 100; // Adjust this value as needed
+const MAX_OUTPUT_LINES = 100;
 
 const systemPrompt = `You are an AI assistant that generates shell commands based on user input. 
 Generate only the command itself, without any explanations or additional text.
