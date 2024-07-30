@@ -36,3 +36,4 @@ coverage
 *.sw?
 .tmp
 _docpress
+tsconfig.tsbuildinfo
