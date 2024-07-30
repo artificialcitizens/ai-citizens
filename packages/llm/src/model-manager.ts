@@ -104,6 +104,7 @@ export const anthropicModel = ({
   if (!process.env.ANTHROPIC_API_KEY) {
     throw new Error("ANTHROPIC_API_KEY is not set");
   }
+
   return new ChatAnthropic({
     maxTokens,
     model,
@@ -163,10 +164,6 @@ export const ollamaModel = async ({
   model?: OllamaModel;
   temperature?: number;
 }) => {
-  const response = await fetch(baseUrl + "/models");
-  if (!response.ok) {
-    throw new Error(`Failed to connect to ${baseUrl}`);
-  }
   return new ChatOllama({
     baseUrl,
     checkOrPullModel: false,
