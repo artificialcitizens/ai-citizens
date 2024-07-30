@@ -4,25 +4,9 @@ import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { RunnableWithMessageHistory } from "@langchain/core/runnables";
 import { Command, Flags } from "@oclif/core";
 import inquirer from "inquirer";
-import { config } from "dotenv";
-
-const configPath = path.join(
-  process.env.ACAI_CONFIG_PATH || process.cwd(),
-  "acai.config.json"
-);
-config({
-  path: ["~/ava.env"],
-});
-
-import fs from "fs";
-import path from "path";
-
-function getModelConfig() {
-  const configFile = fs.readFileSync(configPath, "utf8");
-  return JSON.parse(configFile).modelConfig;
-}
-
-import { getModel, isAllModel } from "@ai-citizens/llm";
+import { getModelConfig } from "../utils/get-model-config.js";
+import * as llm from "@ai-citizens/llm";
+import { XMLParser } from "fast-xml-parser";
 
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 
@@ -46,11 +30,38 @@ export default class Chat extends Command {
   };
   static override description = "Interactive chat with the AI assistant";
 
+  // New method to handle model selection
+  public async selectModel(
+    modelConfig: Record<string, string[]>
+  ): Promise<string> {
+    // First, select the model provider
+    const { selectedProvider } = await inquirer.prompt([
+      {
+        type: "list",
+        name: "selectedProvider",
+        message: "Select a model provider:",
+        choices: Object.keys(modelConfig),
+      },
+    ]);
+
+    // Then, select the specific model from the chosen provider
+    const { selectedModel } = await inquirer.prompt([
+      {
+        type: "list",
+        name: "selectedModel",
+        message: `Select a ${selectedProvider} model:`,
+        choices: modelConfig[selectedProvider],
+      },
+    ]);
+
+    return selectedModel;
+  }
+
   public async run(): Promise<void> {
     const { flags } = await this.parse(Chat);
 
     let modelName = flags.model || "gpt-4o-mini";
-    if (!isAllModel(modelName)) {
+    if (!llm.isAllModel(modelName)) {
       this.log(
         `------------------------------------------------\n\n Invalid model: ${modelName} \n\n Use the --modelSelect || -m flag to select a model\n\n------------------------------------------------`
       );
@@ -58,35 +69,14 @@ export default class Chat extends Command {
 
     if (flags.modelSelect) {
       const modelConfig = getModelConfig();
-
-      // First, select the model provider
-      const { selectedProvider } = await inquirer.prompt([
-        {
-          type: "list",
-          name: "selectedProvider",
-          message: "Select a model provider:",
-          choices: Object.keys(modelConfig),
-        },
-      ]);
-
-      // Then, select the specific model from the chosen provider
-      const { selectedModel } = await inquirer.prompt([
-        {
-          type: "list",
-          name: "selectedModel",
-          message: `Select a ${selectedProvider} model:`,
-          choices: modelConfig[selectedProvider],
-        },
-      ]);
-
-      modelName = selectedModel;
+      modelName = await this.selectModel(modelConfig);
     }
 
-    if (!isAllModel(modelName)) {
+    if (!llm.isAllModel(modelName)) {
       throw new Error(`Invalid model: ${modelName}`);
     }
 
-    const model = await getModel({ model: modelName });
+    const model = await llm.getModel({ model: modelName });
 
     const parser = new StringOutputParser();
     const chain = prompt.pipe(model);

@@ -24,8 +24,8 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "typescript": "workspace:*",
-    "@types/node": "workspace:*"
+    "typescript": "^5.5.4",
+    "@types/node": "^18"
   },
   "devDependencies": {}
 }

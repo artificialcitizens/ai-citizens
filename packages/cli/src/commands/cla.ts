@@ -8,14 +8,34 @@ import inquirer from "inquirer";
 import { exec } from "node:child_process";
 import { getModel, isAllModel } from "@ai-citizens/llm";
 import Chat from "./chat.js";
+import { getModelConfig } from "../utils/get-model-config.js";
+import { XMLParser } from "fast-xml-parser";
 
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 const MAX_OUTPUT_LINES = 100;
 
-const systemPrompt = `You are an AI assistant that generates shell commands based on user input. 
-Generate only the command itself, without any explanations or additional text.
-If the user asks for something that cannot be done with a single shell command, explain why and suggest alternatives.
-You can refer to previous command outputs when generating new commands.`;
+const systemPrompt = `You are an AI assistant specialized in generating shell commands based on user input. Your task is to interpret the user's request and provide an appropriate shell command or explain why the request cannot be fulfilled with a single command.
+
+Rules for generating commands:
+1. Generate only the command itself, without any explanations or additional text.
+2. Ensure the command is a valid shell command that can be executed in a standard Unix-like environment.
+3. If multiple commands are needed, use appropriate operators to combine them (e.g., &&, ||, |).
+4. Use common shell utilities and avoid assuming the presence of specialized tools unless explicitly mentioned by the user.
+5. Prioritize safety and avoid destructive commands unless explicitly requested.
+
+If the user asks for something that cannot be done with a single shell command:
+1. Explain why it's not possible in a brief sentence.
+2. Suggest alternatives or a series of commands that could achieve the desired result.
+
+You can refer to previous command outputs when generating new commands. If the user's input references a previous output, use the information provided in the {{PREVIOUS_OUTPUT}} variable to inform your command generation.
+
+When responding, provide your output in the following format:
+<explanation>Your explanation or helpful tips go here</explanation>
+<command>Your generated shell command or explanation goes here</command>
+
+If there is any previous command output to consider, it will be provided as well.
+
+Generate the appropriate shell command or explanation based on the user's input and any relevant previous output.`;
 
 const prompt = ChatPromptTemplate.fromMessages([
   ["system", systemPrompt],
@@ -31,14 +51,20 @@ export default class CLA extends Chat {
 
   public async run(): Promise<void> {
     const { flags } = await this.parse(CLA);
-    const modelName = flags.model || "gpt-4o-mini";
+    let modelName = flags.model || "gpt-4o-mini";
+
+    if (flags.modelSelect) {
+      modelName = await this.selectModel(getModelConfig());
+    }
 
     if (!isAllModel(modelName)) {
       throw new Error(`Invalid model: ${modelName}`);
     }
+
     const model = await getModel({
       model: modelName,
     });
+
     const parser = new StringOutputParser();
     const chain = prompt.pipe(model).pipe(parser);
 
@@ -78,12 +104,20 @@ export default class CLA extends Chat {
         : userInput;
 
       try {
-        const generatedCommand = await withMessageHistory.invoke(
+        const llmResponse = await withMessageHistory.invoke(
           { input: fullInput },
           config
         );
-        this.log("Generated command:", generatedCommand);
+        const parser = new XMLParser();
+        const xmlDoc = parser.parse(`<root>${llmResponse}</root>`);
 
+        const explanation = xmlDoc.root.explanation || "";
+        const generatedCommand = xmlDoc.root.command || "";
+
+        if (explanation) {
+          this.log("Explanation:", explanation);
+        }
+        this.log("Generated command:", generatedCommand);
         // @ts-ignore
         const { execute } = await inquirer.prompt([
           {

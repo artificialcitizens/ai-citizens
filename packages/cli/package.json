@@ -43,7 +43,8 @@
     "@oclif/plugin-plugins": "^5",
     "clipboardy": "^4.0.0",
     "dotenv": "^16.4.5",
-    "inquirer": "^9.2.23"
+    "inquirer": "^9.2.23",
+    "fast-xml-parser": "^4.4.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.26.10",
