@@ -83,14 +83,15 @@ async function convertDirToTextFile(
 
   // Generate directory structure
   const dirStructure = await generateDirStructure(dirPath);
-  output = `${path.basename(dirPath)}/\n${dirStructure}\n${output}`;
+  const dirName = path.basename(dirPath);
+  output = `${dirName}/\n${dirStructure}\n${output}`;
 
   await processDirectory(dirPath);
 
   if (outputPath) {
-    await fs.writeFile(`${outputPath}/converted-dir-output.txt`, output);
+    const outputFileName = `${dirName}-converted-dir-output.txt`;
+    await fs.writeFile(path.join(outputPath, outputFileName), output);
   }
-
   return output;
 }
 
