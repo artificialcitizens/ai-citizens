@@ -142,11 +142,6 @@ export async function localModel({
   model?: string;
   temperature?: number;
 }) {
-  // check if the url returns anything
-  const response = await fetch(baseURL + "/models");
-  if (!response.ok) {
-    throw new Error(`Failed to connect to ${baseURL}`);
-  }
   return new ChatOpenAI({
     configuration: { baseURL },
     maxTokens,
