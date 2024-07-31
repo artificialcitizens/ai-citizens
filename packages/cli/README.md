@@ -1,44 +1,39 @@
-<img src="https://user-images.githubusercontent.com/449385/38243295-e0a47d58-372e-11e8-9bc0-8c02a6f4d2ac.png" width="260" height="73">
-
 # `oclif` CLI
 
-[![Version](https://img.shields.io/npm/v/oclif.svg)](https://npmjs.org/package/oclif)
+<!-- [![Version](https://img.shields.io/npm/v/oclif.svg)](https://npmjs.org/package/oclif)
 [![Downloads/week](https://img.shields.io/npm/dw/oclif.svg)](https://npmjs.org/package/oclif/oclif)
-[![License](https://img.shields.io/npm/l/oclif.svg)](https://github.com/oclif/oclif/blob/main/package.json)
+[![License](https://img.shields.io/npm/l/oclif.svg)](https://github.com/oclif/oclif/blob/main/package.json) -->
 
 <!-- toc -->
-* [`oclif` CLI](#oclif-cli)
-* [🗒 Description](#-description)
-* [🚀 Getting Started Tutorial](#-getting-started-tutorial)
-* [📌 Requirements](#-requirements)
-* [📌 Migrating from V1](#-migrating-from-v1)
-* [🏗 Usage](#-usage)
-* [📚 Examples](#-examples)
-* [🔨 Commands](#-commands)
-* [🚀 Contributing](#-contributing)
-* [🏭 Related Repositories](#-related-repositories)
-* [🦔 Learn More](#-learn-more)
+
+- [🗒 Description](#-description)
+- [🔨 Commands](#-commands)
+- [🚀 Contributing](#-contributing)
+- [🏭 Related Repositories](#-related-repositories)
+- [🦔 Learn More](#-learn-more)
 <!-- tocstop -->
 
 # 🗒 Description
 
 This is the `oclif` CLI for the [Open CLI Framework](https://github.com/oclif/core), that supports the development of oclif plugins and CLIs.
 
-[See the docs for more information](http://oclif.io).
+<!-- <!-- [See the docs for more information](http://oclif.io). -->
 
 # 🚀 Getting Started Tutorial
 
-The [Getting Started tutorial](http://oclif.io/docs/introduction) is a step-by-step guide to introduce you to oclif. If you have not developed anything in a command line before, this tutorial is a great place to get started.
+Install the CLI globally:
 
-See [Usage](#-usage) below for an overview of the `oclif` CLI.
+`npm i -g @ai-citizens/ava`
+
+Run `ava --help` to see what commands are available.
 
 # 📌 Requirements
 
 Currently, Node 18+ is supported. We support the [LTS versions](https://nodejs.org/en/about/releases) of Node. You can add the [node](https://www.npmjs.com/package/node) package to your CLI to ensure users are running a specific version of Node.
 
-# 📌 Migrating from V1
+<!-- # 📌 Migrating from V1
 
-If you have been using version 1 of the [`oclif` CLI](https://github.com/oclif/oclif/tree/v1.18.4) there are some important differences to note when using the latest version.
+If you have been using version 1 of the [`oclif` CLI](https://github.com/oclif/oclif/tree/v1.18.4) there are some important differences to note when using the latest version. -->
 
 ## Breaking Changes
 
@@ -88,67 +83,37 @@ hello world! (./src/commands/hello/world.ts)
 
 - [Hello-World](https://github.com/oclif/hello-world)
 - [Salesforce CLI](https://github.com/salesforcecli/cli)
-- [Heroku CLI](https://github.com/heroku/cli)
+- [Heroku CLI](https://github.com/heroku/cli) -->
 
 # 🔨 Commands
 
 <!-- commands -->
-* [`ava chat`](#ava-chat)
-* [`ava cla`](#ava-cla)
-* [`ava init [CONFIGPATH]`](#ava-init-configpath)
 
-## `ava chat`
+- [`ava util process dir [INPUTDIR]`](#ava-util-process-dir-inputdir)
 
-Interactive chat with the AI assistant
+## `ava util process dir [INPUTDIR]`
 
-```
-USAGE
-  $ ava chat [--model <value>]
-
-FLAGS
-  --model=<value>  The model to use
-
-DESCRIPTION
-  Interactive chat with the AI assistant
-```
-
-## `ava cla`
-
-Interactive AI agent to generate and execute commands based on natural language input
+Converts a directory of files to a text file
 
 ```
 USAGE
-  $ ava cla [--model <value>]
-
-FLAGS
-  --model=<value>  The model to use
-
-DESCRIPTION
-  Interactive AI agent to generate and execute commands based on natural language input
-```
-
-## `ava init [CONFIGPATH]`
-
-Initialize Ava configuration
-
-```
-USAGE
-  $ ava init [CONFIGPATH] [-f]
+  $ ava util process dir [INPUTDIR] [-g <value>] [-i <value>] [-o <value>]
 
 ARGUMENTS
-  CONFIGPATH  Optional path for the config file
+  INPUTDIR  input directory to convert to text file
 
 FLAGS
-  -f, --force  Overwrite existing config file
+  -g, --gitIgnore=<value>   use .gitignore file to ignore files and directories
+  -i, --ignore=<value>      ignore files and directories using comma separated string
+  -o, --outputFile=<value>  output file to write to
 
 DESCRIPTION
-  Initialize Ava configuration
+  Converts a directory of files to a text file
 
 EXAMPLES
-  $ ava init
-
-  $ ava init /custom/path/ava.env
+  $ ava util process dir
 ```
+
 <!-- commandsstop -->
 
 # 🚀 Contributing

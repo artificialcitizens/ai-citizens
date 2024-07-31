@@ -32,6 +32,7 @@ const modelConfig = {
 };
 
 export type AllModels = (typeof modelConfig)[keyof typeof modelConfig][number];
+export const allModels = Object.values(modelConfig).flat();
 export function isAllModel(model: string): model is AllModels {
   return Object.values(modelConfig).some((models) =>
     // @ts-expect-error this could be anything
@@ -62,14 +63,17 @@ export const openAiModel = ({
   maxTokens?: number;
   model?: OpenAIModel;
   temperature?: number;
-}) =>
-  new ChatOpenAI({
+}) => {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error("OPENAI_API_KEY is not set");
+  }
+  return new ChatOpenAI({
     configuration: { baseURL: baseUrl },
     maxTokens,
     model,
     temperature,
   });
-
+};
 export const groqModel = ({
   maxTokens = 1024,
   model = "llama-3.1-8b-instant",
@@ -78,13 +82,16 @@ export const groqModel = ({
   maxTokens?: number;
   model?: GroqModel;
   temperature?: number;
-}) =>
-  new ChatGroq({
+}) => {
+  if (!process.env.GROQ_API_KEY) {
+    throw new Error("GROQ_API_KEY is not set");
+  }
+  return new ChatGroq({
     maxTokens,
     model,
     temperature,
   });
-
+};
 export const anthropicModel = ({
   maxTokens = 1024,
   model = "claude-3-haiku-20240307",
@@ -93,12 +100,17 @@ export const anthropicModel = ({
   maxTokens?: number;
   model?: AnthropicModel;
   temperature?: number;
-}) =>
-  new ChatAnthropic({
+}) => {
+  if (!process.env.ANTHROPIC_API_KEY) {
+    throw new Error("ANTHROPIC_API_KEY is not set");
+  }
+
+  return new ChatAnthropic({
     maxTokens,
     model,
     temperature,
   });
+};
 
 export const googleModel = ({
   maxTokens = 1024,
@@ -108,15 +120,19 @@ export const googleModel = ({
   maxTokens?: number;
   model?: GoogleModel;
   temperature?: number;
-}) =>
-  new ChatGoogleGenerativeAI({
+}) => {
+  if (!process.env.GOOGLE_API_KEY) {
+    throw new Error("GOOGLE_API_KEY is not set");
+  }
+  return new ChatGoogleGenerativeAI({
     maxOutputTokens: maxTokens,
     model,
     temperature,
   });
+};
 // Any OpenAI compatible endpoint should work here, tested with llama.cpp server
-export const localModel = ({
-  baseURL = "http://192.168.4.195:8080/v1",
+export async function localModel({
+  baseURL = process.env.LOCAL_OPENAI_BASE_URL || "http://localhost:8080/v1",
   maxTokens = 1024,
   model = "hermes-2-pro-llama-3-8b",
   temperature = 0.5,
@@ -125,23 +141,31 @@ export const localModel = ({
   maxTokens?: number;
   model?: string;
   temperature?: number;
-}) =>
-  new ChatOpenAI({
+}) {
+  return new ChatOpenAI({
     configuration: { baseURL },
     maxTokens,
     model,
     temperature,
   });
+}
 
-export const ollamaModel = ({
-  baseUrl = "http://127.0.0.1:11434",
+export const ollamaModel = async ({
+  baseUrl = process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434",
   model = "llama3.1",
   temperature = 0.1,
 }: {
   baseUrl?: string;
   model?: OllamaModel;
   temperature?: number;
-}) => new ChatOllama({ baseUrl, checkOrPullModel: false, model, temperature });
+}) => {
+  return new ChatOllama({
+    baseUrl,
+    checkOrPullModel: false,
+    model,
+    temperature,
+  });
+};
 
 export const getModel = ({
   baseUrl,

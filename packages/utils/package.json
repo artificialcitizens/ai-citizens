@@ -1,7 +1,7 @@
 {
-  "name": "@ai-citizens/llm",
-  "version": "0.0.2",
-  "description": "",
+  "name": "@ai-citizens/utils",
+  "version": "0.0.0",
+  "description": "a collection of utility functions for AI powered applications",
   "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -10,6 +10,10 @@
     ".": {
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
+    },
+    "./process": {
+      "import": "./dist/esm/process/index.js",
+      "require": "./dist/cjs/process/index.js"
     }
   },
   "scripts": {
@@ -19,17 +23,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@langchain/anthropic": "^0.2.10",
-    "@langchain/google-genai": "^0.0.23",
-    "@langchain/groq": "^0.0.15",
-    "@langchain/ollama": "^0.0.2",
-    "@langchain/openai": "^0.2.5"
-  },
   "peerDependencies": {
-    "dotenv": "^16.4.5"
-  },
-  "devDependencies": {
+    "typescript": "^5.5.4",
     "@types/node": "^18"
-  }
+  },
+  "devDependencies": {}
 }

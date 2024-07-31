@@ -4,12 +4,8 @@ import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { RunnableWithMessageHistory } from "@langchain/core/runnables";
 import { Command, Flags } from "@oclif/core";
 import inquirer from "inquirer";
-import { config } from "dotenv";
-config({
-  path: ["~/ava.env"],
-});
-
-import { getModel, isAllModel } from "@ai-citizens/llm";
+import { getModelConfig } from "../utils/get-model-config.js";
+import * as llm from "@ai-citizens/llm";
 
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 
@@ -25,19 +21,61 @@ export default class Chat extends Command {
       description: "The model to use",
       required: false,
     }),
+    modelSelect: Flags.boolean({
+      description: "Select a model",
+      required: false,
+      char: "m",
+    }),
   };
   static override description = "Interactive chat with the AI assistant";
 
+  // New method to handle model selection
+  public async selectModel(
+    modelConfig: Record<string, string[]>
+  ): Promise<string> {
+    // First, select the model provider
+    const { selectedProvider } = await inquirer.prompt([
+      {
+        type: "list",
+        name: "selectedProvider",
+        message: "Select a model provider:",
+        choices: Object.keys(modelConfig),
+      },
+    ]);
+
+    // Then, select the specific model from the chosen provider
+    const { selectedModel } = await inquirer.prompt([
+      {
+        type: "list",
+        name: "selectedModel",
+        message: `Select a ${selectedProvider} model:`,
+        choices: modelConfig[selectedProvider],
+      },
+    ]);
+
+    return selectedModel;
+  }
+
   public async run(): Promise<void> {
-    const { args, flags } = await this.parse(Chat);
+    const { flags } = await this.parse(Chat);
 
-    const modelName = flags.model || "gpt-4o-mini";
+    let modelName = flags.model || "gpt-4o-mini";
+    if (!llm.isAllModel(modelName)) {
+      this.log(
+        `------------------------------------------------\n\n Invalid model: ${modelName} \n\n Use the --modelSelect || -m flag to select a model\n\n------------------------------------------------`
+      );
+    }
 
-    if (!isAllModel(modelName)) {
+    if (flags.modelSelect) {
+      const modelConfig = getModelConfig();
+      modelName = await this.selectModel(modelConfig);
+    }
+
+    if (!llm.isAllModel(modelName)) {
       throw new Error(`Invalid model: ${modelName}`);
     }
 
-    const model = getModel({ model: modelName });
+    const model = await llm.getModel({ model: modelName });
 
     const parser = new StringOutputParser();
     const chain = prompt.pipe(model);
