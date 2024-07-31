@@ -1,5 +1,11 @@
 # @ai-citizens/ava
 
+## 0.0.8
+
+### Patch Changes
+
+- ac74a4c: updates config pathing and logic
+
 ## 0.0.7
 
 ### Patch Changes
