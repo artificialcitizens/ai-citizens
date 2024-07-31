@@ -6,7 +6,11 @@ import { Command, Flags } from "@oclif/core";
 import inquirer from "inquirer";
 import { getModelConfig } from "../utils/get-model-config.js";
 import * as llm from "@ai-citizens/llm";
+import { config } from "dotenv";
 
+config({
+  path: [`${process.env.AVA_CONFIG_PATH}/ava.env`, process.cwd() + "/ava.env"],
+});
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 
 const prompt = ChatPromptTemplate.fromMessages([
