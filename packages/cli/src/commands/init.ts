@@ -1,7 +1,5 @@
 import { Args, Command, Flags } from "@oclif/core";
 import * as fs from "fs";
-import * as path from "path";
-import * as os from "os";
 import inquirer from "inquirer";
 
 enum ApiKeys {
@@ -11,6 +9,8 @@ enum ApiKeys {
   GOOGLE_API_KEY = "GOOGLE_API_KEY",
   GROQ_API_KEY = "GROQ_API_KEY",
   UNSTRUCTURED_API_KEY = "UNSTRUCTURED_API_KEY",
+  LOCAL_OPENAI_BASE_URL = "LOCAL_OPENAI_BASE_URL",
+  OLLAMA_BASE_URL = "OLLAMA_BASE_URL",
 }
 
 export default class Init extends Command {
@@ -71,22 +71,22 @@ export default class Init extends Command {
 
   public async run(): Promise<void> {
     const { args, flags } = await this.parse(Init);
+    const currentDir = process.cwd();
+    const configPath = args.configPath || currentDir;
 
-    const configPath = args.configPath || path.join(os.homedir(), "ava.env");
+    let env = this.readExistingConfig(configPath + "/ava.env");
 
-    let config = this.readExistingConfig(configPath);
-
-    if (Object.keys(config).length > 0 && !flags.force) {
+    if (Object.keys(env).length > 0 && !flags.force) {
       this.log(
         `Existing config file found at ${configPath}. Updating with missing keys.`
       );
     } else {
-      config = {};
+      env = {};
       this.log(`Creating new config file at ${configPath}.`);
     }
 
     try {
-      const updatedConfig = await this.promptForMissingKeys(config);
+      const updatedConfig = await this.promptForMissingKeys(env);
 
       const configContent = Object.entries(updatedConfig)
         .map(([key, value]) => `${key}=${value}`)
@@ -95,13 +95,13 @@ export default class Init extends Command {
       fs.writeFileSync(configPath, configContent);
       this.log(
         `Ava config file ${
-          Object.keys(config).length > 0 ? "updated" : "created"
+          Object.keys(env).length > 0 ? "updated" : "created"
         } at: ${configPath}`
       );
     } catch (error) {
       this.error(
         `Failed to ${
-          Object.keys(config).length > 0 ? "update" : "create"
+          Object.keys(env).length > 0 ? "update" : "create"
         } config file: ${error}`
       );
     }

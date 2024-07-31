@@ -6,7 +6,6 @@ import { Command, Flags } from "@oclif/core";
 import inquirer from "inquirer";
 import { getModelConfig } from "../utils/get-model-config.js";
 import * as llm from "@ai-citizens/llm";
-import { XMLParser } from "fast-xml-parser";
 
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 
