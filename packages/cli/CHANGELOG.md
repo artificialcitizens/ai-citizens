@@ -1,5 +1,14 @@
 # @ai-citizens/ava
 
+## 0.0.7
+
+### Patch Changes
+
+- 78aa8ed: adds utils, additional model handling improvements
+- Updated dependencies [78aa8ed]
+  - @ai-citizens/utils@0.0.1
+  - @ai-citizens/llm@0.0.3
+
 ## 0.0.6
 
 ### Patch Changes
