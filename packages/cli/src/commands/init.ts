@@ -11,6 +11,7 @@ enum ApiKeys {
   UNSTRUCTURED_API_KEY = "UNSTRUCTURED_API_KEY",
   LOCAL_OPENAI_BASE_URL = "LOCAL_OPENAI_BASE_URL",
   OLLAMA_BASE_URL = "OLLAMA_BASE_URL",
+  AVA_CONFIG_PATH = "AVA_CONFIG_PATH",
 }
 
 export default class Init extends Command {
@@ -53,7 +54,8 @@ export default class Init extends Command {
     config: Record<string, string>
   ): Promise<Record<string, string>> {
     for (const key of Object.values(ApiKeys)) {
-      if (!config[key]) {
+      // Skip AVA_CONFIG_PATH
+      if (key !== ApiKeys.AVA_CONFIG_PATH && !config[key]) {
         const { value } = await inquirer.prompt([
           {
             type: "input",
@@ -73,8 +75,8 @@ export default class Init extends Command {
     const { args, flags } = await this.parse(Init);
     const currentDir = process.cwd();
     const configPath = args.configPath || currentDir;
-
-    let env = this.readExistingConfig(configPath + "/ava.env");
+    const envPath = configPath + "/ava.env";
+    let env = this.readExistingConfig(envPath);
 
     if (Object.keys(env).length > 0 && !flags.force) {
       this.log(
@@ -88,15 +90,19 @@ export default class Init extends Command {
     try {
       const updatedConfig = await this.promptForMissingKeys(env);
 
-      const configContent = Object.entries(updatedConfig)
-        .map(([key, value]) => `${key}=${value}`)
+      // Add AVA_CONFIG_PATH to the config
+      updatedConfig[ApiKeys.AVA_CONFIG_PATH] = configPath;
+
+      // Ensure all ApiKeys are present in the config, even if empty
+      const configContent = Object.values(ApiKeys)
+        .map((key) => `${key}=${updatedConfig[key] || ""}`)
         .join("\n");
 
-      fs.writeFileSync(configPath, configContent);
+      fs.writeFileSync(envPath, configContent);
       this.log(
         `Ava config file ${
           Object.keys(env).length > 0 ? "updated" : "created"
-        } at: ${configPath}`
+        } at: ${envPath}`
       );
     } catch (error) {
       this.error(

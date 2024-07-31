@@ -1,14 +1,10 @@
 import fs from "fs";
 import path from "path";
-import { config } from "dotenv";
 
 const configPath = path.join(
-  process.env.ACAI_CONFIG_PATH || process.cwd(),
-  "acai.config.json"
+  process.env.AVA_CONFIG_PATH || process.cwd(),
+  "ava.config.json"
 );
-config({
-  path: [`${configPath}/.env`],
-});
 
 const modelConfigCache: Record<string, any> = {};
 
