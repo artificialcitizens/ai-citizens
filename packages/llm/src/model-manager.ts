@@ -4,47 +4,64 @@ import { ChatGroq } from "@langchain/groq";
 import { ChatOllama } from "@langchain/ollama";
 import { ChatOpenAI } from "@langchain/openai";
 
-const modelConfig = {
-  anthropic: [
-    "claude-3-5-sonnet-20240620",
-    "claude-3-haiku-20240307",
-    "claude-3-opus-20240229",
-    "claude-3-sonnet-20240229",
-  ] as const,
-  google: ["gemini-1.0-pro", "gemini-1.5-flash", "gemini-1.5-pro"] as const,
-  groq: [
-    "gemma-7b-it",
-    "gemma2-9b-it",
-    "llama-3.1-8b-instant",
-    "llama-3.1-70b-versatile",
-    "mixtral-8x7b-32768",
-  ] as const,
-  local: ["hermes-2-pro-llama-3-8b"] as const,
-  ollama: ["llama3.1"] as const,
-  openAI: [
-    "gpt-3.5-turbo",
-    "gpt-4",
-    "gpt-4-0125-preview",
-    "gpt-4-turbo",
-    "gpt-4o",
-    "gpt-4o-mini",
-  ] as const,
+export const modelConfig = {
+  anthropic: {
+    models: [
+      "claude-3-5-sonnet-20240620",
+      "claude-3-haiku-20240307",
+      "claude-3-opus-20240229",
+      "claude-3-sonnet-20240229",
+    ] as const,
+  },
+  google: {
+    models: ["gemini-1.0-pro", "gemini-1.5-flash", "gemini-1.5-pro"] as const,
+  },
+  groq: {
+    models: [
+      "gemma-7b-it",
+      "gemma2-9b-it",
+      "llama-3.1-8b-instant",
+      "llama-3.1-70b-versatile",
+      "mixtral-8x7b-32768",
+    ] as const,
+  },
+  local: {
+    models: ["hermes-2-pro-llama-3-8b"] as const,
+  },
+  ollama: {
+    models: ["llama3.1"] as const,
+  },
+  openAI: {
+    models: [
+      "gpt-3.5-turbo",
+      "gpt-4",
+      "gpt-4-0125-preview",
+      "gpt-4-turbo",
+      "gpt-4o",
+      "gpt-4o-mini",
+    ] as const,
+  },
 };
 
-export type AllModels = (typeof modelConfig)[keyof typeof modelConfig][number];
-export const allModels = Object.values(modelConfig).flat();
+export type AllModels =
+  (typeof modelConfig)[keyof typeof modelConfig]["models"][number];
+
+export const allModels = Object.values(modelConfig).flatMap(
+  (config) => config.models
+);
+
 export function isAllModel(model: string): model is AllModels {
-  return Object.values(modelConfig).some((models) =>
+  return Object.values(modelConfig).some((config) =>
     // @ts-expect-error this could be anything
-    models.includes(model)
+    config.models.includes(model)
   );
 }
-type OpenAIModel = (typeof modelConfig.openAI)[number];
-type GroqModel = (typeof modelConfig.groq)[number];
-type AnthropicModel = (typeof modelConfig.anthropic)[number];
-type GoogleModel = (typeof modelConfig.google)[number];
-type LocalModel = (typeof modelConfig.local)[number];
-type OllamaModel = (typeof modelConfig.ollama)[number];
+type OpenAIModel = (typeof modelConfig.openAI.models)[number];
+type GroqModel = (typeof modelConfig.groq.models)[number];
+type AnthropicModel = (typeof modelConfig.anthropic.models)[number];
+type GoogleModel = (typeof modelConfig.google.models)[number];
+type LocalModel = (typeof modelConfig.local.models)[number];
+type OllamaModel = (typeof modelConfig.ollama.models)[number];
 export type Model =
   | AnthropicModel
   | GoogleModel
@@ -178,7 +195,7 @@ export const getModel = ({
   model: Model;
   temperature?: number;
 }) => {
-  if (modelConfig.openAI.includes(model as OpenAIModel)) {
+  if (modelConfig["openAI"].models.includes(model as OpenAIModel)) {
     return openAiModel({
       baseUrl,
       maxTokens,
@@ -187,11 +204,11 @@ export const getModel = ({
     });
   }
 
-  if (modelConfig.groq.includes(model as GroqModel)) {
+  if (modelConfig["groq"].models.includes(model as GroqModel)) {
     return groqModel({ maxTokens, model: model as GroqModel, temperature });
   }
 
-  if (modelConfig.anthropic.includes(model as AnthropicModel)) {
+  if (modelConfig["anthropic"].models.includes(model as AnthropicModel)) {
     return anthropicModel({
       maxTokens,
       model: model as AnthropicModel,
@@ -199,15 +216,15 @@ export const getModel = ({
     });
   }
 
-  if (modelConfig.google.includes(model as GoogleModel)) {
+  if (modelConfig["google"].models.includes(model as GoogleModel)) {
     return googleModel({ maxTokens, model: model as GoogleModel, temperature });
   }
 
-  if (modelConfig.local.includes(model as LocalModel)) {
+  if (modelConfig["local"].models.includes(model as LocalModel)) {
     return localModel({ baseURL: baseUrl, maxTokens, model, temperature });
   }
 
-  if (modelConfig.ollama.includes(model as OllamaModel)) {
+  if (modelConfig["ollama"].models.includes(model as OllamaModel)) {
     return ollamaModel({ model: model as OllamaModel, temperature });
   }
 
