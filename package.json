@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "build": "pnpm -r run build",
+    "clean": "pnpm -r run clean",
+    "build": "pnpm run clean && pnpm -r run build",
     "ci:publish": "pnpm publish --access public -r --filter \"@ai-citizens/*\" --no-git-checks",
     "ci:version": "changeset version",
     "publish": "pnpm publish -r --filter \"@ai-citizens/*\" --no-git-checks",
@@ -16,12 +17,16 @@
   "license": "ISC",
   "devDependencies": {
     "@changesets/cli": "^2.27.7",
+    "@types/node": "^18",
+    "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4",
-    "@types/node": "^18"
+    "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@langchain/core": "^0.2.18",
+    "@ai-citizens/llm": "workspace:*",
+    "@ai-citizens/tools": "workspace:*",
+    "@ai-citizens/prompts": "workspace:*",
+    "@ai-citizens/utils": "workspace:*",
     "dotenv": "^16.4.5"
   }
 }

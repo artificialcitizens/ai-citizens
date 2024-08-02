@@ -13,14 +13,22 @@
     }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@langchain/langgraph": "^0.0.31",
+    "@langchain/core": "^0.2.18",
+    "uuid": "^10.0.0"
+  },
   "peerDependencies": {
+    "@ai-citizens/llm": "workspace:*",
+    "@ai-citizens/prompts": "workspace:*",
+    "@ai-citizens/utils": "workspace:*",
+    "@ai-citizens/tools": "workspace:*",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {

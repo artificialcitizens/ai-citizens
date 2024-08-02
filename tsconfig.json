@@ -1,3 +1,11 @@
 {
-  "extends": "./tsconfig.base.json"
+  "extends": "./tsconfig.base.json",
+  "references": [
+    { "path": "packages/llm" },
+    { "path": "packages/prompts" },
+    { "path": "packages/graph" },
+    { "path": "packages/utils" },
+    { "path": "packages/tools" },
+    { "path": "packages/cli" }
+  ]
 }

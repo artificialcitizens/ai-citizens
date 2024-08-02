@@ -6,13 +6,13 @@
       "@ai-citizen/utils": ["../utils"]
     },
     "declaration": true,
-    "module": "Node16",
+    "module": "NodeNext",
     "outDir": "dist",
     "rootDir": "./src",
     "composite": true,
     "strict": true,
     "target": "es2022",
-    "moduleResolution": "node16",
+    "moduleResolution": "NodeNext",
     "typeRoots": ["node_modules/@types", "node_modules/@ai-citizen/types"]
   },
   "ts-node": {

@@ -1,19 +1,20 @@
 {
   "compilerOptions": {
     "incremental": true,
+    "types": ["node"],
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "NodeNext",
     "declaration": true,
     "esModuleInterop": true,
     "outDir": "./dist/esm",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "Bundler",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@ai-citizen/*": ["../*"]
     }
   },
   "include": ["src/**/*"],

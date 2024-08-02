@@ -33,6 +33,9 @@
   "dependencies": {
     "@ai-citizens/llm": "workspace:*",
     "@ai-citizens/utils": "workspace:*",
+    "@ai-citizens/graph": "workspace:*",
+    "@ai-citizens/prompts": "workspace:*",
+    "@ai-citizens/tools": "workspace:*",
     "@langchain/anthropic": "^0.2.10",
     "@langchain/google-genai": "^0.0.23",
     "@langchain/groq": "^0.0.15",

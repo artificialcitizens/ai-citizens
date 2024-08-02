@@ -8,9 +8,18 @@ importers:
 
   .:
     dependencies:
-      '@langchain/core':
-        specifier: ^0.2.18
-        version: 0.2.19(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)
+      '@ai-citizens/llm':
+        specifier: workspace:*
+        version: link:packages/llm
+      '@ai-citizens/prompts':
+        specifier: workspace:*
+        version: link:packages/prompts
+      '@ai-citizens/tools':
+        specifier: workspace:*
+        version: link:packages/tools
+      '@ai-citizens/utils':
+        specifier: workspace:*
+        version: link:packages/utils
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -20,19 +29,31 @@ importers:
         version: 2.27.7
       '@types/node':
         specifier: ^18
-        version: 18.19.42
+        version: 18.19.43
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.7.4)(@types/node@18.19.42)(typescript@5.5.4)
+        version: 10.9.2(@swc/core@1.7.5)(@types/node@18.19.43)(typescript@5.5.4)
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
 
   packages/cli:
     dependencies:
+      '@ai-citizens/graph':
+        specifier: workspace:*
+        version: link:../graph
       '@ai-citizens/llm':
         specifier: workspace:*
         version: link:../llm
+      '@ai-citizens/prompts':
+        specifier: workspace:*
+        version: link:../prompts
+      '@ai-citizens/tools':
+        specifier: workspace:*
+        version: link:../tools
       '@ai-citizens/utils':
         specifier: workspace:*
         version: link:../utils
@@ -84,74 +105,109 @@ importers:
         version: 9.0.7
       '@types/node':
         specifier: ^18
-        version: 18.19.42
+        version: 18.19.43
       shx:
         specifier: ^0.3.3
         version: 0.3.4
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.7.4)(@types/node@18.19.42)(typescript@5.5.4)
+        version: 10.9.2(@swc/core@1.7.5)(@types/node@18.19.43)(typescript@5.5.4)
 
   packages/graph:
     dependencies:
+      '@ai-citizens/llm':
+        specifier: workspace:*
+        version: link:../llm
+      '@ai-citizens/prompts':
+        specifier: workspace:*
+        version: link:../prompts
+      '@ai-citizens/tools':
+        specifier: workspace:*
+        version: link:../tools
+      '@ai-citizens/utils':
+        specifier: workspace:*
+        version: link:../utils
+      '@langchain/core':
+        specifier: ^0.2.18
+        version: 0.2.19(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)
+      '@langchain/langgraph':
+        specifier: ^0.0.31
+        version: 0.0.31(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
+      uuid:
+        specifier: ^10.0.0
+        version: 10.0.0
     devDependencies:
       '@types/node':
         specifier: ^18
-        version: 18.19.42
+        version: 18.19.43
 
   packages/llm:
     dependencies:
       '@langchain/anthropic':
         specifier: ^0.2.10
-        version: 0.2.12(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)
+        version: 0.2.12
       '@langchain/google-genai':
         specifier: ^0.0.23
-        version: 0.0.23(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)(zod@3.23.8)
+        version: 0.0.23(zod@3.23.8)
       '@langchain/groq':
         specifier: ^0.0.15
-        version: 0.0.15(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)
+        version: 0.0.15
       '@langchain/ollama':
         specifier: ^0.0.2
-        version: 0.0.2(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)
+        version: 0.0.2
       '@langchain/openai':
         specifier: ^0.2.5
-        version: 0.2.5(langchain@0.2.12(openai@4.54.0))
+        version: 0.2.5
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
-    devDependencies:
-      '@types/node':
-        specifier: ^18
-        version: 18.19.42
 
   packages/prompts:
     dependencies:
+      '@langchain/core':
+        specifier: ^0.2.18
+        version: 0.2.19(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
     devDependencies:
       '@types/node':
         specifier: ^18
-        version: 18.19.42
+        version: 18.19.43
 
   packages/tools:
     dependencies:
       '@ai-citizens/llm':
         specifier: workspace:*
         version: link:../llm
+      '@ai-citizens/prompts':
+        specifier: workspace:*
+        version: link:../prompts
+      '@ai-citizens/utils':
+        specifier: workspace:*
+        version: link:../utils
       '@langchain/community':
         specifier: ^0.2.22
-        version: 0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)
+        version: 0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
+      '@langchain/core':
+        specifier: ^0.2.18
+        version: 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
+      youtube-transcript:
+        specifier: ^1.2.1
+        version: 1.2.1
+      youtubei.js:
+        specifier: ^10.0.0
+        version: 10.3.0
     devDependencies:
       '@types/node':
         specifier: ^18
-        version: 18.19.42
+        version: 18.19.43
 
   packages/ui:
     dependencies:
@@ -176,7 +232,7 @@ importers:
         version: 7.18.0(eslint@8.57.0)(typescript@5.5.4)
       '@vitejs/plugin-react-swc':
         specifier: ^3.5.0
-        version: 3.7.0(vite@5.3.5(@types/node@18.19.42))
+        version: 3.7.0(vite@5.3.5(@types/node@18.19.43))
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -191,13 +247,13 @@ importers:
         version: 5.5.4
       vite:
         specifier: ^5.3.4
-        version: 5.3.5(@types/node@18.19.42)
+        version: 5.3.5(@types/node@18.19.43)
 
   packages/utils:
     dependencies:
       '@types/node':
         specifier: ^18
-        version: 18.19.42
+        version: 18.19.43
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -438,6 +494,10 @@ packages:
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
+  '@fastify/busboy@2.1.1':
+    resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
+    engines: {node: '>=14'}
+
   '@google/generative-ai@0.7.1':
     resolution: {integrity: sha512-WTjMLLYL/xfA5BW6xAycRPiAX7FNHKAxrid/ayqC1QMam0KAK0NbMeS9Lubw80gVg5xFMLE+H7pw4wdNzTOlxw==}
     engines: {node: '>=18.0.0'}
@@ -458,6 +518,10 @@ packages:
   '@inquirer/figures@1.0.5':
     resolution: {integrity: sha512-79hP/VWdZ2UVc9bFGJnoQ/lQMpL74mGgzSYX1xUqCVk7/v73vJCMw1VuyWN1jGkZ9B3z7THAbySqGbCNefcjfA==}
     engines: {node: '>=18'}
+
+  '@isaacs/cliui@8.0.2':
+    resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
+    engines: {node: '>=12'}
 
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
@@ -854,6 +918,15 @@ packages:
     resolution: {integrity: sha512-JN6dlPNHZEFKc8JjQzO+H7IqCpcE3s/1nYnb+sHxpc22Amr3yxXgp6CvanLhmD+R8Wj1AE1vG7AkzjM8MLtv+A==}
     engines: {node: '>=18'}
 
+  '@langchain/langgraph@0.0.31':
+    resolution: {integrity: sha512-f5QMSLy/RnLktsqnNm2mq8gp1xplHwQf87XIPVO0IYuumOJiafx5lE7ahPO+fVmCzAz6LxcsVocvD0JqxXR/2w==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      better-sqlite3: ^9.5.0
+    peerDependenciesMeta:
+      better-sqlite3:
+        optional: true
+
   '@langchain/ollama@0.0.2':
     resolution: {integrity: sha512-RMgEensnUeL9+4/5Z2v8E2bjEazyq0THQtYEXF9M4cd2DRwIwq9KJmQMLwOqIZO4vNVWJd5Vn4v17ZRnikGytg==}
     engines: {node: '>=18'}
@@ -956,6 +1029,10 @@ packages:
     engines: {node: '>=8.0.0'}
     deprecated: Deprecated in favor of @oclif/core
 
+  '@pkgjs/parseargs@0.11.0':
+    resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
+    engines: {node: '>=14'}
+
   '@rollup/rollup-android-arm-eabi@4.19.2':
     resolution: {integrity: sha512-OHflWINKtoCFSpm/WmuQaWW4jeX+3Qt3XQDepkkiFTsoxFc5BpF3Z5aDxFZgBqRjO6ATP5+b1iilp4kGIZVWlA==}
     cpu: [arm]
@@ -1036,68 +1113,68 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@swc/core-darwin-arm64@1.7.4':
-    resolution: {integrity: sha512-RbWrdGh+x9xKFUA9/kPZRR8OPxUsDUuPyLjPIGLYZMO+ftht2vhVH7QsUq6lg+jAP34eIya72UA1isiZe+BRaA==}
+  '@swc/core-darwin-arm64@1.7.5':
+    resolution: {integrity: sha512-Y+bvW9C4/u26DskMbtQKT4FU6QQenaDYkKDi028vDIKAa7v1NZqYG9wmhD/Ih7n5EUy2uJ5I5EWD7WaoLzT6PA==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [darwin]
 
-  '@swc/core-darwin-x64@1.7.4':
-    resolution: {integrity: sha512-TxCWMJs4OrqApjFuT8cUiqMz0zg97F0JsXBEeZ7zjkyv9XJ/rN2pdwqMlZv0Wv2C2rivOPo6FsWYlZ3V8ZHhyA==}
+  '@swc/core-darwin-x64@1.7.5':
+    resolution: {integrity: sha512-AuIbDlcaAhYS6mtF4UqvXgrLeAfXZbVf4pgtgShPbutF80VbCQiIB55zOFz5aZdCpsBVuCWcBq0zLneK+VQKkQ==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [darwin]
 
-  '@swc/core-linux-arm-gnueabihf@1.7.4':
-    resolution: {integrity: sha512-5IhwIJZAgkkfI6PqgQ3xk0/2hTAVsAczIPLiR2Epp30EgsNo1KIFL0ZHzrnvJPy5BZ3jy3T1dEbDE/memBOEmA==}
+  '@swc/core-linux-arm-gnueabihf@1.7.5':
+    resolution: {integrity: sha512-99uBPHITRqgGwCXAjHY94VaV3Z40+D2NQNgR1t6xQpO8ZnevI6YSzX6GVZfBnV7+7oisiGkrVEwfIRRa+1s8FA==}
     engines: {node: '>=10'}
     cpu: [arm]
     os: [linux]
 
-  '@swc/core-linux-arm64-gnu@1.7.4':
-    resolution: {integrity: sha512-0787jri83jigf26mF8FndWehh7jqMaHwAm/OV6VdToyNo/g+d1AxVpkEizrywZK46el+AObnHUIHIHwZgO21LA==}
+  '@swc/core-linux-arm64-gnu@1.7.5':
+    resolution: {integrity: sha512-xHL3Erlz+OGGCG4h6K2HWiR56H5UYMuBWWPbbUufi2bJpfhuKQy/X3vWffwL8ZVfJmCUwr4/G91GHcm32uYzRg==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
 
-  '@swc/core-linux-arm64-musl@1.7.4':
-    resolution: {integrity: sha512-A45hGKWAGcjU5Ol0uQUoK0tHerwEKxfprYUZbmPLpD2yrpMZr+dTrwY2n075sixs7RuZEccBkgGNpehEe5BPBQ==}
+  '@swc/core-linux-arm64-musl@1.7.5':
+    resolution: {integrity: sha512-5ArGdqvFMszNHdi4a67vopeYq8d1K+FuTWDrblHrAvZFhAyv+GQz2PnKqYOgl0sWmQxsNPfNwBFtxACpUO3Jzg==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
 
-  '@swc/core-linux-x64-gnu@1.7.4':
-    resolution: {integrity: sha512-bcO1MpAm39TXqqHuYW4ox4vDvhB7jkguwMwxvmL+cKBGsUHrIoUTfGt9NM9N4D4CvOwULlxqbyt19veUJ7CVPw==}
+  '@swc/core-linux-x64-gnu@1.7.5':
+    resolution: {integrity: sha512-mSVVV/PFzCGtI1nVQQyx34NwCMgSurF6ZX/me8pUAX054vsE/pSFL66xN+kQOe/1Z/LOd4UmXFkZ/EzOSnYcSg==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
 
-  '@swc/core-linux-x64-musl@1.7.4':
-    resolution: {integrity: sha512-N6nXuHyDO/q5kPN2xQxz5BEvhFpgnFSkP+9wxg5xWq+qIQL5bv37jk8dkKvMLx/8fHzTqrIjPDSRzVbcL7sqXg==}
+  '@swc/core-linux-x64-musl@1.7.5':
+    resolution: {integrity: sha512-09hY3ZKMUORXVunESKS9yuP78+gQbr759GKHo8wyCdtAx8lCZdEjfI5NtC7/1VqwfeE32/U6u+5MBTVhZTt0AA==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
 
-  '@swc/core-win32-arm64-msvc@1.7.4':
-    resolution: {integrity: sha512-7W1owqCNR1cG+mpS55juiZlR/lrAdxB1pH32egeOipNKOLGwyqmlzQ0g9tkQTNgzwgfpCUg8z606+GqqXvajZw==}
+  '@swc/core-win32-arm64-msvc@1.7.5':
+    resolution: {integrity: sha512-B/UDtPI3RlYRFW42xQxOpl6kI/9LtkD7No+XeRIKQTPe15EP2o+rUlv7CmKljVBXgJ8KmaQbZlaEh1YP+QZEEQ==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [win32]
 
-  '@swc/core-win32-ia32-msvc@1.7.4':
-    resolution: {integrity: sha512-saLkY+q7zNPk4gYiUBCc93FYPo4ECXMjHcSPtLVHoPZBIxRrklgaAf6aDpblBo30nVdoBE2V3YPd0Y/cPiY6RQ==}
+  '@swc/core-win32-ia32-msvc@1.7.5':
+    resolution: {integrity: sha512-BgLesVGmIY6Nub/sURqtSRvWYcbCE/ACfuZB3bZHVKD6nsZJJuOpdB8oC41fZPyc8yZUzL3XTBIifkT2RP+w9w==}
     engines: {node: '>=10'}
     cpu: [ia32]
     os: [win32]
 
-  '@swc/core-win32-x64-msvc@1.7.4':
-    resolution: {integrity: sha512-zKF6jpRBNuVKgOf2W5dMcPyjwcNCp21syjl9lvLRbCeIg+1U+zjdoQCAmMWWoPNE7fLg+yfvohnnOJG2AdzQ9Q==}
+  '@swc/core-win32-x64-msvc@1.7.5':
+    resolution: {integrity: sha512-CnF557tidLfQRPczcqDJ8x+LBQYsFa0Ra6w2+YU1iFUboaI2jJVuqt3vEChu80y6JiRIBAaaV2L/GawDJh1dIQ==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [win32]
 
-  '@swc/core@1.7.4':
-    resolution: {integrity: sha512-+wSycNxOw9QQz81AJAZlNS34EtOIifwUXMPACg05PWjECsjOKDTXLCVPx6J0lRaxhHSGBU2OYs9mRfIvxGt3CA==}
+  '@swc/core@1.7.5':
+    resolution: {integrity: sha512-qKK0/Ta4qvxs/ok3XyYVPT7OBenwRn1sSINf1cKQTBHPqr7U/uB4k2GTl6JgEs8H4PiJrMTNWfMLTucIoVSfAg==}
     engines: {node: '>=10'}
     peerDependencies:
       '@swc/helpers': '*'
@@ -1141,8 +1218,8 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
-  '@types/node@18.19.42':
-    resolution: {integrity: sha512-d2ZFc/3lnK2YCYhos8iaNIYu9Vfhr92nHiyJHRltXWjXUBjEE+A4I58Tdbnw4VhggSW+2j5y5gTrLs4biNnubg==}
+  '@types/node@18.19.43':
+    resolution: {integrity: sha512-Mw/YlgXnyJdEwLoFv2dpuJaDFriX+Pc+0qOBJ57jC1H6cDxIj2xc5yUrdtArDVG0m+KV6622a4p2tenEqB3C/g==}
 
   '@types/prop-types@15.7.12':
     resolution: {integrity: sha512-5zvhXYtRNRluoE/jAp4GVsSduVUzNWKkOZrCDBWYtE7biZywwdC2AcEzg+cSMLFRfVgeAFqpfNabiPjxFddV1Q==}
@@ -1268,6 +1345,10 @@ packages:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
 
+  ansi-regex@6.0.1:
+    resolution: {integrity: sha512-n5M855fKb2SsfMIiFFoVrABHJC8QtHwVx+mHWP3QcEqBHYienj5dHSgjbxtC0WEZXYt4wcD6zrQElDPhFuZgfA==}
+    engines: {node: '>=12'}
+
   ansi-styles@3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
     engines: {node: '>=4'}
@@ -1279,6 +1360,10 @@ packages:
   ansi-styles@5.2.0:
     resolution: {integrity: sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==}
     engines: {node: '>=10'}
+
+  ansi-styles@6.2.1:
+    resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
+    engines: {node: '>=12'}
 
   ansicolors@0.3.2:
     resolution: {integrity: sha512-QXu7BPrP29VllRxH8GwB7x5iX5qWKAAMLqKQGWTeLWVlNHNOpVMJ91dsxQAIWXpjuW5wqvxu3Jd/nRjrJ+0pqg==}
@@ -1502,6 +1587,9 @@ packages:
     resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
     engines: {node: '>=12'}
 
+  eastasianwidth@0.2.0:
+    resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
+
   ejs@3.1.10:
     resolution: {integrity: sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==}
     engines: {node: '>=0.10.0'}
@@ -1509,6 +1597,9 @@ packages:
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
+
+  emoji-regex@9.2.2:
+    resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
 
   end-of-stream@1.4.4:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
@@ -1667,6 +1758,10 @@ packages:
   flatted@3.3.1:
     resolution: {integrity: sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==}
 
+  foreground-child@3.2.1:
+    resolution: {integrity: sha512-PXUUyLqrR2XCWICfv6ukppP96sdFwWbNEnfEMt7jNsISjMsvaLNinAHNDYyvkyU+SZG2BTSbT5NjG+vZslfGTA==}
+    engines: {node: '>=14'}
+
   form-data-encoder@1.7.2:
     resolution: {integrity: sha512-qfqtYan3rxrnCk1VYaA4H+Ms9xdpPqvLZa6xmMgFvhO32x7/3J/ExcTd6qpxM0vH2GdMI+poehyBZvqfMTto8A==}
 
@@ -1729,6 +1824,11 @@ packages:
   glob-parent@6.0.2:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
     engines: {node: '>=10.13.0'}
+
+  glob@11.0.0:
+    resolution: {integrity: sha512-9UiX/Bl6J2yaBbxKoEBRm4Cipxgok8kQYcOPEhScPwebu2I0HoQOuYdIO6S3hLuWoZgpDpwQZMzTFxgpkyT76g==}
+    engines: {node: 20 || >=22}
+    hasBin: true
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
@@ -1937,10 +2037,17 @@ packages:
     resolution: {integrity: sha512-LpB/54B+/2J5hqQ7imZHfdU31OlgQqx7ZicVlkm9kzg9/w8GKLEcFfJl/t7DCEDueOyBAD6zCCwTO6Fzs0NoEQ==}
     engines: {node: '>=16'}
 
+  jackspeak@4.0.1:
+    resolution: {integrity: sha512-cub8rahkh0Q/bw1+GxP7aeSe29hHHn2V4m29nnDlvCdlgU+3UGxkZp7Z53jLUdpX3jdTO0nJZUDl3xvbWc2Xog==}
+    engines: {node: 20 || >=22}
+
   jake@10.9.2:
     resolution: {integrity: sha512-2P4SQ0HrLQ+fw6llpLnOaGAvN2Zu6778SJMrCUwns4fOoG9ayrTiZk3VV8sCPkVZF8ab0zksVpS8FDY5pRCNBA==}
     engines: {node: '>=10'}
     hasBin: true
+
+  jintr@2.1.1:
+    resolution: {integrity: sha512-89cwX4ouogeDGOBsEVsVYsnWWvWjchmwXBB4kiBhmjOKw19FiOKhNhMhpxhTlK2ctl7DS+d/ethfmuBpzoNNgA==}
 
   js-tiktoken@1.0.12:
     resolution: {integrity: sha512-L7wURW1fH9Qaext0VzaUDpFGVQgjkdE3Dgsy9/+yXyGEpBKnylTd0mU0bfbNkKDlXRb6TEsZkwuflu1B8uQbJQ==}
@@ -2228,6 +2335,10 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
+  lru-cache@11.0.0:
+    resolution: {integrity: sha512-Qv32eSV1RSCfhY3fpPE2GNZ8jgM9X7rdAfemLWqTUxwiyIC4jJ6Sy0fZ8H+oLWevO6i4/bizg7c8d8i6bxrzbA==}
+    engines: {node: 20 || >=22}
+
   lru-cache@4.1.5:
     resolution: {integrity: sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==}
 
@@ -2272,6 +2383,10 @@ packages:
     resolution: {integrity: sha512-vqiC06CuhBTUdZH+RYl8sFrL096vA45Ok5ISO6sE/Mr1jRbGH4Csnhi8f3wKVl7x8mO4Au7Ir9D3Oyv1VYMFJw==}
     engines: {node: '>=12'}
 
+  minimatch@10.0.1:
+    resolution: {integrity: sha512-ethXTt3SGGR+95gudmqJ1eNhRO7eGEGIgYA9vnPatK4/etz2MEVDno5GMCibdMTuBMyElzIlgxMna3K94XDIDQ==}
+    engines: {node: 20 || >=22}
+
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
 
@@ -2285,6 +2400,10 @@ packages:
 
   minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
+
+  minipass@7.1.2:
+    resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
+    engines: {node: '>=16 || 14 >=14.17'}
 
   mkdirp-classic@0.5.3:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
@@ -2531,6 +2650,9 @@ packages:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
     engines: {node: '>=6'}
 
+  package-json-from-dist@1.0.0:
+    resolution: {integrity: sha512-dATvCeZN/8wQsGywez1mzHtTlP22H8OEfPrVMLNr4/eGa+ijtLn/6M5f0dY8UKNrC2O9UCU6SSoG3qRKnt7STw==}
+
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -2568,6 +2690,10 @@ packages:
 
   path-parse@1.0.7:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
+
+  path-scurry@2.0.0:
+    resolution: {integrity: sha512-ypGJsmGtdXUOeM5u93TyeIEfEhM6s+ljAhrk5vAvSx8uyY/02OvrZnA0YNGUrPXfpJMgI1ODd3nwz8Npx4O4cg==}
+    engines: {node: 20 || >=22}
 
   path-type@4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
@@ -2687,6 +2813,11 @@ packages:
     deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
+  rimraf@6.0.1:
+    resolution: {integrity: sha512-9dkvaxAsk/xNXSJzMgFqqMCuFgt2+KsOFek3TMLfo8NCPfWpBmqwyNn5Y+NX56QUYfCtsyhF3ayiboEoUmJk/A==}
+    engines: {node: 20 || >=22}
+    hasBin: true
+
   rollup@4.19.2:
     resolution: {integrity: sha512-6/jgnN1svF9PjNYJ4ya3l+cqutg49vOZ4rVgsDKxdl+5gpGPnByFXWGyfH9YGx9i3nfBwSu1Iyu6vGwFFA0BdQ==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -2791,12 +2922,20 @@ packages:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
     engines: {node: '>=8'}
 
+  string-width@5.1.2:
+    resolution: {integrity: sha512-HnLOCR3vjcY8beoNLtcjZ5/nxn2afmME6lhrDrebokqMap+XbeW8n9TXpPDOqdGK5qcI3oT0GKTW6wC7EMiVqA==}
+    engines: {node: '>=12'}
+
   string_decoder@1.3.0:
     resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
 
   strip-ansi@6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}
     engines: {node: '>=8'}
+
+  strip-ansi@7.1.0:
+    resolution: {integrity: sha512-iq6eVVI64nQQTRYq2KtEg2d2uU7LElhTJwsH4YzIHZshxlgZms/wIc4VoDQTlG/IvVIrBKG06CrZnp0qv7hkcQ==}
+    engines: {node: '>=12'}
 
   strip-bom@3.0.0:
     resolution: {integrity: sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==}
@@ -2927,6 +3066,10 @@ packages:
   undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
 
+  undici@5.28.4:
+    resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
+    engines: {node: '>=14.0'}
+
   universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
     engines: {node: '>= 4.0.0'}
@@ -3040,6 +3183,10 @@ packages:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
     engines: {node: '>=10'}
 
+  wrap-ansi@8.1.0:
+    resolution: {integrity: sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==}
+    engines: {node: '>=12'}
+
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
@@ -3078,6 +3225,13 @@ packages:
     resolution: {integrity: sha512-cYVsTjKl8b+FrnidjibDWskAv7UKOfcwaVZdp/it9n1s9fU3IkgDbhdIRKCW4JDsAlECJY0ytoVPT3sK6kideA==}
     engines: {node: '>=18'}
 
+  youtube-transcript@1.2.1:
+    resolution: {integrity: sha512-TvEGkBaajKw+B6y91ziLuBLsa5cawgowou+Bk0ciGpjELDfAzSzTGXaZmeSSkUeknCPpEr/WGApOHDwV7V+Y9Q==}
+    engines: {node: '>=18.0.0'}
+
+  youtubei.js@10.3.0:
+    resolution: {integrity: sha512-tLmeJCECK2xF2hZZtF2nEqirdKVNLFSDpa0LhTaXY3tngtL7doQXyy7M2CLueramDTlmCnFaW+rctHirTPFaRQ==}
+
   zod-to-json-schema@3.23.2:
     resolution: {integrity: sha512-uSt90Gzc/tUfyNqxnjlfBs8W6WSGpNBv0rVsNxP/BVSMHMKGdthPYff4xtCHYloJGM0CFxFsb3NbC0eqPhfImw==}
     peerDependencies:
@@ -3090,7 +3244,7 @@ snapshots:
 
   '@anthropic-ai/sdk@0.22.0':
     dependencies:
-      '@types/node': 18.19.42
+      '@types/node': 18.19.43
       '@types/node-fetch': 2.6.11
       abort-controller: 3.0.0
       agentkeepalive: 4.5.0
@@ -3371,6 +3525,8 @@ snapshots:
 
   '@eslint/js@8.57.0': {}
 
+  '@fastify/busboy@2.1.1': {}
+
   '@google/generative-ai@0.7.1': {}
 
   '@humanwhocodes/config-array@0.11.14':
@@ -3387,6 +3543,15 @@ snapshots:
 
   '@inquirer/figures@1.0.5': {}
 
+  '@isaacs/cliui@8.0.2':
+    dependencies:
+      string-width: 5.1.2
+      string-width-cjs: string-width@4.2.3
+      strip-ansi: 7.1.0
+      strip-ansi-cjs: strip-ansi@6.0.1
+      wrap-ansi: 8.1.0
+      wrap-ansi-cjs: wrap-ansi@7.0.0
+
   '@jridgewell/resolve-uri@3.1.2': {}
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
@@ -3396,10 +3561,10 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@langchain/anthropic@0.2.12(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)':
+  '@langchain/anthropic@0.2.12':
     dependencies:
       '@anthropic-ai/sdk': 0.22.0
-      '@langchain/core': 0.2.19(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)
+      '@langchain/core': 0.2.19
       fast-xml-parser: 4.4.1
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
@@ -3411,7 +3576,7 @@ snapshots:
   '@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0)':
     dependencies:
       '@anthropic-ai/sdk': 0.22.0
-      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(openai@4.54.0))(openai@4.54.0)
+      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
       fast-xml-parser: 4.4.1
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
@@ -3420,22 +3585,25 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)':
+  '@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)':
     dependencies:
-      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0))(openai@4.54.0)
-      '@langchain/openai': 0.2.5(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0))
+      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
+      '@langchain/openai': 0.2.5(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))
       binary-extensions: 2.3.0
       expr-eval: 2.0.2
       flat: 5.0.2
       js-yaml: 4.1.0
-      langchain: 0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)
-      langsmith: 0.1.40(xzehiv3ljp2f6jzrciipwzadji)
+      langchain: 0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
+      langsmith: 0.1.40(p32oeytzsqo3mlmoi5nwf67yli)
       uuid: 10.0.0
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     optionalDependencies:
+      '@langchain/langgraph': 0.0.31(langchain@0.2.12)(openai@4.54.0)
       ignore: 5.3.1
       lodash: 4.17.21
+      youtube-transcript: 1.2.1
+      youtubei.js: 10.3.0
     transitivePeerDependencies:
       - '@gomomento/sdk-web'
       - '@langchain/anthropic'
@@ -3454,13 +3622,31 @@ snapshots:
       - peggy
       - pyodide
 
-  '@langchain/core@0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0))(openai@4.54.0)':
+  '@langchain/core@0.2.19':
     dependencies:
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.12
-      langsmith: 0.1.40(xzehiv3ljp2f6jzrciipwzadji)
+      langsmith: 0.1.40(@langchain/core@0.2.19)
+      ml-distance: 4.0.1
+      mustache: 4.2.0
+      p-queue: 6.6.2
+      p-retry: 4.6.2
+      uuid: 10.0.0
+      zod: 3.23.8
+      zod-to-json-schema: 3.23.2(zod@3.23.8)
+    transitivePeerDependencies:
+      - langchain
+      - openai
+
+  '@langchain/core@0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)':
+    dependencies:
+      ansi-styles: 5.2.0
+      camelcase: 6.3.0
+      decamelize: 1.2.0
+      js-tiktoken: 1.0.12
+      langsmith: 0.1.40(p32oeytzsqo3mlmoi5nwf67yli)
       ml-distance: 4.0.1
       mustache: 4.2.0
       p-queue: 6.6.2
@@ -3508,30 +3694,48 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/google-genai@0.0.23(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)(zod@3.23.8)':
+  '@langchain/core@0.2.19(openai@4.54.0)':
     dependencies:
-      '@google/generative-ai': 0.7.1
-      '@langchain/core': 0.2.19(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)
+      ansi-styles: 5.2.0
+      camelcase: 6.3.0
+      decamelize: 1.2.0
+      js-tiktoken: 1.0.12
+      langsmith: 0.1.40(@langchain/core@0.2.19(openai@4.54.0))(openai@4.54.0)
+      ml-distance: 4.0.1
+      mustache: 4.2.0
+      p-queue: 6.6.2
+      p-retry: 4.6.2
+      uuid: 10.0.0
+      zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     transitivePeerDependencies:
       - langchain
       - openai
-      - zod
 
   '@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8)':
     dependencies:
       '@google/generative-ai': 0.7.1
-      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(openai@4.54.0))(openai@4.54.0)
+      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     transitivePeerDependencies:
       - langchain
       - openai
       - zod
 
-  '@langchain/groq@0.0.15(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)':
+  '@langchain/google-genai@0.0.23(zod@3.23.8)':
     dependencies:
-      '@langchain/core': 0.2.19(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)
-      '@langchain/openai': 0.2.5(langchain@0.2.12(openai@4.54.0))
+      '@google/generative-ai': 0.7.1
+      '@langchain/core': 0.2.19
+      zod-to-json-schema: 3.23.2(zod@3.23.8)
+    transitivePeerDependencies:
+      - langchain
+      - openai
+      - zod
+
+  '@langchain/groq@0.0.15':
+    dependencies:
+      '@langchain/core': 0.2.19
+      '@langchain/openai': 0.2.5
       groq-sdk: 0.3.3
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
@@ -3542,8 +3746,8 @@ snapshots:
 
   '@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0)':
     dependencies:
-      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(openai@4.54.0))(openai@4.54.0)
-      '@langchain/openai': 0.2.5(langchain@0.2.12(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(openai@4.54.0))
+      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
+      '@langchain/openai': 0.2.5(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))
       groq-sdk: 0.3.3
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
@@ -3552,9 +3756,28 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/ollama@0.0.2(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)':
+  '@langchain/langgraph@0.0.31(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)':
     dependencies:
       '@langchain/core': 0.2.19(langchain@0.2.12(openai@4.54.0))(openai@4.54.0)
+      uuid: 10.0.0
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - langchain
+      - openai
+
+  '@langchain/langgraph@0.0.31(langchain@0.2.12)(openai@4.54.0)':
+    dependencies:
+      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
+      uuid: 10.0.0
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - langchain
+      - openai
+    optional: true
+
+  '@langchain/ollama@0.0.2':
+    dependencies:
+      '@langchain/core': 0.2.19
       ollama: 0.5.6
       uuid: 10.0.0
     transitivePeerDependencies:
@@ -3563,16 +3786,27 @@ snapshots:
 
   '@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0)':
     dependencies:
-      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(openai@4.54.0))(openai@4.54.0)
+      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
       ollama: 0.5.6
       uuid: 10.0.0
     transitivePeerDependencies:
       - langchain
       - openai
 
-  '@langchain/openai@0.2.5(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0))':
+  '@langchain/openai@0.2.5':
     dependencies:
-      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0))(openai@4.54.0)
+      '@langchain/core': 0.2.19(openai@4.54.0)
+      js-tiktoken: 1.0.12
+      openai: 4.54.0
+      zod: 3.23.8
+      zod-to-json-schema: 3.23.2(zod@3.23.8)
+    transitivePeerDependencies:
+      - encoding
+      - langchain
+
+  '@langchain/openai@0.2.5(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))':
+    dependencies:
+      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
       js-tiktoken: 1.0.12
       openai: 4.54.0
       zod: 3.23.8
@@ -3602,10 +3836,11 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - langchain
+    optional: true
 
-  '@langchain/textsplitters@0.0.3(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0))(openai@4.54.0)':
+  '@langchain/textsplitters@0.0.3(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)':
     dependencies:
-      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0))(openai@4.54.0)
+      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
       js-tiktoken: 1.0.12
     transitivePeerDependencies:
       - langchain
@@ -3838,6 +4073,9 @@ snapshots:
 
   '@oclif/screen@1.0.4': {}
 
+  '@pkgjs/parseargs@0.11.0':
+    optional: true
+
   '@rollup/rollup-android-arm-eabi@4.19.2':
     optional: true
 
@@ -3886,51 +4124,51 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.19.2':
     optional: true
 
-  '@swc/core-darwin-arm64@1.7.4':
+  '@swc/core-darwin-arm64@1.7.5':
     optional: true
 
-  '@swc/core-darwin-x64@1.7.4':
+  '@swc/core-darwin-x64@1.7.5':
     optional: true
 
-  '@swc/core-linux-arm-gnueabihf@1.7.4':
+  '@swc/core-linux-arm-gnueabihf@1.7.5':
     optional: true
 
-  '@swc/core-linux-arm64-gnu@1.7.4':
+  '@swc/core-linux-arm64-gnu@1.7.5':
     optional: true
 
-  '@swc/core-linux-arm64-musl@1.7.4':
+  '@swc/core-linux-arm64-musl@1.7.5':
     optional: true
 
-  '@swc/core-linux-x64-gnu@1.7.4':
+  '@swc/core-linux-x64-gnu@1.7.5':
     optional: true
 
-  '@swc/core-linux-x64-musl@1.7.4':
+  '@swc/core-linux-x64-musl@1.7.5':
     optional: true
 
-  '@swc/core-win32-arm64-msvc@1.7.4':
+  '@swc/core-win32-arm64-msvc@1.7.5':
     optional: true
 
-  '@swc/core-win32-ia32-msvc@1.7.4':
+  '@swc/core-win32-ia32-msvc@1.7.5':
     optional: true
 
-  '@swc/core-win32-x64-msvc@1.7.4':
+  '@swc/core-win32-x64-msvc@1.7.5':
     optional: true
 
-  '@swc/core@1.7.4':
+  '@swc/core@1.7.5':
     dependencies:
       '@swc/counter': 0.1.3
       '@swc/types': 0.1.12
     optionalDependencies:
-      '@swc/core-darwin-arm64': 1.7.4
-      '@swc/core-darwin-x64': 1.7.4
-      '@swc/core-linux-arm-gnueabihf': 1.7.4
-      '@swc/core-linux-arm64-gnu': 1.7.4
-      '@swc/core-linux-arm64-musl': 1.7.4
-      '@swc/core-linux-x64-gnu': 1.7.4
-      '@swc/core-linux-x64-musl': 1.7.4
-      '@swc/core-win32-arm64-msvc': 1.7.4
-      '@swc/core-win32-ia32-msvc': 1.7.4
-      '@swc/core-win32-x64-msvc': 1.7.4
+      '@swc/core-darwin-arm64': 1.7.5
+      '@swc/core-darwin-x64': 1.7.5
+      '@swc/core-linux-arm-gnueabihf': 1.7.5
+      '@swc/core-linux-arm64-gnu': 1.7.5
+      '@swc/core-linux-arm64-musl': 1.7.5
+      '@swc/core-linux-x64-gnu': 1.7.5
+      '@swc/core-linux-x64-musl': 1.7.5
+      '@swc/core-win32-arm64-msvc': 1.7.5
+      '@swc/core-win32-ia32-msvc': 1.7.5
+      '@swc/core-win32-x64-msvc': 1.7.5
 
   '@swc/counter@0.1.3': {}
 
@@ -3951,7 +4189,7 @@ snapshots:
   '@types/glob@7.2.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 18.19.42
+      '@types/node': 18.19.43
 
   '@types/inquirer@9.0.7':
     dependencies:
@@ -3962,12 +4200,12 @@ snapshots:
 
   '@types/node-fetch@2.6.11':
     dependencies:
-      '@types/node': 18.19.42
+      '@types/node': 18.19.43
       form-data: 4.0.0
 
   '@types/node@12.20.55': {}
 
-  '@types/node@18.19.42':
+  '@types/node@18.19.43':
     dependencies:
       undici-types: 5.26.5
 
@@ -3988,7 +4226,7 @@ snapshots:
 
   '@types/through@0.0.33':
     dependencies:
-      '@types/node': 18.19.42
+      '@types/node': 18.19.43
 
   '@types/uuid@9.0.8': {}
 
@@ -4075,10 +4313,10 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-react-swc@3.7.0(vite@5.3.5(@types/node@18.19.42))':
+  '@vitejs/plugin-react-swc@3.7.0(vite@5.3.5(@types/node@18.19.43))':
     dependencies:
-      '@swc/core': 1.7.4
-      vite: 5.3.5(@types/node@18.19.42)
+      '@swc/core': 1.7.5
+      vite: 5.3.5(@types/node@18.19.43)
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -4115,6 +4353,8 @@ snapshots:
 
   ansi-regex@5.0.1: {}
 
+  ansi-regex@6.0.1: {}
+
   ansi-styles@3.2.1:
     dependencies:
       color-convert: 1.9.3
@@ -4124,6 +4364,8 @@ snapshots:
       color-convert: 2.0.1
 
   ansi-styles@5.2.0: {}
+
+  ansi-styles@6.2.1: {}
 
   ansicolors@0.3.2: {}
 
@@ -4347,11 +4589,15 @@ snapshots:
 
   dotenv@16.4.5: {}
 
+  eastasianwidth@0.2.0: {}
+
   ejs@3.1.10:
     dependencies:
       jake: 10.9.2
 
   emoji-regex@8.0.0: {}
+
+  emoji-regex@9.2.2: {}
 
   end-of-stream@1.4.4:
     dependencies:
@@ -4575,6 +4821,11 @@ snapshots:
 
   flatted@3.3.1: {}
 
+  foreground-child@3.2.1:
+    dependencies:
+      cross-spawn: 7.0.3
+      signal-exit: 4.1.0
+
   form-data-encoder@1.7.2: {}
 
   form-data@4.0.0:
@@ -4635,6 +4886,15 @@ snapshots:
     dependencies:
       is-glob: 4.0.3
 
+  glob@11.0.0:
+    dependencies:
+      foreground-child: 3.2.1
+      jackspeak: 4.0.1
+      minimatch: 10.0.1
+      minipass: 7.1.2
+      package-json-from-dist: 1.0.0
+      path-scurry: 2.0.0
+
   glob@7.2.3:
     dependencies:
       fs.realpath: 1.0.0
@@ -4674,7 +4934,7 @@ snapshots:
 
   groq-sdk@0.3.3:
     dependencies:
-      '@types/node': 18.19.42
+      '@types/node': 18.19.43
       '@types/node-fetch': 2.6.11
       abort-controller: 3.0.0
       agentkeepalive: 4.5.0
@@ -4832,12 +5092,22 @@ snapshots:
 
   isexe@3.1.1: {}
 
+  jackspeak@4.0.1:
+    dependencies:
+      '@isaacs/cliui': 8.0.2
+    optionalDependencies:
+      '@pkgjs/parseargs': 0.11.0
+
   jake@10.9.2:
     dependencies:
       async: 3.2.5
       chalk: 4.1.2
       filelist: 1.0.4
       minimatch: 3.1.2
+
+  jintr@2.1.1:
+    dependencies:
+      acorn: 8.12.1
 
   js-tiktoken@1.0.12:
     dependencies:
@@ -4874,17 +5144,17 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0):
+  langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0):
     dependencies:
-      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0))(openai@4.54.0)
-      '@langchain/openai': 0.2.5(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0))
-      '@langchain/textsplitters': 0.0.3(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0))(openai@4.54.0)
+      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
+      '@langchain/openai': 0.2.5(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))
+      '@langchain/textsplitters': 0.0.3(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
       binary-extensions: 2.3.0
       js-tiktoken: 1.0.12
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
       langchainhub: 0.0.11
-      langsmith: 0.1.40(xzehiv3ljp2f6jzrciipwzadji)
+      langsmith: 0.1.40(p32oeytzsqo3mlmoi5nwf67yli)
       ml-distance: 4.0.1
       openapi-types: 12.1.3
       p-retry: 4.6.2
@@ -4894,12 +5164,14 @@ snapshots:
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     optionalDependencies:
       '@langchain/anthropic': 0.2.12(langchain@0.2.12)(openai@4.54.0)
-      '@langchain/community': 0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)
+      '@langchain/community': 0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
       '@langchain/google-genai': 0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8)
       '@langchain/groq': 0.0.15(langchain@0.2.12)(openai@4.54.0)
       '@langchain/ollama': 0.0.2(langchain@0.2.12)(openai@4.54.0)
       fast-xml-parser: 4.4.1
       ignore: 5.3.1
+      youtube-transcript: 1.2.1
+      youtubei.js: 10.3.0
     transitivePeerDependencies:
       - encoding
       - openai
@@ -4984,7 +5256,7 @@ snapshots:
       langchain: 0.2.12(openai@4.54.0)
       openai: 4.54.0
 
-  langsmith@0.1.40(xzehiv3ljp2f6jzrciipwzadji):
+  langsmith@0.1.40(@langchain/core@0.2.19(openai@4.54.0))(openai@4.54.0):
     dependencies:
       '@types/uuid': 9.0.8
       commander: 10.0.1
@@ -4993,8 +5265,31 @@ snapshots:
       semver: 7.6.3
       uuid: 9.0.1
     optionalDependencies:
-      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0))(openai@4.54.0)
-      langchain: 0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)
+      '@langchain/core': 0.2.19(openai@4.54.0)
+      openai: 4.54.0
+
+  langsmith@0.1.40(@langchain/core@0.2.19):
+    dependencies:
+      '@types/uuid': 9.0.8
+      commander: 10.0.1
+      p-queue: 6.6.2
+      p-retry: 4.6.2
+      semver: 7.6.3
+      uuid: 9.0.1
+    optionalDependencies:
+      '@langchain/core': 0.2.19
+
+  langsmith@0.1.40(p32oeytzsqo3mlmoi5nwf67yli):
+    dependencies:
+      '@types/uuid': 9.0.8
+      commander: 10.0.1
+      p-queue: 6.6.2
+      p-retry: 4.6.2
+      semver: 7.6.3
+      uuid: 9.0.1
+    optionalDependencies:
+      '@langchain/core': 0.2.19(langchain@0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.54.0)
+      langchain: 0.2.12(@langchain/anthropic@0.2.12(langchain@0.2.12)(openai@4.54.0))(@langchain/community@0.2.22(@langchain/anthropic@0.2.12)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.12)(openai@4.54.0)(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.12)(openai@4.54.0))(@langchain/ollama@0.0.2(langchain@0.2.12)(openai@4.54.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.54.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
       openai: 4.54.0
 
   levn@0.4.1:
@@ -5045,6 +5340,8 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
+  lru-cache@11.0.0: {}
+
   lru-cache@4.1.5:
     dependencies:
       pseudomap: 1.0.2
@@ -5085,6 +5382,10 @@ snapshots:
 
   mimic-fn@4.0.0: {}
 
+  minimatch@10.0.1:
+    dependencies:
+      brace-expansion: 2.0.1
+
   minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.11
@@ -5098,6 +5399,8 @@ snapshots:
       brace-expansion: 2.0.1
 
   minimist@1.2.8: {}
+
+  minipass@7.1.2: {}
 
   mkdirp-classic@0.5.3: {}
 
@@ -5194,7 +5497,7 @@ snapshots:
 
   openai@4.54.0:
     dependencies:
-      '@types/node': 18.19.42
+      '@types/node': 18.19.43
       '@types/node-fetch': 2.6.11
       abort-controller: 3.0.0
       agentkeepalive: 4.5.0
@@ -5271,6 +5574,8 @@ snapshots:
 
   p-try@2.2.0: {}
 
+  package-json-from-dist@1.0.0: {}
+
   parent-module@1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -5303,6 +5608,11 @@ snapshots:
   path-key@4.0.0: {}
 
   path-parse@1.0.7: {}
+
+  path-scurry@2.0.0:
+    dependencies:
+      lru-cache: 11.0.0
+      minipass: 7.1.2
 
   path-type@4.0.0: {}
 
@@ -5424,6 +5734,11 @@ snapshots:
     dependencies:
       glob: 7.2.3
 
+  rimraf@6.0.1:
+    dependencies:
+      glob: 11.0.0
+      package-json-from-dist: 1.0.0
+
   rollup@4.19.2:
     dependencies:
       '@types/estree': 1.0.5
@@ -5532,6 +5847,12 @@ snapshots:
       is-fullwidth-code-point: 3.0.0
       strip-ansi: 6.0.1
 
+  string-width@5.1.2:
+    dependencies:
+      eastasianwidth: 0.2.0
+      emoji-regex: 9.2.2
+      strip-ansi: 7.1.0
+
   string_decoder@1.3.0:
     dependencies:
       safe-buffer: 5.2.1
@@ -5539,6 +5860,10 @@ snapshots:
   strip-ansi@6.0.1:
     dependencies:
       ansi-regex: 5.0.1
+
+  strip-ansi@7.1.0:
+    dependencies:
+      ansi-regex: 6.0.1
 
   strip-bom@3.0.0: {}
 
@@ -5610,14 +5935,14 @@ snapshots:
     dependencies:
       typescript: 5.5.4
 
-  ts-node@10.9.2(@swc/core@1.7.4)(@types/node@18.19.42)(typescript@5.5.4):
+  ts-node@10.9.2(@swc/core@1.7.5)(@types/node@18.19.43)(typescript@5.5.4):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 18.19.42
+      '@types/node': 18.19.43
       acorn: 8.12.1
       acorn-walk: 8.3.3
       arg: 4.1.3
@@ -5628,7 +5953,7 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     optionalDependencies:
-      '@swc/core': 1.7.4
+      '@swc/core': 1.7.5
 
   tslib@2.6.3: {}
 
@@ -5654,6 +5979,10 @@ snapshots:
 
   undici-types@5.26.5: {}
 
+  undici@5.28.4:
+    dependencies:
+      '@fastify/busboy': 2.1.1
+
   universalify@0.1.2: {}
 
   uri-js@4.4.1:
@@ -5675,13 +6004,13 @@ snapshots:
 
   validate-npm-package-name@5.0.1: {}
 
-  vite@5.3.5(@types/node@18.19.42):
+  vite@5.3.5(@types/node@18.19.43):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.40
       rollup: 4.19.2
     optionalDependencies:
-      '@types/node': 18.19.42
+      '@types/node': 18.19.43
       fsevents: 2.3.3
 
   wcwidth@1.0.1:
@@ -5738,6 +6067,12 @@ snapshots:
       string-width: 4.2.3
       strip-ansi: 6.0.1
 
+  wrap-ansi@8.1.0:
+    dependencies:
+      ansi-styles: 6.2.1
+      string-width: 5.1.2
+      strip-ansi: 7.1.0
+
   wrappy@1.0.2: {}
 
   write-file-atomic@3.0.3:
@@ -5769,6 +6104,14 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   yoctocolors-cjs@2.1.2: {}
+
+  youtube-transcript@1.2.1: {}
+
+  youtubei.js@10.3.0:
+    dependencies:
+      jintr: 2.1.1
+      tslib: 2.6.3
+      undici: 5.28.4
 
   zod-to-json-schema@3.23.2(zod@3.23.8):
     dependencies:

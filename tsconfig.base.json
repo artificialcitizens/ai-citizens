@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@ai-citizen/*": ["./packages/*"]
+    },
     "strict": true,
     "strictNullChecks": true,
     "esModuleInterop": true,
@@ -9,6 +12,6 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "jsx": "react-jsx",
-    "moduleResolution": "node"
+    "moduleResolution": "NodeNext"
   }
 }
