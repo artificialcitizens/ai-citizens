@@ -1,6 +1,6 @@
 {
   "name": "@ai-citizens/graph",
-  "version": "0.0.3",
+  "version": "0.0.0",
   "description": "",
   "type": "module",
   "main": "./dist/cjs/index.js",
@@ -19,7 +19,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@ai-citizens/llm": "workspace:*"
+  },
   "peerDependencies": {
     "dotenv": "^16.4.5",
     "@langchain/community": "^0.2.22"
