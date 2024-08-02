@@ -76,20 +76,25 @@ youtubeGraphBuilder
   .addNode("getMetadata", async (state) => {
     console.log("getMetadata", state);
     // Fetch metadata (title, url, etc.) from YouTube API
-    const metadata = await fetchYoutube(state.url);
-    console.log("metadata", metadata);
-    // Return updated state or catch error to send to handleError node
-    // if error {
-    //   return {
-    //     error: "Error in processing video metadata",
-    // };
-    // }
-    return {
-      title: "Test Title",
-      description: "Test Description",
-      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      transcription: "Test Transcription",
-    };
+    try {
+      const metadata = await fetchYoutube(state.url);
+
+      if (metadata && metadata.length > 0) {
+        if (metadata.length > 1) {
+          console.log(`Multiple data found for the same URL, ${state.url}`);
+        }
+        const videoData = metadata[0];
+        return {
+          title: videoData.metadata.title,
+          description: videoData.metadata.description,
+          url: state.url, // Keep the original URL
+          transcription: videoData.pageContent,
+        };
+      }
+    } catch (error) {
+      console.error("Error in processing video metadata", error);
+      throw error;
+    }
   })
   .addNode("getRelatedUrls", async (state) => {
     console.log("getRelatedUrls", state);
