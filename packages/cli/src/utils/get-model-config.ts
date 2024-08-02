@@ -15,15 +15,20 @@ export function getModelConfig() {
   const configFile = fs.readFileSync(configPath, "utf8");
   const modelConfig = JSON.parse(configFile).modelConfig;
 
-  // Filter out empty arrays from the modelConfig
   const filteredModelConfig = Object.entries(modelConfig).reduce<
-    Record<string, any>
-  >((acc, [key, value]) => {
-    if (!Array.isArray(value) || value.length > 0) {
-      acc[key] = value;
+    Record<string, string[]>
+  >((acc, [provider, config]) => {
+    if (
+      typeof config === "object" &&
+      config !== null &&
+      "models" in config &&
+      Array.isArray(config.models)
+    ) {
+      acc[provider] = config.models;
     }
     return acc;
   }, {});
+
   modelConfigCache[configPath] = filteredModelConfig;
   return filteredModelConfig;
 }
