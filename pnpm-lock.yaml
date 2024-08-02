@@ -254,6 +254,9 @@ importers:
       '@types/node':
         specifier: ^18
         version: 18.19.43
+      fast-xml-parser:
+        specifier: ^4.4.0
+        version: 4.4.1
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
