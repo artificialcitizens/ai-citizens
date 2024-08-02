@@ -1,12 +1,19 @@
 import { StringOutputParser } from "@langchain/core/output_parsers";
 
-import { getModel } from "@ai-citizens/llm";
+import { getModel, isAllModel } from "@ai-citizens/llm";
 import { analyzeTranscriptTemplate } from "@ai-citizens/prompts";
 
-export const parseTranscript = async (transcript: string) => {
-  const llm = await getModel({
-    model: "gpt-4o",
-  });
+export const parseTranscript = async ({
+  transcript,
+  modelName = "gpt-4o",
+}: {
+  transcript: string;
+  modelName?: string;
+}) => {
+  if (!isAllModel(modelName)) {
+    throw new Error("Model is not supported");
+  }
+  const llm = await getModel({ model: modelName });
   const prompt = analyzeTranscriptTemplate;
   const chain = prompt.pipe(llm).pipe(new StringOutputParser());
 

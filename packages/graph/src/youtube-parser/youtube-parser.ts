@@ -1,7 +1,12 @@
 import { END, START, StateGraph, StateGraphArgs } from "@langchain/langgraph";
 import { BaseMessage } from "@langchain/core/messages";
 // import { IterableReadableStream } from "@langchain/core/";
-import { fetchYoutube } from "@ai-citizens/tools";
+import {
+  extractLinks,
+  fetchYoutube,
+  parseTranscript,
+} from "@ai-citizens/tools";
+import { parseXml } from "@ai-citizens/utils";
 // Define the YouTube video state interface
 interface YouTubeVideoState {
   title: string;
@@ -74,20 +79,16 @@ const youtubeGraphBuilder = new StateGraph<YouTubeVideoState>({
 
 youtubeGraphBuilder
   .addNode("getMetadata", async (state) => {
-    console.log("getMetadata", state);
+    // console.log("getMetadata", state);
     // Fetch metadata (title, url, etc.) from YouTube API
     try {
       const metadata = await fetchYoutube(state.url);
 
-      if (metadata && metadata.length > 0) {
-        if (metadata.length > 1) {
-          console.log(`Multiple data found for the same URL, ${state.url}`);
-        }
+      if (metadata?.length > 0) {
         const videoData = metadata[0];
         return {
           title: videoData.metadata.title,
           description: videoData.metadata.description,
-          url: state.url, // Keep the original URL
           transcription: videoData.pageContent,
         };
       }
@@ -97,56 +98,69 @@ youtubeGraphBuilder
     }
   })
   .addNode("getRelatedUrls", async (state) => {
-    console.log("getRelatedUrls", state);
+    // console.log("getRelatedUrls", state);
+    const { description } = state;
+    const relatedUrlResponse = await extractLinks(description);
+    // console.log("relatedUrlResponse", relatedUrlResponse);
+    const relatedUrls = parseXml(relatedUrlResponse);
+    const { scratchPad, extractedLinks } = relatedUrls;
+    // will give info on how the model came to the conclusion
+    // console.log("scratchPad", scratchPad);
+    // @TODO: current prompt seems to be returning a single string instead of an array
+    // console.log("relatedUrls", relatedUrls);
     // Fetch related URLs
     // Return updated state
     return {
-      relatedUrls: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+      relatedUrls: extractedLinks?.length ? [extractedLinks] : [],
     };
   })
-  .addNode("extractHighlights", async (state) => {
-    console.log("extractHighlights", state);
-    // Extract highlights from video content
-    // Return updated state
-    return {
-      highlights: ["Highlight 1", "Highlight 2"],
-    };
-  })
+  // .addNode("extractHighlights", async (state) => {
+  //   // console.log("extractHighlights", state);
+  //   // Extract highlights from video content
+  //   // Return updated state
+  //   return {
+  //     highlights: ["Highlight 1", "Highlight 2"],
+  //   };
+  // })
   .addNode("generateSummary", async (state) => {
-    console.log("generateSummary", state);
-    // Generate summary of the video
-    // Return updated state
+    const { transcription } = state;
+    const summaryResponse = await parseTranscript({
+      transcript: transcription,
+      modelName: "gpt-4o",
+    });
+    // console.log("generateSummary", summaryResponse);
+    const parsedSummary = parseXml(summaryResponse);
+    // console.log("parsedSummary", parsedSummary);
+    const { key_insights, summary, points_of_contention } = parsedSummary;
     return {
-      summary: "Test Summary",
+      summary,
+      highlights: [key_insights, points_of_contention],
     };
   })
   .addNode("handleMissingTranscription", async (state) => {
-    console.log("Error in processing video metadata");
     return {
-      messages: [
-        {
-          type: "user",
-          content: `I had this error ${state.messages}`,
-        },
-      ],
+      title: "Brute Force Title",
+      description: "Brute Force Description",
+      transcription: "Brute Force Transcription",
     };
   })
   .addEdge(START, "getMetadata")
   .addEdge("getMetadata", "getRelatedUrls")
-  .addEdge("getMetadata", "extractHighlights")
+  // .addEdge("getMetadata", "extractHighlights")
   .addEdge("getMetadata", "generateSummary")
   .addEdge("getRelatedUrls", END)
-  .addEdge("extractHighlights", END)
+  // .addEdge("extractHighlights", END)
   .addEdge("generateSummary", END)
   .addEdge("handleMissingTranscription", "getRelatedUrls")
-  .addEdge("handleMissingTranscription", "extractHighlights")
+  // .addEdge("handleMissingTranscription", "extractHighlights")
   .addEdge("handleMissingTranscription", "generateSummary")
   .addConditionalEdges("getMetadata", (state) => {
     // @TODO: Need to fire additional logic if the transcription is empty
     // Example condition: if title is empty, go to error handling node
-    // else move to the next nodes
+    // else move to the next nodes.
     return state.title
-      ? ["getRelatedUrls", "extractHighlights", "generateSummary"]
+      ? // ? ["getRelatedUrls", "extractHighlights", "generateSummary"]
+        ["getRelatedUrls", "generateSummary"]
       : "handleMissingTranscription";
   });
 const youtubeGraph = youtubeGraphBuilder.compile();
