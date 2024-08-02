@@ -1,19 +1,22 @@
-import {GithubRepoLoader} from '@langchain/community/document_loaders/web/github'
-import {Document} from '@langchain/core/documents'
+import { GithubRepoLoader } from "@langchain/community/document_loaders/web/github";
+import { Document } from "@langchain/core/documents";
 
-export const run = async (dir: string, ignorePaths: string[] = []): Promise<Document[]> => {
+export const fetchGithub = async (
+  dir: string,
+  ignorePaths: string[] = []
+): Promise<Document[]> => {
   const loader = new GithubRepoLoader(dir, {
-    branch: 'main',
+    branch: "main",
     ignorePaths,
     maxConcurrency: 3,
     recursive: false,
-    unknown: 'warn',
-  })
+    unknown: "warn",
+  });
 
-  const docs = []
+  const docs = [];
   for await (const doc of loader.loadAsStream()) {
-    docs.push(doc)
+    docs.push(doc);
   }
 
-  return docs
-}
+  return docs;
+};

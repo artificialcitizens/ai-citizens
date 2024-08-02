@@ -1,14 +1,15 @@
 import { StringOutputParser } from "@langchain/core/output_parsers";
 
-import modelManager from "../model-manager.js";
-import { analyzeTranscriptTemplate } from "../prompts/analyze-transcript.js";
+import { getModel } from "@ai-citizens/llm";
+import { analyzeTranscriptTemplate } from "@ai-citizens/prompts";
 
-export const run = async (transcript: string) => {
-  const llm = getModel({
+export const parseTranscript = async (transcript: string) => {
+  const llm = await getModel({
     model: "gpt-4o",
   });
   const prompt = analyzeTranscriptTemplate;
   const chain = prompt.pipe(llm).pipe(new StringOutputParser());
+
   const response = await chain.invoke({ transcript });
   return response;
 };
