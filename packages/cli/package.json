@@ -31,30 +31,24 @@
     "topicSeparator": " "
   },
   "dependencies": {
-    "@ai-citizens/llm": "workspace:*",
-    "@ai-citizens/utils": "workspace:*",
     "@ai-citizens/graph": "workspace:*",
+    "@ai-citizens/llm": "workspace:*",
     "@ai-citizens/prompts": "workspace:*",
     "@ai-citizens/tools": "workspace:*",
-    "@langchain/anthropic": "^0.2.10",
-    "@langchain/google-genai": "^0.0.23",
-    "@langchain/groq": "^0.0.15",
-    "@langchain/ollama": "^0.0.2",
-    "@langchain/openai": "^0.2.5",
+    "@ai-citizens/utils": "workspace:*",
     "@oclif/core": "^4.0.17",
     "@oclif/plugin-help": "^6",
     "@oclif/plugin-plugins": "^5",
     "clipboardy": "^4.0.0",
     "dotenv": "^16.4.5",
-    "inquirer": "^9.2.23",
-    "fast-xml-parser": "^4.4.0"
+    "fast-xml-parser": "^4.4.0",
+    "inquirer": "^9.2.23"
   },
   "devDependencies": {
-    "@oclif/dev-cli": "^1.26.10",
     "@types/inquirer": "^9.0.7",
     "@types/node": "^18",
-    "ts-node": "^10.9.2",
-    "shx": "^0.3.3"
+    "shx": "^0.3.3",
+    "ts-node": "^10.9.2"
   },
   "peerDependencies": {
     "@langchain/core": "^0.2.18"

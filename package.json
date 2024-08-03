@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "@ai-citizens/llm": "workspace:*",
-    "@ai-citizens/tools": "workspace:*",
     "@ai-citizens/prompts": "workspace:*",
+    "@ai-citizens/tools": "workspace:*",
     "@ai-citizens/utils": "workspace:*",
     "dotenv": "^16.4.5"
   }
