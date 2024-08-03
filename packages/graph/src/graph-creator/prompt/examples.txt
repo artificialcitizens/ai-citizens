@@ -1,13 +1,26 @@
+<example>
+<task>
+We need to build out a youtube graph that will parse a video and related data to return info to the user.
+
+I need you to build out the state for me and any related reducers
+
+{
+title: string
+description: string
+summary: string
+relatedUrls: string []
+url: string
+transcription: string
+messages: BaseMessages
+errors: string[]
+}
+</task>
+
+<output>
 import { END, START, StateGraph, StateGraphArgs } from "@langchain/langgraph";
 import { BaseMessage } from "@langchain/core/messages";
-import {
-  extractLinks,
-  fetchYoutube,
-  parseTranscript,
-} from "@ai-citizens/tools";
-import { parseXml } from "@ai-citizens/utils";
 import { IterableReadableStream } from "@langchain/core/utils/stream";
-import { generateGraphImg } from "../utils/generate-graph-img.js";
+
 // Define the YouTube video state interface
 interface YouTubeVideoState {
   title: string;
@@ -80,97 +93,78 @@ const youtubeGraphBuilder = new StateGraph<YouTubeVideoState>({
 
 youtubeGraphBuilder
   .addNode("getMetadata", async (state) => {
-    // console.log("getMetadata", state);
+    console.log("getMetadata", state);
     // Fetch metadata (title, url, etc.) from YouTube API
-    try {
-      const metadata = await fetchYoutube(state.url);
-
-      if (metadata?.length > 0) {
-        const videoData = metadata[0];
-        return {
-          title: videoData.metadata.title,
-          description: videoData.metadata.description,
-          transcription: videoData.pageContent,
-        };
-      }
-    } catch (error) {
-      // update to catch error and return state with error message to pass to handleMissingTranscription
-      throw error;
-    }
+    // Return updated state or catch error to send to handleError node
+    // if error {
+    //   return {
+    //     error: "Error in processing video metadata",
+    // };
+    // }
+    return {
+      title: "Test Title",
+      description: "Test Description",
+      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      transcription: "Test Transcription",
+    };
   })
   .addNode("getRelatedUrls", async (state) => {
-    // console.log("getRelatedUrls", state);
-    const { description } = state;
-    const relatedUrlResponse = await extractLinks(description);
-    // console.log("relatedUrlResponse", relatedUrlResponse);
-    const relatedUrls = parseXml(relatedUrlResponse);
-    const { scratchPad, extractedLinks } = relatedUrls;
-    // will give info on how the model came to the conclusion
-    // console.log("scratchPad", scratchPad);
-    // @TODO: current prompt seems to be returning a single string instead of an array
-    // console.log("relatedUrls", relatedUrls);
+    console.log("getRelatedUrls", state);
     // Fetch related URLs
     // Return updated state
     return {
-      relatedUrls: extractedLinks?.length ? [extractedLinks] : [],
+      relatedUrls: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
     };
   })
-  // .addNode("extractHighlights", async (state) => {
-  //   // console.log("extractHighlights", state);
-  //   // Extract highlights from video content
-  //   // Return updated state
-  //   return {
-  //     highlights: ["Highlight 1", "Highlight 2"],
-  //   };
-  // })
-  .addNode("generateSummary", async (state) => {
-    const { transcription } = state;
-    const summaryResponse = await parseTranscript({
-      transcript: transcription,
-      modelName: "gpt-4o",
-    });
-    // console.log("generateSummary", summaryResponse);
-    const parsedSummary = parseXml(summaryResponse);
-    // console.log("parsedSummary", parsedSummary);
-    const { key_insights, summary, points_of_contention } = parsedSummary;
+  .addNode("extractHighlights", async (state) => {
+    console.log("extractHighlights", state);
+    // Extract highlights from video content
+    // Return updated state
     return {
-      summary,
-      highlights: [key_insights, points_of_contention],
+      highlights: ["Highlight 1", "Highlight 2"],
+    };
+  })
+  .addNode("generateSummary", async (state) => {
+    console.log("generateSummary", state);
+    // Generate summary of the video
+    // Return updated state
+    return {
+      summary: "Test Summary",
     };
   })
   .addNode("handleMissingTranscription", async (state) => {
+    console.log("Error in processing video metadata");
+    // @TODO: will use a more brute force method by ripping the audio from the video and transcribing ourselves
+    // we still want the meta data from the video though and will need to process in some capacity
     return {
-      title: "Brute Force Title",
-      description: "Brute Force Description",
-      transcription: "Brute Force Transcription",
+      title: "Test Title",
+      description: "Test Description",
+      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      transcription: "Brute Forced Test Transcription",
     };
   })
   .addEdge(START, "getMetadata")
   .addEdge("getRelatedUrls", END)
+  .addEdge("extractHighlights", END)
   .addEdge("generateSummary", END)
   .addEdge("handleMissingTranscription", "getRelatedUrls")
+  .addEdge("handleMissingTranscription", "extractHighlights")
   .addEdge("handleMissingTranscription", "generateSummary")
   .addConditionalEdges("getMetadata", (state) => {
-    // @TODO: Need to fire additional logic if the transcription is empty
     // Example condition: if title is empty, go to error handling node
-    // else move to the next nodes.
+    // else move to the next nodes
     return state.title
-      ? // ? ["getRelatedUrls", "extractHighlights", "generateSummary"]
-        ["getRelatedUrls", "generateSummary"]
+      ? ["getRelatedUrls", "extractHighlights", "generateSummary"]
       : "handleMissingTranscription";
   });
 const youtubeGraph = youtubeGraphBuilder.compile();
 
-const graphImg = generateGraphImg({
-  app: youtubeGraph,
-  path: "./youtube-graph.png",
-});
 export const processYouTubeVideo = async (
-  videoUrl?: string,
+  videoUrl: string,
   config?: { configurable: { thread_id: string } }
 ): Promise<YouTubeVideoState> => {
   const initialState: Partial<YouTubeVideoState> = {
-    url: videoUrl || "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    url: videoUrl,
   };
   const finalState = await youtubeGraph.invoke(initialState, config);
   return finalState;
@@ -190,3 +184,5 @@ export const streamYouTubeVideoProcessing = async (
   });
   return stream;
 };
+</output>
+</example>

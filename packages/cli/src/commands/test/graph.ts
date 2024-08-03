@@ -1,5 +1,5 @@
 import { Args, Command, Flags } from "@oclif/core";
-import { processYouTubeVideo } from "@ai-citizens/graph";
+import { processYouTubeVideo, runGraphGenerator } from "@ai-citizens/graph";
 
 export default class TestGraph extends Command {
   static override args = {
@@ -18,9 +18,21 @@ export default class TestGraph extends Command {
   public async run(): Promise<void> {
     const { args, flags } = await this.parse(TestGraph);
 
-    if (args.type === "youtube" || !args.type) {
+    if (args.type === "youtube") {
       const parsedVideo = await processYouTubeVideo();
       console.log(parsedVideo);
+    }
+
+    if (args.type === "graph" || !args.type) {
+      const parsedGraph = await runGraphGenerator(
+        "generate a graph for a chatbot",
+        {
+          configurable: {
+            thread_id: "123",
+          },
+        }
+      );
+      console.log(parsedGraph);
     }
   }
 }
