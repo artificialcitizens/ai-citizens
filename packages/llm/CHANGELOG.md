@@ -1,5 +1,11 @@
 # @ai-citizens/llm
 
+## 0.0.4
+
+### Patch Changes
+
+- b230327: additional cli improvements, new graphs and functionality
+
 ## 0.0.3
 
 ### Patch Changes
