@@ -2,6 +2,63 @@ import { Args, Command, Flags } from "@oclif/core";
 import * as fs from "fs";
 import inquirer from "inquirer";
 
+const defaultConfig = `{
+  "modelConfig": {
+    "anthropic": {
+      "defaultModel": "claude-3-5-sonnet-20240620",
+      "temperature": 0.5,
+      "maxTokens": 8192,
+      "models": [
+        "claude-3-5-sonnet-20240620",
+        "claude-3-haiku-20240307",
+        "claude-3-opus-20240229",
+        "claude-3-sonnet-20240229"
+      ]
+    },
+    "google": {
+      "defaultModel": "gemini-1.5-pro",
+      "temperature": 0.5,
+      "maxTokens": 8192,
+      "models": ["gemini-1.0-pro", "gemini-1.5-flash", "gemini-1.5-pro"]
+    },
+    "openAI": {
+      "defaultModel": "gpt-4o",
+      "temperature": 0.5,
+      "maxTokens": 8192,
+      "models": [
+        "gpt-3.5-turbo",
+        "gpt-4",
+        "gpt-4-0125-preview",
+        "gpt-4-turbo",
+        "gpt-4o",
+        "gpt-4o-mini"
+      ]
+    },
+    "groq": {
+      "defaultModel": "llama-3.1-8b-instant",
+      "temperature": 0.5,
+      "maxTokens": 8192,
+      "models": [
+        "llama-3.1-8b-instant",
+        "llama-3.1-70b-versatile",
+        "mixtral-8x7b-32768"
+      ]
+    },
+    "ollama": {
+      "defaultModel": "llama3.1",
+      "temperature": 0.5,
+      "maxTokens": 8192,
+      "models": ["llama3.1"]
+    },
+    "local": {
+      "defaultModel": "hermes-2-pro-llama-3-8b",
+      "temperature": 0.5,
+      "maxTokens": 8192,
+      "models": ["hermes-2-pro-llama-3-8b"]
+    }
+  }
+}`;
+
 enum ApiKeys {
   OPENAI_API_KEY = "OPENAI_API_KEY",
   TAVILY_API_KEY = "TAVILY_API_KEY",
@@ -33,6 +90,10 @@ export default class Init extends Command {
     force: Flags.boolean({
       char: "f",
       description: "Overwrite existing config file",
+    }),
+    config: Flags.boolean({
+      char: "c",
+      description: "Create a new config file",
     }),
   };
 
@@ -75,7 +136,14 @@ export default class Init extends Command {
     const { args, flags } = await this.parse(Init);
     const currentDir = process.cwd();
     const configPath = args.configPath || currentDir;
-    const envPath = configPath + "/ava.env";
+    const envPath = configPath + "/.env";
+
+    if (flags.config) {
+      const configObject = JSON.parse(defaultConfig);
+      const formattedConfig = JSON.stringify(configObject, null, 2);
+      fs.writeFileSync(configPath + "/ava.config.json", formattedConfig);
+    }
+
     let env = this.readExistingConfig(envPath);
 
     if (Object.keys(env).length > 0 && !flags.force) {

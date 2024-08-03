@@ -9,7 +9,7 @@ import * as llm from "@ai-citizens/llm";
 import { config } from "dotenv";
 
 config({
-  path: [`${process.env.AVA_CONFIG_PATH}/ava.env`, process.cwd() + "/ava.env"],
+  path: [`${process.env.AVA_CONFIG_PATH}/.env`, process.cwd() + "/.env"],
 });
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 
