@@ -18,12 +18,12 @@ export default class TestGraph extends Command {
   public async run(): Promise<void> {
     const { args, flags } = await this.parse(TestGraph);
 
-    if (args.type === "youtube") {
+    if (args.type === "youtube" || !args.type) {
       const parsedVideo = await processYouTubeVideo();
       console.log(parsedVideo);
     }
 
-    if (args.type === "graph" || !args.type) {
+    if (args.type === "graph") {
       const parsedGraph = await runGraphGenerator(
         "generate a graph for a chatbot",
         {
