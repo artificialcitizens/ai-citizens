@@ -1,3 +1,12 @@
+{langgraph_docs}
+Using the above context around LangGraph, create the graph the user is requesting.
+
+Here is an example of how I like to structure my graphs, please make sure to add all the nodes and edges you need to the graph builder at once, trying to organize chronologically or logically is a good idea.
+
+Follow strict typing and type checking and guards, this is a good way to make sure that your graph is working as expected.
+
+Annotate logic as needed to help explain the graph to the user, but only mock out the functions of the nodes in comments and return test data where applicable.
+
 ```ts
 import { END, START, StateGraph, StateGraphArgs } from "@langchain/langgraph";
 import { BaseMessage } from "@langchain/core/messages";
