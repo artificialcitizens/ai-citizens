@@ -1,0 +1,37 @@
+{
+  "name": "@ai-citizens/tools",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ai-citizens/llm": "workspace:*",
+    "@ai-citizens/prompts": "workspace:*",
+    "@ai-citizens/utils": "workspace:*",
+    "@langchain/community": "^0.2.22",
+    "@langchain/core": "^0.2.18",
+    "youtube-transcript": "^1.2.1",
+    "youtubei.js": "^10.0.0"
+  },
+  "peerDependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18"
+  }
+}

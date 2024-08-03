@@ -39,6 +39,10 @@ export default class Dir extends Command {
       char: "o",
       description: "output file to write to",
     }),
+    writeToCWD: Flags.boolean({
+      char: "w",
+      description: "write to current working directory",
+    }),
   };
 
   public async run(): Promise<void> {
@@ -48,7 +52,7 @@ export default class Dir extends Command {
       this.error("Input directory is required");
     }
 
-    if (!flags.outputFile) {
+    if (!flags.outputFile && !flags.writeToCWD) {
       this.error("Output file is required");
     }
 
@@ -61,6 +65,7 @@ export default class Dir extends Command {
     await convertDirToTextFile(args.inputDir, {
       ignore,
       outputPath: flags.outputFile,
+      writeToCWD: flags.writeToCWD,
     });
   }
 }
