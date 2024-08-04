@@ -91,10 +91,6 @@ export default class Init extends Command {
       char: "f",
       description: "Overwrite existing config file",
     }),
-    config: Flags.boolean({
-      char: "c",
-      description: "Create a new config file",
-    }),
   };
 
   private readExistingConfig(configPath: string): Record<string, string> {
@@ -138,11 +134,24 @@ export default class Init extends Command {
     const configPath = args.configPath || currentDir;
     const envPath = configPath + "/.env";
 
-    if (flags.config) {
-      const configObject = JSON.parse(defaultConfig);
-      const formattedConfig = JSON.stringify(configObject, null, 2);
-      fs.writeFileSync(configPath + "/ava.config.json", formattedConfig);
+    const configFilePath = configPath + "/ava.config.json";
+    let configObject;
+
+    try {
+      const existingConfig = fs.readFileSync(configFilePath, "utf8");
+      configObject = JSON.parse(existingConfig);
+      this.log("Existing ava.config.json found and loaded.");
+    } catch (error) {
+      // File doesn't exist or couldn't be parsed, use default config
+      configObject = JSON.parse(defaultConfig);
+      this.log(
+        "No existing ava.config.json found. Creating with default configuration."
+      );
     }
+
+    const formattedConfig = JSON.stringify(configObject, null, 2);
+    fs.writeFileSync(configFilePath, formattedConfig);
+    this.log("ava.config.json has been updated.");
 
     let env = this.readExistingConfig(envPath);
 
