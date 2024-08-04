@@ -1,5 +1,11 @@
 # @ai-citizens/ava
 
+## 0.0.10
+
+### Patch Changes
+
+- 88c8e39: improve init handling
+
 ## 0.0.9
 
 ### Patch Changes
