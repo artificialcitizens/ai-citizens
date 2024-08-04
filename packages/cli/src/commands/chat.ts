@@ -24,11 +24,12 @@ export default class Chat extends Command {
     model: Flags.string({
       description: "The model to use",
       required: false,
+      char: "m",
     }),
     modelSelect: Flags.boolean({
       description: "Select a model",
       required: false,
-      char: "m",
+      char: "s",
     }),
   };
   static override description = "Interactive chat with the AI assistant";
@@ -66,7 +67,7 @@ export default class Chat extends Command {
     let modelName = flags.model || "gpt-4o-mini";
     if (!llm.isAllModel(modelName)) {
       this.log(
-        `------------------------------------------------\n\n Invalid model: ${modelName} \n\n Use the --modelSelect || -m flag to select a model\n\n------------------------------------------------`
+        `------------------------------------------------\n\n Invalid model: ${modelName} \n\n Use the --modelSelect || -s flag to select a model\n\n------------------------------------------------`
       );
     }
 
