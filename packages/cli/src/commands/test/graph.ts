@@ -1,5 +1,12 @@
 import { Args, Command, Flags } from "@oclif/core";
-import { processYouTubeVideo, runGraphGenerator } from "@ai-citizens/graph";
+import {
+  processYouTubeVideo,
+  runGraphGenerator,
+  resumeGraphGenerator,
+  updateGraphState,
+} from "@ai-citizens/graph";
+import inquirer from "inquirer";
+import { HumanMessage } from "@langchain/core/messages";
 
 export default class TestGraph extends Command {
   static override args = {
@@ -24,15 +31,46 @@ export default class TestGraph extends Command {
     }
 
     if (args.type === "graph") {
-      const parsedGraph = await runGraphGenerator(
+      const config = {
+        configurable: {
+          thread_id: "123",
+        },
+      };
+
+      const parsedGraphState = await runGraphGenerator(
         "generate a graph for a chatbot",
-        {
-          configurable: {
-            thread_id: "123",
-          },
-        }
+        config
       );
-      console.log(parsedGraph);
+      this.log(parsedGraphState.scaffoldedGraph);
+
+      // User interaction loop
+      const { userInput }: { userInput: string } = await inquirer.prompt([
+        {
+          type: "input",
+          name: "userInput",
+          message: "Enter your feedback (or 'exit' to quit):",
+        },
+      ]);
+
+      if (userInput.toLowerCase() === "exit") {
+        process.stdout.write("\nGraph generation ended. Goodbye!\n");
+        return;
+      }
+      if (userInput) {
+        const updatedGraphState = {
+          ...parsedGraphState,
+          qaResult: {
+            hasErrors: true,
+            errorMessages: [],
+          },
+          messages: [...parsedGraphState.messages, new HumanMessage(userInput)],
+        };
+
+        // Resume graph generation with user input
+        updateGraphState(updatedGraphState, config);
+      }
+      const resumedGraphState = await resumeGraphGenerator(config);
+      console.log(resumedGraphState.scaffoldedGraph);
     }
   }
 }
