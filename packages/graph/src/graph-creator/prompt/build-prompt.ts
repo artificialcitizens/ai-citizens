@@ -1,5 +1,6 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
-import fs from "fs";
+import { langgraphDocs } from "./langgraph-docs.js";
+import { langgraphExamples as examples } from "./examples.js";
 
 const scaffoldLangGraph = ChatPromptTemplate.fromTemplate(
   `
@@ -16,12 +17,6 @@ Now, consider these examples of graph structures:
 <examples>
 {examples}
 </examples>
-
-The user has made the following request for a LangGraph:
-
-<user_request>
-{user_request}
-</user_request>
 
 Your task is to create the graph the user is requesting. Follow these guidelines:
 
@@ -45,15 +40,14 @@ Present your complete graph implementation inside <graph> tags. Ensure that your
 After the graph implementation, provide a brief explanation of how the graph works and how it fulfills the user's request. Include this explanation inside <explanation> tags.
 
 Remember to adhere to strict typing, use appropriate error handling, and organize your code in a clear and logical manner.
+
+The user's request is:
 `
 );
 
-export const scaffoldLangGraphPrompt = (userRequest: string) => {
-  const langgraphDocs = fs.readFileSync("./langgraph-docs.txt", "utf-8");
-  const examples = fs.readFileSync("./examples.txt", "utf-8");
+export const scaffoldLangGraphPrompt = () => {
   return scaffoldLangGraph.format({
     langgraph_docs: langgraphDocs,
     examples: examples,
-    user_request: userRequest,
   });
 };
