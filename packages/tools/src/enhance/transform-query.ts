@@ -12,8 +12,7 @@ export async function transformQuery({
   model,
 }: {
   state: { question: string };
-  // @ts-expect-error need to fix types
-  model: Model;
+  model: any;
 }): Promise<{ question: string; improvedQuestion: string }> {
   const { question } = state;
   // console.log('---TRANSFORM QUERY---')
