@@ -8,11 +8,13 @@ export const generateGraphImg = async ({
   app: CompiledStateGraph<any, any, any>;
   path?: string;
 }) => {
-  const drawableGraph = app.getGraph();
-  const image = await drawableGraph.drawMermaidPng();
-  const arrayBuffer = await image.arrayBuffer();
-  if (!path) {
-    return arrayBuffer;
+  if (process.env.NODE_ENV !== "production") {
+    const drawableGraph = app.getGraph();
+    const image = await drawableGraph.drawMermaidPng();
+    const arrayBuffer = await image.arrayBuffer();
+    if (!path) {
+      return arrayBuffer;
+    }
+    fs.writeFileSync(path, Buffer.from(arrayBuffer));
   }
-  fs.writeFileSync(path, Buffer.from(arrayBuffer));
 };

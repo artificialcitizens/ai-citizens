@@ -5,9 +5,19 @@ import {
   StateGraph,
   StateGraphArgs,
 } from "@langchain/langgraph";
-import { BaseMessage, HumanMessage, AIMessage } from "@langchain/core/messages";
+import {
+  BaseMessage,
+  HumanMessage,
+  AIMessage,
+  SystemMessage,
+} from "@langchain/core/messages";
 import { RunnableConfig } from "@langchain/core/runnables";
 import { generateGraphImg } from "../utils/generate-graph-img.js";
+import { scaffoldLangGraphPrompt } from "./prompt/build-prompt.js";
+import { getModel } from "@ai-citizens/llm";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
+import { StringOutputParser } from "@langchain/core/output_parsers";
+import { parseXml } from "@ai-citizens/utils";
 
 // Define the state interface for the graph generator
 interface GraphGeneratorState {
@@ -19,6 +29,7 @@ interface GraphGeneratorState {
   userApproval: boolean;
   planningResult: string;
   messages: BaseMessage[];
+  userRequest: string;
 }
 
 // Define the state channels with reducers
@@ -46,6 +57,10 @@ const graphGeneratorState: StateGraphArgs<GraphGeneratorState>["channels"] = {
       return [...prev, ...next];
     },
   },
+  userRequest: {
+    default: () => "",
+    value: (prev: string, next?: string) => next ?? prev,
+  },
 };
 
 // Create the graph builder
@@ -56,41 +71,50 @@ const graphGeneratorBuilder = new StateGraph<GraphGeneratorState>({
 // Add nodes to the graph
 graphGeneratorBuilder
   .addNode("scaffoldGraph", async (state: GraphGeneratorState) => {
-    console.log("Scaffolding graph...");
-    // Mock implementation: Generate a basic graph structure
-    const scaffoldedGraph = `
-      const exampleGraph = new StateGraph({
-        channels: {
-          // Add channels here
-        }
-      });
-      
-      exampleGraph
-        .addNode("nodeA", (state) => { /* Logic for nodeA */ })
-        .addNode("nodeB", (state) => { /* Logic for nodeB */ })
-        .addEdge(START, "nodeA")
-        .addEdge("nodeA", "nodeB")
-        .addEdge("nodeB", END);
-    `;
-    return { scaffoldedGraph };
-  })
-  .addNode("qaCheck", async (state: GraphGeneratorState) => {
-    console.log("Performing QA check...");
-    // Mock implementation: Perform linting and error checking
-    const hasErrors = Math.random() < 0.3; // 30% chance of errors for demonstration
-    const errorMessages = hasErrors
-      ? ["Linting error on line 5", "Missing type annotation for nodeB"]
-      : [];
+    // console.log("Scaffolding graph...");
+    const systemPrompt = await scaffoldLangGraphPrompt();
+    // const prompt = ChatPromptTemplate.fromMessages([
+    //   new SystemMessage(systemPrompt),
+    //   new HumanMessage(state.userRequest),
+    // ]);
+    // const modelName = "claude-3-5-sonnet-20240620";
+    // const model = await getModel({
+    //   model: modelName,
+    // });
+    // const parser = new StringOutputParser();
+    // const chain = prompt.pipe(model).pipe(parser);
+    // const response = await chain.invoke({ input: state.userRequest });
+    // // extract graph from response from the <graph></graph> tags, we have to do this custom because the response is not in the correct format
+    // const graph = response.match(/<graph>([\s\S]+)<\/graph>/)?.[1];
+    const graph = "test";
     return {
-      qaResult: { hasErrors, errorMessages },
+      scaffoldedGraph: graph,
       messages: [
-        new AIMessage(
-          `QA Check completed. ${
-            hasErrors ? "Errors found." : "No errors found."
-          }`
-        ),
+        new SystemMessage(systemPrompt),
+        new HumanMessage(state.userRequest),
+        new AIMessage(`Scaffolded graph:\n${graph}`),
       ],
     };
+  })
+  .addNode("qaCheck", async (state: GraphGeneratorState) => {
+    console.log("QA checking...");
+    if (state.qaResult.hasErrors) {
+      // console.log(state.messages);
+      // const prompt = ChatPromptTemplate.fromMessages(state.messages);
+      // const modelName = "claude-3-5-sonnet-20240620";
+      // const model = await getModel({
+      //   model: modelName,
+      // });
+      // const parser = new StringOutputParser();
+      // const chain = prompt.pipe(model).pipe(parser);
+      // const response = await chain.invoke({ input: state.userRequest });
+      // // extract graph from response from the <graph></graph> tags, we have to do this custom because the response is not in the correct format
+      // const graph = response.match(/<graph>([\s\S]+)<\/graph>/)?.[1];
+      const graph = "updated test";
+      return {
+        scaffoldedGraph: graph,
+      };
+    }
   })
   .addNode("planning", async (state: GraphGeneratorState) => {
     console.log("Planning next steps...");
@@ -100,6 +124,7 @@ graphGeneratorBuilder
     return {
       planningResult,
       messages: [
+        ...state.messages,
         new AIMessage(`Planning completed. Next steps:\n${planningResult}`),
       ],
     };
@@ -118,7 +143,7 @@ const checkpointer = new MemorySaver();
 const graphGeneratorGraph = graphGeneratorBuilder.compile({
   checkpointer,
   // @ts-expect-error stupid typing
-  interruptBefore: ["planning"],
+  interruptBefore: ["qaCheck"],
 });
 const graphImg = generateGraphImg({
   app: graphGeneratorGraph,
@@ -132,9 +157,8 @@ export const runGraphGenerator = async (
   }
 ): Promise<GraphGeneratorState> => {
   let request = userRequest || "Generate a graph for a chatbot";
-  const userMessage = new HumanMessage(request);
   const initialState: Partial<GraphGeneratorState> = {
-    messages: [userMessage],
+    userRequest: request,
   };
   const finalState = await graphGeneratorGraph.invoke(initialState, config);
   return finalState;
@@ -144,4 +168,13 @@ export const resumeGraphGenerator = async (config?: {
   configurable: { thread_id: string };
 }): Promise<GraphGeneratorState> => {
   return await graphGeneratorGraph.invoke(null, config);
+};
+
+export const updateGraphState = async (
+  state: GraphGeneratorState,
+  config?: {
+    configurable: { thread_id: string };
+  }
+) => {
+  graphGeneratorGraph.updateState(config, state);
 };
