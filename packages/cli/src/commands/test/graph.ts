@@ -7,6 +7,7 @@ import {
 } from "@ai-citizens/graph";
 import inquirer from "inquirer";
 import { HumanMessage } from "@langchain/core/messages";
+import { test } from "@ai-citizens/tools";
 
 export default class TestGraph extends Command {
   static override args = {
@@ -25,7 +26,7 @@ export default class TestGraph extends Command {
   public async run(): Promise<void> {
     const { args, flags } = await this.parse(TestGraph);
 
-    if (args.type === "youtube" || !args.type) {
+    if (args.type === "youtube") {
       const parsedVideo = await processYouTubeVideo();
       console.log(parsedVideo);
     }
@@ -71,6 +72,10 @@ export default class TestGraph extends Command {
       }
       const resumedGraphState = await resumeGraphGenerator(config);
       console.log(resumedGraphState.scaffoldedGraph);
+    }
+
+    if (args.type === "pg-vector" || !args.type) {
+      await test();
     }
   }
 }
