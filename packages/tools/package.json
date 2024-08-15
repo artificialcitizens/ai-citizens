@@ -25,6 +25,9 @@
     "@ai-citizens/utils": "workspace:*",
     "@langchain/community": "^0.2.22",
     "@langchain/core": "^0.2.18",
+    "@langchain/openai": "^0.2.5",
+    "pg": "^8.12.0",
+    "uuid": "^10.0.0",
     "youtube-transcript": "^1.2.1",
     "youtubei.js": "^10.0.0"
   },
@@ -32,6 +35,7 @@
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "@types/node": "^18"
+    "@types/node": "^18",
+    "@types/pg": "^8.11.6"
   }
 }
