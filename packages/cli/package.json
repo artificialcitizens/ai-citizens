@@ -10,7 +10,6 @@
     },
     "nodeArguments": [
       "--import=tsimp"
-      "ava": "^6.1.3",,
     ]
   },
   "scripts": {
