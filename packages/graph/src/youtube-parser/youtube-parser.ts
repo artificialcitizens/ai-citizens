@@ -8,6 +8,7 @@ import {
 import { parseXml } from "@ai-citizens/utils";
 import { IterableReadableStream } from "@langchain/core/utils/stream";
 import { generateGraphImg } from "../utils/generate-graph-img.js";
+import { PostgresSaver } from "../checkpointer/index.js";
 // Define the YouTube video state interface
 interface YouTubeVideoState {
   title: string;
@@ -159,12 +160,19 @@ youtubeGraphBuilder
         ["getRelatedUrls", "generateSummary"]
       : "handleMissingTranscription";
   });
-const youtubeGraph = youtubeGraphBuilder.compile();
 
-const graphImg = generateGraphImg({
-  app: youtubeGraph,
-  path: "./youtube-graph.png",
+const checkpointer = PostgresSaver.fromConnString(
+  "postgresql://postgres:password@localhost:54321/electric"
+);
+const youtubeGraph = youtubeGraphBuilder.compile({
+  checkpointer,
 });
+
+// @TODO: Automate graph image generation and readme update
+// const graphImg = generateGraphImg({
+//   app: youtubeGraph,
+//   path: "./youtube-graph.png",
+// });
 export const processYouTubeVideo = async (
   videoUrl?: string,
   config?: { configurable: { thread_id: string } }
