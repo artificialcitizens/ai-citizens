@@ -69,7 +69,7 @@ export const createVectorStore = async (): Promise<PGVectorStore> => {
     postgresConnectionOptions: {
       type: "postgres",
       host: "localhost",
-      port: 54321, // Changed from 5432 to 54321
+      port: 54321,
       user: "postgres",
       password: "password",
       database: "electric",

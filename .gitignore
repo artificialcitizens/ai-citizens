@@ -40,3 +40,6 @@ tsconfig.tsbuildinfo
 .env
 ava.env
 langgraphjs
+.tsimp
+
+test-assets/
