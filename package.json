@@ -13,7 +13,8 @@
     "version-packages": "changeset version",
     "release": "pnpm build && pnpm version-packages && pnpm publish",
     "psql": "psql \"postgresql://postgres:password@localhost:54321/electric\"",
-    "wipe-db": "docker-compose down && docker volume rm electric_quickstart_postgres_data && docker-compose up -d"
+    "wipe-db": "docker-compose down && docker volume rm electric_quickstart_postgres_data && docker-compose up -d",
+    "copy-env": "for dir in packages/*; do cp .env \"$dir/.env\"; done"
   },
   "keywords": [],
   "author": "",
