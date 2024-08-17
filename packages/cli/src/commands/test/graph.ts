@@ -4,10 +4,12 @@ import {
   runGraphGenerator,
   resumeGraphGenerator,
   updateGraphState,
+  testAgent,
 } from "@ai-citizens/graph";
 import inquirer from "inquirer";
 import { HumanMessage } from "@langchain/core/messages";
 import { test } from "@ai-citizens/tools";
+import { testElectric } from "../../ui/test.jsx";
 
 export default class TestGraph extends Command {
   static override args = {
@@ -25,9 +27,16 @@ export default class TestGraph extends Command {
 
   public async run(): Promise<void> {
     const { args, flags } = await this.parse(TestGraph);
-
+    const config = {
+      configurable: {
+        thread_id: "123",
+      },
+    };
     if (args.type === "youtube") {
-      const parsedVideo = await processYouTubeVideo();
+      const parsedVideo = await processYouTubeVideo(
+        "https://youtu.be/ZaD_IoNhmXg?si=AMrXm08vqxkP48UW",
+        config
+      );
       console.log(parsedVideo);
     }
 
@@ -74,8 +83,13 @@ export default class TestGraph extends Command {
       console.log(resumedGraphState.scaffoldedGraph);
     }
 
-    if (args.type === "pg-vector" || !args.type) {
+    if (args.type === "pg-vector") {
       await test();
     }
+
+    if (args.type === "electric") {
+      testElectric();
+    }
+
   }
 }
