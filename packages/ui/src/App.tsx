@@ -1,19 +1,18 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+// import { useState } from "react";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
 import "./App.css";
 import { useShape } from "@electric-sql/react";
 function App() {
   const { data } = useShape({
-    url: `http://localhost:3000/v1/shape/foo`,
+    url: `http://localhost:3000/v1/shape/checkpoints`,
   });
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   return (
     <>
-      <div>
-        <pre>{JSON.stringify(data, null, 4)}</pre>
-        <a href='https://vitejs.dev' target='_blank'>
+      <pre>{JSON.stringify(data, null, 4)}</pre>
+      {/* <a href='https://vitejs.dev' target='_blank'>
           <img src={viteLogo} className='logo' alt='Vite logo' />
         </a>
         <a href='https://react.dev' target='_blank'>
@@ -32,6 +31,7 @@ function App() {
       <p className='read-the-docs'>
         Click on the Vite and React logos to learn more
       </p>
+      */}
     </>
   );
 }
