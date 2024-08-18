@@ -1,6 +1,52 @@
-## Search Graph
+# Search Graph
+
+This module implements a state-based graph for performing web searches, extracting key information, and generating responses based on user queries.
 
 ![Search Example](./graph.png)
+
+## Key Components
+
+1. **SearchState**: Defines the structure for storing search-related information.
+
+2. **StateGraph**: Utilizes LangChain's StateGraph to manage the flow of operations.
+
+3. **Main Nodes**:
+
+   - `performSearchNode`: Executes the web search using the Tavily API.
+   - `extractKeyPointsNode`: Identifies and extracts key points from search results.
+   - `generateRelatedQueriesNode`: Creates related queries based on the initial search.
+   - `generateResponseNode`: Produces a final response and report based on all gathered information.
+
+4. **Utility Functions**:
+
+   - `filterSearchResults`: Filters search results based on a minimum score.
+   - `formatSearchResults`: Formats the search results for further processing.
+
+5. **LLM Integration**: Utilizes GPT models for various natural language processing tasks.
+
+## Workflow
+
+1. The search process begins with a user query.
+2. The query is used to perform a web search.
+3. Key points are extracted from the search results.
+4. Related queries are generated to expand the search scope.
+5. A final response and report are generated based on all collected information.
+
+## Usage
+
+The module exports two main functions:
+
+1. `performSearch`: Executes the entire search process and returns the final state.
+2. `streamSearchProcess`: Provides a stream of intermediate states during the search process.
+
+## Example Usage
+
+```ts
+const result = await performSearch(
+  "How do I register to vote in Oregon?",
+  config
+);
+```
 
 ## Example Response
 
