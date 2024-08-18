@@ -18,7 +18,6 @@ import { generateGraphImg } from "../utils/generate-graph-img.js";
 interface SearchState {
   query: string;
   searchResults: string[];
-  lowQualitySearchResults: string[];
   sources: string[];
   keyPoints: string[];
   relatedQueries: string[];
@@ -42,10 +41,6 @@ const searchGraphState: StateGraphArgs<SearchState>["channels"] = {
     value: stringReducer,
   },
   searchResults: {
-    default: () => [],
-    value: arrayReducer,
-  },
-  lowQualitySearchResults: {
     default: () => [],
     value: arrayReducer,
   },
