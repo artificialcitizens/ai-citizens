@@ -4,7 +4,6 @@ import {
   runGraphGenerator,
   resumeGraphGenerator,
   updateGraphState,
-  testAgent,
 } from "@ai-citizens/graph";
 import inquirer from "inquirer";
 import { HumanMessage } from "@langchain/core/messages";
@@ -40,10 +39,10 @@ export default class TestGraph extends Command {
       console.log(parsedVideo);
     }
 
-    if (args.type === "graph") {
+    if (args.type === "graph" || !args.type) {
       const config = {
         configurable: {
-          thread_id: "123",
+          thread_id: "2123",
         },
       };
 
@@ -90,6 +89,5 @@ export default class TestGraph extends Command {
     if (args.type === "electric") {
       testElectric();
     }
-
   }
 }
