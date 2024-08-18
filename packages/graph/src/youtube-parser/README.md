@@ -179,3 +179,224 @@ export const streamYouTubeVideoProcessing = async (
   return stream;
 };
 ```
+
+```ts
+import { END, START, StateGraph } from "@langchain/langgraph";
+import { BaseMessage, HumanMessage, AIMessage } from "@langchain/core/messages";
+import { MemorySaver } from "@langchain/langgraph";
+
+// Define the state interface
+interface ChatbotState {
+  messages: BaseMessage[];
+  current_action: "respond" | "action";
+}
+
+// Define the graph builder
+const graphBuilder = new StateGraph<ChatbotState>({
+  channels: {
+    messages: {
+      default: () => [],
+      reducer: (prev: BaseMessage[], next: BaseMessage[]) => [...prev, ...next],
+    },
+    current_action: {
+      default: () => "respond",
+      reducer: (_, next) => next,
+    },
+  },
+});
+
+// Add nodes to the graph
+graphBuilder
+  .addNode("route", (state: ChatbotState) => {
+    console.log("Routing user query");
+    // Mock implementation of routing logic
+    const lastMessage = state.messages[state.messages.length - 1];
+    const content =
+      typeof lastMessage.content === "string"
+        ? lastMessage.content
+        : JSON.stringify(lastMessage.content);
+    if (content.toLowerCase().includes("action")) {
+      return { current_action: "action" };
+    }
+    return { current_action: "respond" };
+  })
+  .addNode("respond", (state: ChatbotState) => {
+    console.log("Generating response");
+    // Mock implementation of response generation
+    return {
+      messages: [new AIMessage("This is a mock response to your query.")],
+    };
+  })
+  .addNode("action", (state: ChatbotState) => {
+    console.log("Performing action");
+    // Mock implementation of action execution
+    return {
+      messages: [new AIMessage("I have performed the requested action.")],
+    };
+  })
+  .addEdge(START, "route")
+  .addConditionalEdges("route", (state) => state.current_action as string, {
+    respond: "respond",
+    action: "action",
+  })
+  .addEdge("respond", END)
+  .addEdge("action", END);
+
+// Compile the graph
+const graph = graphBuilder.compile({
+  checkpointer: new MemorySaver(),
+});
+
+// Function to process user input
+async function processChatInput(
+  input: string,
+  threadId: string
+): Promise<ChatbotState> {
+  const config = { configurable: { thread_id: threadId } };
+  const initialState: Partial<ChatbotState> = {
+    messages: [new HumanMessage(input)],
+  };
+
+  try {
+    const finalState = await graph.invoke(initialState, config);
+    return finalState;
+  } catch (error) {
+    console.error("Error processing chat input:", error);
+    throw error;
+  }
+}
+
+export async function runChatbot() {
+  const threadId = "example-thread";
+  const userInput = "Hello, how are you?";
+
+  try {
+    const result = await processChatInput(userInput, threadId);
+    console.log("Final state:", result);
+  } catch (error) {
+    console.error("Chatbot error:", error);
+  }
+
+  const newInput = "Hello, can you help me with this action?";
+  try {
+    const result = await processChatInput(newInput, threadId);
+    console.log("Final state:", result);
+  } catch (error) {
+    console.error("Chatbot error:", error);
+  }
+}
+```
+
+```ts
+import { END, START, StateGraph } from "@langchain/langgraph";
+import { PromptTemplate } from "@langchain/core/prompts";
+import "dotenv/config";
+
+interface PlanExecuteState {
+  input: string;
+  plan: string[];
+  pastSteps: [string, string][];
+  response?: string;
+}
+
+const planExecuteGraph = new StateGraph<PlanExecuteState>({
+  channels: {
+    input: {
+      value: (left?: string, right?: string) => right ?? left ?? "",
+    },
+    plan: {
+      value: (x?: string[], y?: string[]) => y ?? x ?? [],
+      default: () => [],
+    },
+    pastSteps: {
+      value: (x: [string, string][], y: [string, string][]) => x.concat(y),
+      default: () => [],
+    },
+    response: {
+      value: (x?: string, y?: string) => y ?? x,
+      default: () => undefined,
+    },
+  },
+});
+
+export const planningNode = async (state: PlanExecuteState) => {
+  console.log("Planning for input:", state.input);
+  const mockedPlan = [
+    "1. Choose a date and venue",
+    "2. Create a guest list",
+    "3. Plan decorations and theme",
+    "4. Arrange food and drinks",
+    "5. Organize entertainment",
+  ];
+  return { plan: mockedPlan };
+};
+
+export const executionNode = async (state: PlanExecuteState) => {
+  const currentStep = state.plan[0];
+  console.log("Executing step:", currentStep);
+  const mockedStepResult = `Completed: ${currentStep}`;
+  return {
+    plan: state.plan.slice(1),
+    pastSteps: [[currentStep, mockedStepResult]],
+  };
+};
+
+export const responderNode = async (state: PlanExecuteState) => {
+  console.log("Generating response based on executed steps");
+  const mockedResponse =
+    "The surprise birthday party has been successfully planned with all necessary arrangements made.";
+  return { response: mockedResponse };
+};
+
+const conditionalEdge = (state: PlanExecuteState) => {
+  if (state.plan.length > 0) {
+    console.log("Moving to executor");
+    return "executor";
+  }
+  console.log("Moving to responder");
+  return "responder";
+};
+
+planExecuteGraph
+  .addNode("planner", planningNode)
+  .addNode("executor", executionNode)
+  .addNode("responder", responderNode)
+  .addEdge(START, "planner")
+  .addEdge("planner", "executor")
+  .addConditionalEdges("executor", conditionalEdge)
+  .addEdge("responder", END);
+
+// Compile the graph
+const graph = planExecuteGraph.compile();
+
+// Function to process user input
+async function processPlanExecuteInput(
+  input: string
+): Promise<PlanExecuteState> {
+  const initialState: PlanExecuteState = {
+    input,
+    plan: [],
+    pastSteps: [],
+  };
+
+  try {
+    const finalState = await graph.invoke(initialState);
+    return finalState;
+  } catch (error) {
+    console.error("Error processing input:", error);
+    throw error;
+  }
+}
+
+export async function runPlanExecuteAgent() {
+  const userInput = "Plan a surprise birthday party for my best friend";
+
+  try {
+    const result = await processPlanExecuteInput(userInput);
+    console.log("Final state:", result);
+    console.log("Response:", result.response);
+  } catch (error) {
+    console.error("Planning agent error:", error);
+  }
+}
+```

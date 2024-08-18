@@ -1,4 +1,3 @@
-# https://next.electric-sql.com/guides/quickstart
 version: "3.3"
 name: "electric_quickstart"
 
@@ -11,9 +10,9 @@ services:
       POSTGRES_PASSWORD: password
     ports:
       - 54321:5432
-    tmpfs:
-      - /var/lib/postgresql/data
-      - /tmp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
     command:
       - -c
       - listen_addresses=*
@@ -30,3 +29,6 @@ services:
     depends_on:
       - postgres
     restart: always
+
+volumes:
+  postgres_data:

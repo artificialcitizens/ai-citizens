@@ -5,12 +5,17 @@
   "scripts": {
     "clean": "pnpm -r run clean",
     "build": "pnpm run clean && pnpm -r run build",
+    "test": "pnpm -r run test",
     "ci:publish": "pnpm publish --access public -r --filter \"@ai-citizens/*\" --no-git-checks",
     "ci:version": "changeset version",
     "publish": "pnpm publish -r --filter \"@ai-citizens/*\" --no-git-checks",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "pnpm build && pnpm version-packages && pnpm publish"
+    "release": "pnpm build && pnpm version-packages && pnpm publish",
+    "psql": "psql \"postgresql://postgres:password@localhost:54321/electric\"",
+    "wipe-db": "docker-compose down && docker volume rm electric_quickstart_postgres_data && docker-compose up -d",
+    "copy-env": "for dir in packages/*; do cp .env \"$dir/.env\"; done",
+    "clean:node_modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +25,9 @@
     "@types/node": "^18",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "ava": "^6.1.3",
+    "tsimp": "^2.0.11"
   },
   "dependencies": {
     "@ai-citizens/llm": "workspace:*",
