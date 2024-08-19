@@ -1,6 +1,7 @@
 import { DynamicStructuredTool } from "@langchain/core/tools";
+import { TavilySearchResults } from "@langchain/community/tools/tavily_search";
 import { z } from "zod";
-
+import "dotenv/config";
 export const basicWebSearch = new DynamicStructuredTool({
   name: "search",
   description: "Call to surf the web.",
@@ -13,3 +14,5 @@ export const basicWebSearch = new DynamicStructuredTool({
     return "It's sunny in San Francisco, but you better look out if you're a Gemini 😈.";
   },
 });
+
+export const tavilyTool = new TavilySearchResults();
