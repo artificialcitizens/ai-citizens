@@ -7,8 +7,8 @@ import {
   performSearchNode,
 } from "./graph.js";
 import "dotenv/config";
-import { tavilyTool } from "@ai-citizens/tools";
-import sinon from "sinon";
+// import { tavilyTool } from "@ai-citizens/tools";
+// import sinon from "sinon";
 
 test("should pass CI", async (t) => {
   const result = await performSearch(
