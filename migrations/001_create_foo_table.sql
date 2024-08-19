@@ -15,4 +15,4 @@ CREATE TABLE documents (
 );
 
 -- Create an index on workspace_id for faster queries
-CREATE INDEX idx_acdoc_workspace_id ON acdoc(workspace_id);
+CREATE INDEX idx_documents_workspace_id ON documents(workspace_id);
