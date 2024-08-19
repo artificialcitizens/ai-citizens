@@ -30,6 +30,7 @@
   "license": "ISC",
   "dependencies": {
     "@langchain/anthropic": "^0.2.10",
+    "@langchain/core": "^0.2.18",
     "@langchain/google-genai": "^0.0.23",
     "@langchain/groq": "^0.0.15",
     "@langchain/ollama": "^0.0.2",
