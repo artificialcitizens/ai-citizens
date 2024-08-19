@@ -191,7 +191,7 @@ export const executionNode = async (state: PlanExecuteState) => {
   const mockedStepResult = `Completed: ${currentStep}`;
   return {
     plan: state.plan.slice(1), // Remove the executed step from the plan
-    pastSteps: [[currentStep, mockedStepResult]], // Add the executed step to pastSteps
+    pastSteps: [[currentStep, mockedStepResult] as [string, string]],
   };
 };
 

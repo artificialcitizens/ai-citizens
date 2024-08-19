@@ -149,8 +149,8 @@ importers:
         specifier: ^0.2.18
         version: 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/community@0.2.28)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
       '@langchain/langgraph':
-        specifier: ^0.0.31
-        version: 0.0.31(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
+        specifier: ^0.0.34
+        version: 0.0.34(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
       '@langchain/openai':
         specifier: ^0.2.5
         version: 0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/community@0.2.28)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))
@@ -187,19 +187,22 @@ importers:
     dependencies:
       '@langchain/anthropic':
         specifier: ^0.2.10
-        version: 0.2.15
+        version: 0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
+      '@langchain/core':
+        specifier: ^0.2.18
+        version: 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))
       '@langchain/google-genai':
         specifier: ^0.0.23
-        version: 0.0.23(zod@3.23.8)
+        version: 0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8)
       '@langchain/groq':
         specifier: ^0.0.15
-        version: 0.0.15
+        version: 0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
       '@langchain/ollama':
         specifier: ^0.0.2
-        version: 0.0.2
+        version: 0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
       '@langchain/openai':
         specifier: ^0.2.5
-        version: 0.2.7
+        version: 0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -237,13 +240,13 @@ importers:
         version: link:../utils
       '@langchain/community':
         specifier: ^0.2.22
-        version: 0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
+        version: 0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
       '@langchain/core':
         specifier: ^0.2.18
-        version: 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
+        version: 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
       '@langchain/openai':
         specifier: ^0.2.5
-        version: 0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))
+        version: 0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))
       canvas:
         specifier: ^2.11.2
         version: 2.11.2
@@ -1022,8 +1025,8 @@ packages:
     resolution: {integrity: sha512-JN6dlPNHZEFKc8JjQzO+H7IqCpcE3s/1nYnb+sHxpc22Amr3yxXgp6CvanLhmD+R8Wj1AE1vG7AkzjM8MLtv+A==}
     engines: {node: '>=18'}
 
-  '@langchain/langgraph@0.0.31':
-    resolution: {integrity: sha512-f5QMSLy/RnLktsqnNm2mq8gp1xplHwQf87XIPVO0IYuumOJiafx5lE7ahPO+fVmCzAz6LxcsVocvD0JqxXR/2w==}
+  '@langchain/langgraph@0.0.34':
+    resolution: {integrity: sha512-cuig46hGmZkf+eXw1Cx2CtkAWgsAbIpa5ABLxn9oe1rbtvHXmfekqHZA6tGE0DipEmsN4H64zFcDEJydll6Sdw==}
     engines: {node: '>=18'}
     peerDependencies:
       better-sqlite3: ^9.5.0
@@ -4259,18 +4262,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@langchain/anthropic@0.2.15':
-    dependencies:
-      '@anthropic-ai/sdk': 0.25.2
-      '@langchain/core': 0.2.27
-      fast-xml-parser: 4.4.1
-      zod: 3.23.8
-      zod-to-json-schema: 3.23.2(zod@3.23.8)
-    transitivePeerDependencies:
-      - encoding
-      - langchain
-      - openai
-
   '@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))':
     dependencies:
       '@anthropic-ai/sdk': 0.25.2
@@ -4282,9 +4273,8 @@ snapshots:
       - encoding
       - langchain
       - openai
-    optional: true
 
-  '@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)':
+  '@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)':
     dependencies:
       '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/community@0.2.28)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
       '@langchain/openai': 0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/community@0.2.28)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))
@@ -4298,7 +4288,7 @@ snapshots:
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     optionalDependencies:
-      '@langchain/langgraph': 0.0.31(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
+      '@langchain/langgraph': 0.0.34(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
       d3-dsv: 3.0.1
       ignore: 5.3.2
       pg: 8.12.0
@@ -4324,21 +4314,21 @@ snapshots:
       - pyodide
     optional: true
 
-  '@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)':
+  '@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)':
     dependencies:
-      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
-      '@langchain/openai': 0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))
+      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
+      '@langchain/openai': 0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))
       binary-extensions: 2.3.0
       expr-eval: 2.0.2
       flat: 5.0.2
       js-yaml: 4.1.0
-      langchain: 0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
-      langsmith: 0.1.41(ycce5egglwuvyqh3fcajkdfk4u)
+      langchain: 0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
+      langsmith: 0.1.41(wxc3uf7ovldvwgrnvfkszgg2fi)
       uuid: 10.0.0
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     optionalDependencies:
-      '@langchain/langgraph': 0.0.31(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
+      '@langchain/langgraph': 0.0.34(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
       ignore: 5.3.2
       lodash: 4.17.21
       pg: 8.12.0
@@ -4363,30 +4353,13 @@ snapshots:
       - peggy
       - pyodide
 
-  '@langchain/core@0.2.27':
+  '@langchain/core@0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))':
     dependencies:
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.14
-      langsmith: 0.1.41(@langchain/core@0.2.27)
-      mustache: 4.2.0
-      p-queue: 6.6.2
-      p-retry: 4.6.2
-      uuid: 10.0.0
-      zod: 3.23.8
-      zod-to-json-schema: 3.23.2(zod@3.23.8)
-    transitivePeerDependencies:
-      - langchain
-      - openai
-
-  '@langchain/core@0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))':
-    dependencies:
-      ansi-styles: 5.2.0
-      camelcase: 6.3.0
-      decamelize: 1.2.0
-      js-tiktoken: 1.0.14
-      langsmith: 0.1.41(ycce5egglwuvyqh3fcajkdfk4u)
+      langsmith: 0.1.41(wxc3uf7ovldvwgrnvfkszgg2fi)
       mustache: 4.2.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -4404,6 +4377,23 @@ snapshots:
       decamelize: 1.2.0
       js-tiktoken: 1.0.14
       langsmith: 0.1.41(@langchain/core@0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/community@0.2.28)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/community@0.2.28)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
+      mustache: 4.2.0
+      p-queue: 6.6.2
+      p-retry: 4.6.2
+      uuid: 10.0.0
+      zod: 3.23.8
+      zod-to-json-schema: 3.23.2(zod@3.23.8)
+    transitivePeerDependencies:
+      - langchain
+      - openai
+
+  '@langchain/core@0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))':
+    dependencies:
+      ansi-styles: 5.2.0
+      camelcase: 6.3.0
+      decamelize: 1.2.0
+      js-tiktoken: 1.0.14
+      langsmith: 0.1.41(@langchain/core@0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))
       mustache: 4.2.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -4466,23 +4456,6 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/core@0.2.27(openai@4.56.0(zod@3.23.8))':
-    dependencies:
-      ansi-styles: 5.2.0
-      camelcase: 6.3.0
-      decamelize: 1.2.0
-      js-tiktoken: 1.0.14
-      langsmith: 0.1.41(@langchain/core@0.2.27(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))
-      mustache: 4.2.0
-      p-queue: 6.6.2
-      p-retry: 4.6.2
-      uuid: 10.0.0
-      zod: 3.23.8
-      zod-to-json-schema: 3.23.2(zod@3.23.8)
-    transitivePeerDependencies:
-      - langchain
-      - openai
-
   '@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8)':
     dependencies:
       '@google/generative-ai': 0.7.1
@@ -4492,29 +4465,6 @@ snapshots:
       - langchain
       - openai
       - zod
-    optional: true
-
-  '@langchain/google-genai@0.0.23(zod@3.23.8)':
-    dependencies:
-      '@google/generative-ai': 0.7.1
-      '@langchain/core': 0.2.27
-      zod-to-json-schema: 3.23.2(zod@3.23.8)
-    transitivePeerDependencies:
-      - langchain
-      - openai
-      - zod
-
-  '@langchain/groq@0.0.15':
-    dependencies:
-      '@langchain/core': 0.2.27
-      '@langchain/openai': 0.2.7
-      groq-sdk: 0.3.3
-      zod: 3.23.8
-      zod-to-json-schema: 3.23.2(zod@3.23.8)
-    transitivePeerDependencies:
-      - encoding
-      - langchain
-      - openai
 
   '@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))':
     dependencies:
@@ -4527,22 +4477,12 @@ snapshots:
       - encoding
       - langchain
       - openai
-    optional: true
 
-  '@langchain/langgraph@0.0.31(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))':
+  '@langchain/langgraph@0.0.34(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))':
     dependencies:
       '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/community@0.2.28)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
       uuid: 10.0.0
       zod: 3.23.8
-    transitivePeerDependencies:
-      - langchain
-      - openai
-
-  '@langchain/ollama@0.0.2':
-    dependencies:
-      '@langchain/core': 0.2.27
-      ollama: 0.5.8
-      uuid: 10.0.0
     transitivePeerDependencies:
       - langchain
       - openai
@@ -4555,22 +4495,10 @@ snapshots:
     transitivePeerDependencies:
       - langchain
       - openai
-    optional: true
 
-  '@langchain/openai@0.2.7':
+  '@langchain/openai@0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))':
     dependencies:
-      '@langchain/core': 0.2.27(openai@4.56.0(zod@3.23.8))
-      js-tiktoken: 1.0.14
-      openai: 4.56.0(zod@3.23.8)
-      zod: 3.23.8
-      zod-to-json-schema: 3.23.2(zod@3.23.8)
-    transitivePeerDependencies:
-      - encoding
-      - langchain
-
-  '@langchain/openai@0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))':
-    dependencies:
-      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
+      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
       js-tiktoken: 1.0.14
       openai: 4.56.0(zod@3.23.8)
       zod: 3.23.8
@@ -4582,6 +4510,17 @@ snapshots:
   '@langchain/openai@0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/community@0.2.28)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))':
     dependencies:
       '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/community@0.2.28)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
+      js-tiktoken: 1.0.14
+      openai: 4.56.0(zod@3.23.8)
+      zod: 3.23.8
+      zod-to-json-schema: 3.23.2(zod@3.23.8)
+    transitivePeerDependencies:
+      - encoding
+      - langchain
+
+  '@langchain/openai@0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))':
+    dependencies:
+      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))
       js-tiktoken: 1.0.14
       openai: 4.56.0(zod@3.23.8)
       zod: 3.23.8
@@ -4614,9 +4553,9 @@ snapshots:
       - langchain
     optional: true
 
-  '@langchain/textsplitters@0.0.3(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))':
+  '@langchain/textsplitters@0.0.3(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))':
     dependencies:
-      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
+      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
       js-tiktoken: 1.0.14
     transitivePeerDependencies:
       - langchain
@@ -4629,6 +4568,15 @@ snapshots:
     transitivePeerDependencies:
       - langchain
       - openai
+
+  '@langchain/textsplitters@0.0.3(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))':
+    dependencies:
+      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))
+      js-tiktoken: 1.0.14
+    transitivePeerDependencies:
+      - langchain
+      - openai
+    optional: true
 
   '@langchain/textsplitters@0.0.3(langchain@0.2.16(fast-xml-parser@4.4.1)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))':
     dependencies:
@@ -6267,16 +6215,16 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0):
+  langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0):
     dependencies:
-      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
-      '@langchain/openai': 0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))
-      '@langchain/textsplitters': 0.0.3(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
+      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
+      '@langchain/openai': 0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))
+      '@langchain/textsplitters': 0.0.3(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
       binary-extensions: 2.3.0
       js-tiktoken: 1.0.14
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
-      langsmith: 0.1.41(ycce5egglwuvyqh3fcajkdfk4u)
+      langsmith: 0.1.41(wxc3uf7ovldvwgrnvfkszgg2fi)
       openapi-types: 12.1.3
       p-retry: 4.6.2
       uuid: 10.0.0
@@ -6285,7 +6233,7 @@ snapshots:
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     optionalDependencies:
       '@langchain/anthropic': 0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
-      '@langchain/community': 0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
+      '@langchain/community': 0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
       '@langchain/google-genai': 0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8)
       '@langchain/groq': 0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
       '@langchain/ollama': 0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
@@ -6316,7 +6264,7 @@ snapshots:
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     optionalDependencies:
       '@langchain/anthropic': 0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
-      '@langchain/community': 0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
+      '@langchain/community': 0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
       '@langchain/google-genai': 0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8)
       '@langchain/groq': 0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
       '@langchain/ollama': 0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
@@ -6329,6 +6277,32 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - openai
+
+  langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)):
+    dependencies:
+      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))
+      '@langchain/openai': 0.2.7(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))
+      '@langchain/textsplitters': 0.0.3(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))
+      binary-extensions: 2.3.0
+      js-tiktoken: 1.0.14
+      js-yaml: 4.1.0
+      jsonpointer: 5.0.1
+      langsmith: 0.1.41(@langchain/core@0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))
+      openapi-types: 12.1.3
+      p-retry: 4.6.2
+      uuid: 10.0.0
+      yaml: 2.5.0
+      zod: 3.23.8
+      zod-to-json-schema: 3.23.2(zod@3.23.8)
+    optionalDependencies:
+      '@langchain/anthropic': 0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
+      '@langchain/google-genai': 0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8)
+      '@langchain/groq': 0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
+      '@langchain/ollama': 0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
+    transitivePeerDependencies:
+      - encoding
+      - openai
+    optional: true
 
   langchain@0.2.16(fast-xml-parser@4.4.1)(openai@4.56.0(zod@3.23.8)):
     dependencies:
@@ -6387,6 +6361,19 @@ snapshots:
       langchain: 0.2.16(@langchain/anthropic@0.2.15)(@langchain/community@0.2.28)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(d3-dsv@3.0.1)(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
       openai: 4.56.0(zod@3.23.8)
 
+  langsmith@0.1.41(@langchain/core@0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8)):
+    dependencies:
+      '@types/uuid': 9.0.8
+      commander: 10.0.1
+      p-queue: 6.6.2
+      p-retry: 4.6.2
+      semver: 7.6.3
+      uuid: 9.0.1
+    optionalDependencies:
+      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8))
+      langchain: 0.2.16(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/ollama@0.0.2)(openai@4.56.0(zod@3.23.8))
+      openai: 4.56.0(zod@3.23.8)
+
   langsmith@0.1.41(@langchain/core@0.2.27(langchain@0.2.16(fast-xml-parser@4.4.1)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(fast-xml-parser@4.4.1)(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8)):
     dependencies:
       '@types/uuid': 9.0.8
@@ -6427,7 +6414,7 @@ snapshots:
       langchain: 0.2.16(openai@4.56.0)
       openai: 4.56.0(zod@3.23.8)
 
-  langsmith@0.1.41(@langchain/core@0.2.27(openai@4.56.0(zod@3.23.8)))(openai@4.56.0(zod@3.23.8)):
+  langsmith@0.1.41(wxc3uf7ovldvwgrnvfkszgg2fi):
     dependencies:
       '@types/uuid': 9.0.8
       commander: 10.0.1
@@ -6436,31 +6423,8 @@ snapshots:
       semver: 7.6.3
       uuid: 9.0.1
     optionalDependencies:
-      '@langchain/core': 0.2.27(openai@4.56.0(zod@3.23.8))
-      openai: 4.56.0(zod@3.23.8)
-
-  langsmith@0.1.41(@langchain/core@0.2.27):
-    dependencies:
-      '@types/uuid': 9.0.8
-      commander: 10.0.1
-      p-queue: 6.6.2
-      p-retry: 4.6.2
-      semver: 7.6.3
-      uuid: 9.0.1
-    optionalDependencies:
-      '@langchain/core': 0.2.27
-
-  langsmith@0.1.41(ycce5egglwuvyqh3fcajkdfk4u):
-    dependencies:
-      '@types/uuid': 9.0.8
-      commander: 10.0.1
-      p-queue: 6.6.2
-      p-retry: 4.6.2
-      semver: 7.6.3
-      uuid: 9.0.1
-    optionalDependencies:
-      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
-      langchain: 0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.31)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
+      '@langchain/core': 0.2.27(langchain@0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(openai@4.56.0(zod@3.23.8))
+      langchain: 0.2.16(@langchain/anthropic@0.2.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/community@0.2.28(@langchain/anthropic@0.2.15)(@langchain/google-genai@0.0.23)(@langchain/groq@0.0.15)(@langchain/langgraph@0.0.34)(@langchain/ollama@0.0.2)(fast-xml-parser@4.4.1)(ignore@5.3.2)(lodash@4.17.21)(openai@4.56.0(zod@3.23.8))(pg@8.12.0)(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0))(@langchain/google-genai@0.0.23(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))(zod@3.23.8))(@langchain/groq@0.0.15(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@langchain/ollama@0.0.2(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(fast-xml-parser@4.4.1)(ignore@5.3.2)(openai@4.56.0(zod@3.23.8))(ws@8.18.0)(youtube-transcript@1.2.1)(youtubei.js@10.3.0)
       openai: 4.56.0(zod@3.23.8)
 
   levn@0.4.1:
