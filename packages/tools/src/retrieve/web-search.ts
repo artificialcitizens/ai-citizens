@@ -15,4 +15,6 @@ export const basicWebSearch = new DynamicStructuredTool({
   },
 });
 
-export const tavilyTool = new TavilySearchResults();
+export const tavilyTool = process.env.TAVILY_API_KEY
+  ? new TavilySearchResults()
+  : null;
