@@ -1,5 +1,11 @@
 # @ai-citizens/ava
 
+## 0.0.14
+
+### Patch Changes
+
+- e94e513: fixes react ink build issue
+
 ## 0.0.13
 
 ### Patch Changes
