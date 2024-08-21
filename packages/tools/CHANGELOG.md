@@ -1,5 +1,11 @@
 # @ai-citizens/tools
 
+## 0.0.4
+
+### Patch Changes
+
+- be414a4: api key catch
+
 ## 0.0.3
 
 ### Patch Changes

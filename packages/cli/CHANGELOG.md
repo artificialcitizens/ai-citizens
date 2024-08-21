@@ -1,5 +1,13 @@
 # @ai-citizens/ava
 
+## 0.0.15
+
+### Patch Changes
+
+- Updated dependencies [be414a4]
+  - @ai-citizens/tools@0.0.4
+  - @ai-citizens/graph@0.0.5
+
 ## 0.0.14
 
 ### Patch Changes
