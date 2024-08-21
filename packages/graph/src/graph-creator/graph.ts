@@ -145,10 +145,10 @@ const graphGeneratorGraph = graphGeneratorBuilder.compile({
   // @ts-expect-error stupid typing
   interruptBefore: ["qaCheck"],
 });
-const graphImg = generateGraphImg({
-  app: graphGeneratorGraph,
-  path: "./graph-generator-graph.png",
-});
+// const graphImg = generateGraphImg({
+//   app: graphGeneratorGraph,
+//   path: "./graph-generator-graph.png",
+// });
 // Example usage
 export const runGraphGenerator = async (
   userRequest?: string,

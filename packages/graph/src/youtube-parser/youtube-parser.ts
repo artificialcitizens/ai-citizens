@@ -80,25 +80,34 @@ const youtubeGraphBuilder = new StateGraph<YouTubeVideoState>({
 });
 
 youtubeGraphBuilder
-  .addNode("getMetadata", async (state) => {
-    // console.log("getMetadata", state);
-    // Fetch metadata (title, url, etc.) from YouTube API
-    try {
-      const metadata = await fetchYoutube(state.url);
+  .addNode(
+    "getMetadata",
+    async (state): Promise<Partial<YouTubeVideoState>> => {
+      try {
+        const metadata = await fetchYoutube(state.url);
 
-      if (metadata?.length > 0) {
-        const videoData = metadata[0];
+        if (metadata?.length > 0) {
+          const videoData = metadata[0];
+          return {
+            title: String(videoData.metadata.title ?? ""),
+            description: String(videoData.metadata.description ?? ""),
+            transcription: String(videoData.pageContent ?? ""),
+          };
+        }
+        // If no metadata is found, return empty strings
         return {
-          title: videoData.metadata.title,
-          description: videoData.metadata.description,
-          transcription: videoData.pageContent,
+          title: "",
+          description: "",
+          transcription: "",
+        };
+      } catch (error) {
+        // Handle the error and return it in the state
+        return {
+          error: error instanceof Error ? error.message : String(error),
         };
       }
-    } catch (error) {
-      // update to catch error and return state with error message to pass to handleMissingTranscription
-      throw error;
     }
-  })
+  )
   .addNode("getRelatedUrls", async (state) => {
     // console.log("getRelatedUrls", state);
     const { description } = state;
