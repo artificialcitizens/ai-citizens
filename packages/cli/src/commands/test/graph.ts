@@ -8,7 +8,7 @@ import {
 import inquirer from "inquirer";
 import { HumanMessage } from "@langchain/core/messages";
 import { test } from "@ai-citizens/tools";
-import { testElectric } from "../../ui/test.jsx";
+// import { testElectric } from "../../ui/test.jsx";
 
 export default class TestGraph extends Command {
   static override args = {
@@ -86,8 +86,8 @@ export default class TestGraph extends Command {
       await test();
     }
 
-    if (args.type === "electric") {
-      testElectric();
-    }
+    // if (args.type === "electric") {
+    //   testElectric();
+    // }
   }
 }
