@@ -12,15 +12,31 @@ export type Memory = {
 };
 
 export interface ChatbotState {
-  user_query: string;
-  messages: BaseMessage[];
+  assistantName: string;
   current_action: "respond" | "action";
-  memories: string[];
+  goals: string[];
   last_interaction_at: Date;
+  messages: BaseMessage[];
+  memories: string[];
+  user_query: string;
+  userName: string;
+  thoughts: string[];
 }
 
 export const avaGraphBuilder = new StateGraph<ChatbotState>({
   channels: {
+    assistantName: {
+      default: () => "",
+      reducer: (_, next) => next,
+    },
+    goals: {
+      default: () => [],
+      reducer: (prev: string[], next: string[]) => [...prev, ...next],
+    },
+    userName: {
+      default: () => "",
+      reducer: (_, next) => next,
+    },
     user_query: {
       default: () => "",
       reducer: (_, next) => next,
@@ -40,6 +56,10 @@ export const avaGraphBuilder = new StateGraph<ChatbotState>({
     last_interaction_at: {
       default: () => new Date(),
       reducer: (_, next) => next,
+    },
+    thoughts: {
+      default: () => [],
+      reducer: (prev: string[], next: string[]) => [...prev, ...next],
     },
   },
 });

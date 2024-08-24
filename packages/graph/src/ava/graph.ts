@@ -1,13 +1,13 @@
-import { END, START, StateGraph } from "@langchain/langgraph";
-import { BaseMessage, HumanMessage, AIMessage } from "@langchain/core/messages";
+import { END, START } from "@langchain/langgraph";
+import { BaseMessage } from "@langchain/core/messages";
 import { MemorySaver } from "@langchain/langgraph";
-import { ChatbotState, avaGraphBuilder } from "./types.js";
-import { routeNode } from "./route.node.js";
-import { responseNode } from "./response.node.js";
-import { actionNode } from "./action.node.js";
 import { IterableReadableStream } from "@langchain/core/utils/stream";
-import { v4 as uuidv4 } from "uuid";
-import { memoryNode } from "./memory.node.js";
+
+import { ChatbotState, avaGraphBuilder } from "./types.js";
+import { routeNode } from "./nodes/route/route.node.js";
+import { responseNode } from "./nodes/response/response.node.js";
+import { actionNode } from "./nodes/action/action.node.js";
+import { memoryNode } from "./nodes/memory/memory.node.js";
 
 // Add nodes to the graph
 avaGraphBuilder
@@ -27,7 +27,6 @@ avaGraphBuilder
 // Compile the graph
 const graph = avaGraphBuilder.compile({
   checkpointer: new MemorySaver(),
-  // @ts-expect-error stupid typing
   // interruptBefore: ["action"],
 });
 
@@ -37,17 +36,26 @@ export async function processChatInput({
   threadId,
   messages,
   memories,
+  goals,
+  userName,
+  assistantName,
 }: {
   input: string;
   threadId: string;
   messages: BaseMessage[];
   memories: string[];
+  goals: string[];
+  userName: string;
+  assistantName: string;
 }): Promise<ChatbotState> {
   const config = { configurable: { thread_id: threadId } };
   const initialState: Partial<ChatbotState> = {
     user_query: input,
     messages,
     memories,
+    goals,
+    userName,
+    assistantName,
   };
 
   try {

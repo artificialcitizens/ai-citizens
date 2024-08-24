@@ -1,6 +1,4 @@
-import { ChatbotState, Memory } from "./types.js";
-import { BaseLanguageModel } from "@langchain/core/language_models/base";
-import { PromptTemplate } from "@langchain/core/prompts";
+import { ChatbotState } from "../../types.js";
 import { anthropicModel, groqModel, ollamaModel } from "@ai-citizens/llm";
 import { parseXml } from "@ai-citizens/utils";
 
@@ -84,7 +82,6 @@ export async function memoryNode(
   });
   // Generate memory recommendations
   const memoryAnalysis = await llm.invoke(prompt);
-  console.log("memoryAnalysis", memoryAnalysis);
   if (typeof memoryAnalysis.content !== "string") {
     throw new Error("Memory analysis is not a string");
   }
@@ -100,6 +97,5 @@ export function parseAndUpdateMemories(memoryAnalysis: string): string[] {
   const parsedMemories = parseXml(memoryAnalysis);
 
   const { memory } = parsedMemories;
-  console.log({ memory });
   return memory || [];
 }
