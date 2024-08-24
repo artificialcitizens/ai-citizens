@@ -92,19 +92,10 @@ export default class Chat extends Command {
     const { flags } = await this.parse(Chat);
 
     let modelName = flags.model || chatConfig?.defaultModel || "gpt-4o-mini";
-    if (!llm.isAllModel(modelName)) {
-      this.log(
-        `------------------------------------------------\n\n Invalid model: ${modelName} \n\n Use the --modelSelect || -s flag to select a model\n\n------------------------------------------------`
-      );
-    }
 
     if (flags.modelSelect) {
       const modelConfig = getModelConfig();
       modelName = await this.selectModel(modelConfig);
-    }
-
-    if (!llm.isAllModel(modelName)) {
-      throw new Error(`Invalid model: ${modelName}`);
     }
 
     const model = await llm.getModel({ model: modelName });
