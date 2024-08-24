@@ -1,4 +1,10 @@
-import { END, START, StateGraph, StateGraphArgs } from "@langchain/langgraph";
+import {
+  END,
+  START,
+  StateGraph,
+  StateGraphArgs,
+  MemorySaver,
+} from "@langchain/langgraph";
 import { BaseMessage } from "@langchain/core/messages";
 import {
   extractLinks,
@@ -9,6 +15,34 @@ import { parseXml } from "@ai-citizens/utils";
 import { IterableReadableStream } from "@langchain/core/utils/stream";
 import { generateGraphImg } from "../utils/generate-graph-img.js";
 import { PostgresSaver } from "../checkpointer/index.js";
+import { z } from "zod";
+import { StructuredTool, tool } from "@langchain/core/tools";
+
+const youtubeSchema = z.object({
+  url: z.string().describe("The URL of the YouTube video to process."),
+});
+
+export const youtubeGraphTool: StructuredTool<typeof youtubeSchema> = tool(
+  async ({ url }) => {
+    const video = await processYouTubeVideo(url, {
+      configurable: { thread_id: "temp_tool" },
+    });
+    return {
+      title: video.title,
+      summary: video.summary,
+      relatedUrls: video.relatedUrls,
+      url: video.url,
+      highlights: video.highlights,
+      transcript: video.transcription,
+    };
+  },
+  {
+    name: "youtube-parser",
+    description: "Can process YouTube videos.",
+    schema: youtubeSchema,
+  }
+);
+
 // Define the YouTube video state interface
 interface YouTubeVideoState {
   title: string;
@@ -125,19 +159,11 @@ youtubeGraphBuilder
       relatedUrls: extractedLinks?.length ? [extractedLinks] : [],
     };
   })
-  // .addNode("extractHighlights", async (state) => {
-  //   // console.log("extractHighlights", state);
-  //   // Extract highlights from video content
-  //   // Return updated state
-  //   return {
-  //     highlights: ["Highlight 1", "Highlight 2"],
-  //   };
-  // })
   .addNode("generateSummary", async (state) => {
     const { transcription } = state;
     const summaryResponse = await parseTranscript({
       transcript: transcription,
-      modelName: "gpt-4o",
+      modelName: "gpt-4o-mini",
     });
     // console.log("generateSummary", summaryResponse);
     const parsedSummary = parseXml(summaryResponse);
@@ -170,11 +196,12 @@ youtubeGraphBuilder
       : "handleMissingTranscription";
   });
 
-const checkpointer = PostgresSaver.fromConnString(
-  "postgresql://postgres:password@localhost:54321/electric"
-);
+// const checkpointer = PostgresSaver.fromConnString(
+//   "postgresql://postgres:password@localhost:54321/electric"
+// );
+
 const youtubeGraph = youtubeGraphBuilder.compile({
-  checkpointer,
+  checkpointer: new MemorySaver(),
 });
 
 // @TODO: Automate graph image generation and readme update
@@ -183,11 +210,11 @@ const youtubeGraph = youtubeGraphBuilder.compile({
 //   path: "./youtube-graph.png",
 // });
 export const processYouTubeVideo = async (
-  videoUrl?: string,
-  config?: { configurable: { thread_id: string } }
+  videoUrl: string,
+  config: { configurable: { thread_id: string } }
 ): Promise<YouTubeVideoState> => {
   const initialState: Partial<YouTubeVideoState> = {
-    url: videoUrl || "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    url: videoUrl,
   };
   const finalState = await youtubeGraph.invoke(initialState, config);
   return finalState;
