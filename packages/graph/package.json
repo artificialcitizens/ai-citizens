@@ -23,7 +23,8 @@
     },
     "nodeArguments": [
       "--import=tsimp"
-    ]
+    ],
+    "timeout": "500s"
   },
   "keywords": [],
   "author": "",
