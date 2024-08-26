@@ -15,7 +15,8 @@
     "psql": "psql \"postgresql://postgres:password@localhost:54321/electric\"",
     "wipe-db": "docker-compose down && docker volume rm electric_quickstart_postgres_data && docker-compose up -d",
     "copy-env": "for dir in packages/*; do cp .env \"$dir/.env\"; done",
-    "clean:node_modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
+    "clean:cache": "pnpm store prune && pnpm -r exec -- rm -rf node_modules && pnpm cache clean --all",
+    "fresh-install": "pnpm run clean:cache && pnpm install"
   },
   "keywords": [],
   "author": "",
@@ -30,10 +31,6 @@
     "tsimp": "^2.0.11"
   },
   "dependencies": {
-    "@ai-citizens/llm": "workspace:*",
-    "@ai-citizens/prompts": "workspace:*",
-    "@ai-citizens/tools": "workspace:*",
-    "@ai-citizens/utils": "workspace:*",
     "dotenv": "^16.4.5"
   }
 }
