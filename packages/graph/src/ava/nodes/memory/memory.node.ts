@@ -8,7 +8,7 @@ const memoryComparisonPrompt = ({
 }: {
   conversation: string;
   existingMemories: string;
-}) => `You are an AI memory management system responsible for analyzing conversations and updating an AI assistant's memory. Your task is to compare the current conversation with existing memories and decide which memories to update, add, or remove.
+}) => `You are the memory of a digital assistant, analyze the conversation and existing memories and manage the memories by updating, adding, or removing memories.
 
 Here is the current conversation:
 <conversation>
@@ -35,6 +35,7 @@ Guidelines for updating, adding, and removing memories:
 5. Do not add memories that are based information that will expire or become irrelevant soon.
 After your analysis, provide your recommendations in the following format:
 
+Do not store memories about Actions taken by the AI assistant. Only store memories about information in relation to the user and goals
 <memory>
 ...
 </memory>
@@ -59,14 +60,14 @@ export async function memoryNode(
   config: { configurable: { thread_id: string } }
 ): Promise<Partial<ChatbotState>> {
   const { messages, memories } = state;
-  // const llm = anthropicModel({
-  //   model: "claude-3-5-sonnet-20240620",
-  //   temperature: 0,
-  // });
-  const llm = groqModel({
-    model: "llama-3.1-70b-versatile",
+  const llm = anthropicModel({
+    model: "claude-3-5-sonnet-20240620",
     temperature: 0,
   });
+  // const llm = groqModel({
+  //   model: "llama-3.1-70b-versatile",
+  //   temperature: 0,
+  // });
   // Prepare the conversation history
   const conversation = messages
     ?.map((msg) => `${msg._getType()}: ${msg.content}`)

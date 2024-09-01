@@ -21,8 +21,15 @@ import { parseXml } from "@ai-citizens/utils";
 import { ToolNode } from "@langchain/langgraph/prebuilt";
 import { tavilyTool, calculatorTool } from "@ai-citizens/tools";
 import { youtubeGraphTool } from "../../../youtube-parser/index.js";
+import { scrapeRedditTool, scrapeGithubTrendingTool } from "@ai-citizens/tools";
 
-const tools = [tavilyTool, calculatorTool, youtubeGraphTool];
+const tools = [
+  tavilyTool,
+  calculatorTool,
+  youtubeGraphTool,
+  scrapeRedditTool,
+  scrapeGithubTrendingTool,
+];
 const toolNode = new ToolNode(tools);
 
 const actionPrompt = ({
@@ -68,15 +75,15 @@ export const actionNode = async (
     model: "gpt-4o-mini",
     temperature: 0,
   });
-  const llm = groqModel({
-    model: "llama-3.1-70b-versatile",
-    temperature: 0,
-  });
-  const modelWithTools = llm.bindTools(tools);
+  // const llm = groqModel({
+  //   model: "llama-3.1-70b-versatile",
+  //   temperature: 0,
+  // });
+  const modelWithTools = responseModel.bindTools(tools);
   const toolResponse = await toolNode.invoke({
     messages: [await modelWithTools.invoke(lastMessage.content)],
   });
-  console.log("Using tool: ", toolResponse.messages[0].name);
+  console.log("Used tool: ", toolResponse.messages[0].name);
   const response = await responseModel.invoke(
     actionPrompt({
       query: lastMessage.content,

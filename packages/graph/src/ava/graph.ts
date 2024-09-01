@@ -2,6 +2,7 @@ import { END, START } from "@langchain/langgraph";
 import { BaseMessage } from "@langchain/core/messages";
 import { MemorySaver } from "@langchain/langgraph";
 import { IterableReadableStream } from "@langchain/core/utils/stream";
+import { generateGraphImg } from "../utils/generate-graph-img.js";
 
 import { ChatbotState, avaGraphBuilder } from "./types.js";
 import { routeNode } from "./nodes/route/route.node.js";
@@ -15,6 +16,10 @@ avaGraphBuilder
   .addNode("respond", responseNode)
   .addNode("action", actionNode)
   .addNode("memory", memoryNode)
+  // .addNode("reflection", (state: ChatbotState) => {
+  //   console.log("state", state);
+  //   return state;
+  // })
   .addEdge(START, "route")
   .addConditionalEdges("route", (state) => state.current_action, {
     respond: "respond",
@@ -28,6 +33,11 @@ avaGraphBuilder
 const graph = avaGraphBuilder.compile({
   checkpointer: new MemorySaver(),
   // interruptBefore: ["action"],
+});
+
+generateGraphImg({
+  app: graph,
+  path: "./ava-graph.png",
 });
 
 // Function to process user input
@@ -67,10 +77,21 @@ export async function processChatInput({
   }
 }
 
-export async function streamChatInput(
-  input: string,
-  threadId: string
-): Promise<IterableReadableStream<ChatbotState>> {
+export async function streamChatInput({
+  initialState,
+  threadId,
+  onUpdate,
+}: {
+  threadId: string;
+  initialState: Partial<ChatbotState>;
+  onUpdate: ({
+    node,
+    values,
+  }: {
+    node: string;
+    values: Partial<ChatbotState>;
+  }) => void;
+}): Promise<IterableReadableStream<ChatbotState>> {
   const config = {
     configurable: {
       thread_id: threadId,
@@ -78,17 +99,10 @@ export async function streamChatInput(
       streamMode: "updates",
     },
   };
-  const initialState: Partial<ChatbotState> = {
-    user_query: input,
-    messages: [],
-  };
-
   try {
     for await (const chunk of await graph.stream(initialState, config)) {
       for (const [node, values] of Object.entries(chunk)) {
-        console.log(`Receiving update from node: ${node}`);
-        console.log(values);
-        console.log("\n====\n");
+        onUpdate({ node, values });
       }
     }
     return new IterableReadableStream<ChatbotState>();

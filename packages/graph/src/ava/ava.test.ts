@@ -2,7 +2,7 @@ import test from "ava";
 import { processChatInput, streamChatInput } from "./graph.js";
 import { AIMessage, HumanMessage } from "@langchain/core/messages";
 
-test("runAva", async (t) => {
+test.skip("runAva", async (t) => {
   const state = await processChatInput({
     input: "What is the weather in portland oregon?",
     threadId: "tst-123",
@@ -47,10 +47,53 @@ test.skip("runAva with new memories", async (t) => {
   t.is(state.current_action, "action");
 });
 
-test.skip("stream chat input", async (t) => {
+test("stream chat input", async (t) => {
   const input = "What is the weather in portland oregon?";
   const threadId = "86594";
-  await streamChatInput(input, threadId);
+  await streamChatInput({
+    initialState: {
+      messages: [],
+      memories: [],
+      goals: [
+        "Learn as much as possible about the user",
+        "Better understand the content the user wants to see",
+      ],
+      user_query: input,
+      userName: "Alice",
+      assistantName: "Bob",
+    },
+    threadId,
+    onUpdate: ({ node, values }) => {
+      t.log(`Receiving update from node: ${node}`);
+      t.log(values);
+      t.log("\n====\n");
+    },
+  });
 
+  t.pass();
+});
+
+test.skip("run ava with action", async (t) => {
+  const state = await processChatInput({
+    userName: "Alice",
+    assistantName: "Bob",
+    input:
+      "Create a blogpost about this video https://youtu.be/1EmHDte62Jk?si=Zt5NcGjAZW7_MaHb",
+    threadId: "tst-123",
+    messages: [],
+    memories: [],
+    goals: [
+      "Learn as much as possible about the user",
+      "Better understand the content the user wants to see",
+    ],
+  });
+  t.log(state?.messages[state?.messages.length - 1].content);
+  const state2 = await processChatInput({
+    ...state,
+    input: "What is the weather in portland oregon?",
+    threadId: "tst-123",
+    messages: [...state.messages],
+  });
+  t.log(state2?.messages[state2?.messages.length - 1].content);
   t.pass();
 });

@@ -25,7 +25,7 @@ test("action node", async (t) => {
     {
       messages: [
         new HumanMessage(
-          "what is this vid about? Give me a summary, key highlights, and takeaways https://youtu.be/MYpN9BbdB9Q?si=huT_qG8z29w85AGk"
+          "What are the trending github repos related to AI and LLMs?"
         ),
       ],
     },
@@ -35,6 +35,6 @@ test("action node", async (t) => {
       },
     }
   );
-  t.log(state3.messages[state3.messages.length - 1].content);
+  t.log(state3?.messages[state3?.messages.length - 1].content);
   t.pass();
 });
