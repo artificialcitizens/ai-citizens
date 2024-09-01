@@ -109,18 +109,105 @@ test("Grid cells have correct direction information", (t) => {
   });
 });
 
-test("Grid updateDirection method works correctly", (t) => {
+test("Grid updateDirection method updates both cells", (t) => {
   const gridInstance = new Grid(3, 3);
 
+  gridInstance.updateDirection("B2", "east", {
+    blocked: true,
+    description: "Wall",
+  });
+
+  const cellB2 = gridInstance.getCell(1, 1);
+  const cellB3 = gridInstance.getCell(2, 1);
+
+  t.true(cellB2?.directions.east.blocked);
+  t.is(cellB2?.directions.east.description, "Wall");
+
+  t.true(cellB3?.directions.west.blocked);
+  t.is(cellB3?.directions.west.description, "Wall");
+});
+
+test("Grid findPath method finds simple path", (t) => {
+  const gridInstance = new Grid(3, 3);
+
+  // Test simple path
+  t.deepEqual(gridInstance.findPath("A1", "C3"), [
+    "A1",
+    "B1",
+    "C1",
+    "C2",
+    "C3",
+  ]);
+});
+
+test("Grid findPath method finds blocked path", (t) => {
+  const gridInstance = new Grid(3, 3);
+
+  gridInstance.updateDirection("B2", "east", {
+    blocked: true,
+    description: "Wall",
+  });
+  gridInstance.updateDirection("A1", "south", {
+    blocked: true,
+    description: "Wall",
+  });
+  t.deepEqual(gridInstance.findPath("A1", "C3"), [
+    "A1",
+    "A2",
+    "B2",
+    "C2",
+    "C3",
+  ]);
+});
+
+test("Grid can find no path", (t) => {
+  const gridInstance = new Grid(3, 3);
+  gridInstance.updateDirection("B1", "south", {
+    blocked: true,
+    description: "Wall",
+  });
+  gridInstance.updateDirection("B2", "west", {
+    blocked: true,
+    description: "Wall",
+  });
   gridInstance.updateDirection("B2", "north", {
     blocked: true,
-    description: "Wall to the north",
+    description: "Wall",
   });
-  const updatedCell = gridInstance.getCell(1, 1);
-
-  t.deepEqual(updatedCell?.directions.north, {
-    neighborId: "A2",
+  gridInstance.updateDirection("B3", "north", {
     blocked: true,
-    description: "Wall to the north",
+    description: "Wall",
   });
+  t.is(gridInstance.canTravel("A1", "C3"), false);
+  t.is(gridInstance.findPath("A1", "C3"), null);
+});
+
+test("print grid method returns a string", (t) => {
+  const gridInstance = new Grid(3, 3);
+  gridInstance.updateDirection("B1", "south", {
+    blocked: true,
+    description: "Wall",
+  });
+  gridInstance.updateDirection("B2", "west", {
+    blocked: true,
+    description: "Wall",
+  });
+  gridInstance.updateDirection("B2", "north", {
+    blocked: true,
+    description: "Wall",
+  });
+  gridInstance.updateDirection("B3", "north", {
+    blocked: true,
+    description: "Wall",
+  });
+  const gridString = gridInstance.printGrid();
+  t.log(gridString);
+  t.is(
+    gridInstance.printGrid(),
+    `A1 A2 A3
+   x  x  
+B1xB2 B3
+x        
+C1 C2 C3`
+  );
 });

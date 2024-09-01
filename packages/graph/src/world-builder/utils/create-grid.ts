@@ -46,6 +46,61 @@ export class Grid {
     return grid;
   }
 
+  public getGrid(): Cell[][] {
+    return this.grid;
+  }
+
+  public getCell(x: number, y: number): Cell | undefined {
+    return this.grid[y]?.[x];
+  }
+
+  public updateDirection(
+    cellId: string,
+    direction: Direction,
+    update: Partial<DirectionInfo>
+  ): void {
+    const cell = this.findCellById(cellId);
+    if (cell) {
+      cell.directions[direction] = { ...cell.directions[direction], ...update };
+
+      // Update the neighboring cell's opposite direction
+      const neighborId = cell.directions[direction].neighborId;
+      if (neighborId) {
+        const neighborCell = this.findCellById(neighborId);
+        if (neighborCell) {
+          const oppositeDirection = this.getOppositeDirection(direction);
+          neighborCell.directions[oppositeDirection] = {
+            ...neighborCell.directions[oppositeDirection],
+            ...update,
+            neighborId: cellId,
+          };
+        }
+      }
+    }
+  }
+
+  private getOppositeDirection(direction: Direction): Direction {
+    switch (direction) {
+      case "north":
+        return "south";
+      case "south":
+        return "north";
+      case "east":
+        return "west";
+      case "west":
+        return "east";
+    }
+  }
+
+  protected findCellById(id: string): Cell | undefined {
+    for (const row of this.grid) {
+      for (const cell of row) {
+        if (cell.id === id) return cell;
+      }
+    }
+    return undefined;
+  }
+
   protected initializeDirections(
     x: number,
     y: number
@@ -75,31 +130,70 @@ export class Grid {
     };
   }
 
-  public getGrid(): Cell[][] {
-    return this.grid;
-  }
+  public findPath(startId: string, endId: string): string[] | null {
+    const start = this.findCellById(startId);
+    const end = this.findCellById(endId);
 
-  public getCell(x: number, y: number): Cell | undefined {
-    return this.grid[y]?.[x];
-  }
-
-  public updateDirection(
-    cellId: string,
-    direction: Direction,
-    update: Partial<DirectionInfo>
-  ): void {
-    const cell = this.findCellById(cellId);
-    if (cell) {
-      cell.directions[direction] = { ...cell.directions[direction], ...update };
+    if (!start || !end) {
+      return null; // Invalid start or end point
     }
-  }
 
-  protected findCellById(id: string): Cell | undefined {
-    for (const row of this.grid) {
-      for (const cell of row) {
-        if (cell.id === id) return cell;
+    const queue: [Cell, string[]][] = [[start, []]];
+    const visited = new Set<string>();
+
+    while (queue.length > 0) {
+      const [currentCell, path] = queue.shift()!;
+
+      if (currentCell.id === endId) {
+        return [...path, currentCell.id]; // Path found
+      }
+
+      if (visited.has(currentCell.id)) {
+        continue; // Skip already visited cells
+      }
+
+      visited.add(currentCell.id);
+
+      for (const [direction, info] of Object.entries(currentCell.directions)) {
+        if (!info.blocked && info.neighborId && !visited.has(info.neighborId)) {
+          const neighborCell = this.findCellById(info.neighborId);
+          if (neighborCell) {
+            queue.push([neighborCell, [...path, currentCell.id]]);
+          }
+        }
       }
     }
-    return undefined;
+
+    return null; // No path found
+  }
+  public canTravel(startId: string, endId: string): boolean {
+    return this.findPath(startId, endId) !== null;
+  }
+
+  public printGrid(): string {
+    let output = "";
+    for (let y = 0; y < this.height; y++) {
+      let rowString = "";
+      let connectionString = "";
+      for (let x = 0; x < this.width; x++) {
+        const cell = this.grid[y][x];
+        rowString += cell.id;
+
+        // Check east connection
+        if (x < this.width - 1) {
+          rowString += cell.directions.east.blocked ? "x" : " ";
+        }
+
+        // Check south connection
+        if (y < this.height - 1) {
+          connectionString += cell.directions.south.blocked ? "x  " : "   ";
+        }
+      }
+      output += rowString + "\n";
+      if (connectionString) {
+        output += connectionString + "\n";
+      }
+    }
+    return output.trim();
   }
 }
