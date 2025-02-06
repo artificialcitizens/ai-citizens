@@ -21,6 +21,7 @@ export interface ChatbotState {
   user_query: string;
   userName: string;
   thoughts: string[];
+  tasks: string[];
 }
 
 export const avaGraphBuilder = new StateGraph<ChatbotState>({
@@ -58,6 +59,10 @@ export const avaGraphBuilder = new StateGraph<ChatbotState>({
       reducer: (_, next) => next,
     },
     thoughts: {
+      default: () => [],
+      reducer: (prev: string[], next: string[]) => [...prev, ...next],
+    },
+    tasks: {
       default: () => [],
       reducer: (prev: string[], next: string[]) => [...prev, ...next],
     },
