@@ -14,7 +14,7 @@
     "release": "pnpm build && pnpm version-packages && pnpm publish",
     "psql": "psql \"postgresql://postgres:password@localhost:54321/electric\"",
     "wipe-db": "docker-compose down && docker volume rm electric_quickstart_postgres_data && docker-compose up -d",
-    "copy-env": "for dir in packages/*; do cp .env \"$dir/.env\"; done",
+    "copy-env": "for dir in packages/* server; do cp .env \"$dir/.env\"; done",
     "clean:cache": "pnpm store prune && pnpm -r exec -- rm -rf node_modules && pnpm cache clean --all",
     "fresh-install": "pnpm run clean:cache && pnpm install"
   },
