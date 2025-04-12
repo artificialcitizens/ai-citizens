@@ -145,7 +145,7 @@ youtubeGraphBuilder
   .addNode("getRelatedUrls", async (state) => {
     // console.log("getRelatedUrls", state);
     const { description } = state;
-    const relatedUrlResponse = await extractLinks(description);
+    const relatedUrlResponse = await extractLinks(description, "gpt-4o-mini");
     // console.log("relatedUrlResponse", relatedUrlResponse);
     const relatedUrls = parseXml(relatedUrlResponse);
     const { scratchPad, extractedLinks } = relatedUrls;

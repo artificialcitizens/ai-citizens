@@ -14,7 +14,9 @@ export const extractLinks = async (
     model,
   });
   const prompt = extractRelevantLinks;
-  const chain = prompt.pipe(llm).pipe(new StringOutputParser());
-  const response = await chain.invoke({ content });
+  const promptResult = await prompt.invoke({ content });
+  const modelResult = await llm.invoke(promptResult);
+  const parser = new StringOutputParser();
+  const response = await parser.invoke(modelResult);
   return response;
 };

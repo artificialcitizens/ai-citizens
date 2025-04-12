@@ -15,6 +15,8 @@ export const generateGraphImg = async ({
     if (!path) {
       return arrayBuffer;
     }
-    fs.writeFileSync(path, Buffer.from(arrayBuffer));
+    // Convert ArrayBuffer to Uint8Array and write directly
+    const uint8Array = new Uint8Array(arrayBuffer);
+    fs.writeFileSync(path, uint8Array);
   }
 };
