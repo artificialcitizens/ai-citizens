@@ -166,8 +166,7 @@ Please provide your highlights now.`;
   const prompt = ChatPromptTemplate.fromMessages([
     new HumanMessage(promptMessage),
   ]);
-  const chain = prompt.pipe(llm);
-  const response = await chain.invoke({});
+  const response = await llm.invoke(await prompt.formatMessages({}));
   // type assert response is a string
   if (typeof response.content === "string") {
     const parsed = await parseXml(response.content);
@@ -235,8 +234,7 @@ Do not include any additional text, explanations, or commentary outside of the X
   const prompt = ChatPromptTemplate.fromMessages([
     new HumanMessage(promptMessage),
   ]);
-  const chain = prompt.pipe(llm);
-  const response = await chain.invoke({});
+  const response = await llm.invoke(await prompt.formatMessages({}));
   if (typeof response.content === "string") {
     const parsed = await parseXml(response.content);
     return {
@@ -307,8 +305,7 @@ Remember to maintain a professional and informative tone throughout your respons
   const prompt = ChatPromptTemplate.fromMessages([
     new HumanMessage(promptMessage),
   ]);
-  const chain = prompt.pipe(llm);
-  const response = await chain.invoke({});
+  const response = await llm.invoke(await prompt.formatMessages({}));
   if (typeof response.content === "string") {
     const {
       response: responseContent,
@@ -342,7 +339,7 @@ const searchGraph = searchGraphBuilder.compile();
 // });
 export const performSearch = async (
   query: string,
-  config: { configurable: { thread_id: string } }
+  config: { configurable: { thread_id: string; report?: boolean } }
 ): Promise<SearchState> => {
   const initialState: Partial<SearchState> = {
     query,
@@ -353,7 +350,7 @@ export const performSearch = async (
 
 export const streamSearchProcess = async (
   query: string,
-  config: { configurable: { thread_id: string } }
+  config: { configurable: { thread_id: string; report?: boolean } }
 ): Promise<IterableReadableStream<SearchState>> => {
   const initialState: Partial<SearchState> = {
     query,

@@ -55,7 +55,7 @@
       "defaultModel": "llama3.1",
       "temperature": 0.5,
       "maxTokens": 8192,
-      "models": ["llama3.1"]
+      "models": ["llama3.1", "phi3.5"]
     },
     "local": {
       "defaultModel": "hermes-2-pro-llama-3-8b",

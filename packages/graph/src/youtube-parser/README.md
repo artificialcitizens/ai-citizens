@@ -1,11 +1,128 @@
-{langgraph_docs}
-Using the above context around LangGraph, create the graph the user is requesting.
+# YouTube Parser
 
-Here is an example of how I like to structure my graphs, please make sure to add all the nodes and edges you need to the graph builder at once, trying to organize chronologically or logically is a good idea.
+A set of tools for processing YouTube videos and channels, extracting metadata, transcriptions, and generating summaries.
 
-Follow strict typing and type checking and guards, this is a good way to make sure that your graph is working as expected.
+## Features
 
-Annotate logic as needed to help explain the graph to the user, but only mock out the functions of the nodes in comments and return test data where applicable.
+- Process individual YouTube videos to extract metadata, transcript, and generate summaries
+- Process entire YouTube channels to analyze all videos
+- Extract related URLs mentioned in video descriptions
+- Generate highlights from video content
+- Support for both YouTube channel IDs and usernames/handles
+
+## Video Parser
+
+The Video Parser processes individual YouTube videos:
+
+```typescript
+import { processYouTubeVideo } from "@ai-citizens/graph";
+
+// Process a single video
+const result = await processYouTubeVideo(
+  "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  {
+    configurable: { thread_id: "unique_id" },
+  }
+);
+
+console.log(result.title);
+console.log(result.summary);
+console.log(result.highlights);
+```
+
+## Channel Parser
+
+The Channel Parser processes all videos from a YouTube channel:
+
+```typescript
+import { processYouTubeChannel } from "@ai-citizens/graph";
+
+// Process a channel using channel ID
+const resultById = await processYouTubeChannel("UCgNqpQrALMzm-Em3BWaQmYg", {
+  configurable: { thread_id: "channel_thread_id" },
+  maxResults: 10, // Process up to 10 videos
+});
+
+// Process a channel using username (with or without @ symbol)
+const resultByUsername = await processYouTubeChannel("aiDotEngineer", {
+  configurable: { thread_id: "channel_thread_id" },
+  maxResults: 5,
+});
+
+// Process a channel using handle (with @ symbol)
+const resultByHandle = await processYouTubeChannel("@aiDotEngineer", {
+  configurable: { thread_id: "channel_thread_id" },
+  maxResults: 5,
+});
+
+// Access the results
+console.log(`Channel: ${resultById.channelTitle}`);
+console.log(`Videos processed: ${resultById.videos.length}`);
+
+// Loop through videos
+resultById.videos.forEach((video) => {
+  console.log(`Video: ${video.title}`);
+  console.log(`Summary: ${video.summary}`);
+});
+```
+
+## Example Scripts
+
+### Process Single Channel
+
+Run the single channel processing script:
+
+```bash
+# Process a channel by ID
+npx tsx packages/graph/src/youtube-parser/examples/process-channel.ts UCgNqpQrALMzm-Em3BWaQmYg 5
+
+# Process a channel by username
+npx tsx packages/graph/src/youtube-parser/examples/process-channel.ts aiDotEngineer 5
+
+# Process a channel by handle
+npx tsx packages/graph/src/youtube-parser/examples/process-channel.ts @aiDotEngineer 5
+```
+
+The second parameter (5) is optional and specifies the maximum number of videos to process.
+
+### Batch Process Multiple Channels
+
+Run the batch processing script:
+
+```bash
+# Process channels from the pre-defined list (edit the script to add channels)
+npx tsx packages/graph/src/youtube-parser/examples/batch-process-channels.ts
+
+# Process channels in parallel
+npx tsx packages/graph/src/youtube-parser/examples/batch-process-channels.ts parallel
+
+# Process specific channels from command line
+npx tsx packages/graph/src/youtube-parser/examples/batch-process-channels.ts sequential UCgNqpQrALMzm-Em3BWaQmYg @aiDotEngineer
+```
+
+## LangChain Tools
+
+This package also exports structured tools for use with LangChain:
+
+```typescript
+import { youtubeGraphTool, youtubeChannelGraphTool } from "@ai-citizens/graph";
+
+// Add the tools to your LangChain agent
+const tools = [youtubeGraphTool, youtubeChannelGraphTool];
+```
+
+## Integration
+
+This module is part of the AI Citizens project and integrates with:
+
+- The Graph module for LangGraph state management
+- The Tools module for various AI and web interaction tools
+
+## Notes
+
+- Processing channels with many videos may take some time.
+- The YouTube API has rate limits, so be cautious when processing many channels in quick succession.
+- Some videos may not have transcripts available, which will limit the summary quality.
 
 ```ts
 import { END, START, StateGraph, StateGraphArgs } from "@langchain/langgraph";

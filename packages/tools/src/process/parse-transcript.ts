@@ -15,8 +15,10 @@ export const parseTranscript = async ({
   }
   const llm = await getModel({ model: modelName });
   const prompt = analyzeTranscriptTemplate;
-  const chain = prompt.pipe(llm).pipe(new StringOutputParser());
+  const promptResult = await prompt.invoke({ transcript });
+  const modelResult = await llm.invoke(promptResult);
+  const parser = new StringOutputParser();
+  const response = await parser.invoke(modelResult);
 
-  const response = await chain.invoke({ transcript });
   return response;
 };

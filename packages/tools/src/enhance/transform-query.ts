@@ -35,8 +35,10 @@ export async function transformQuery({
   // });
 
   // Prompt
-  const chain = prompt.pipe(model).pipe(new StringOutputParser());
-  const betterQuestion = await chain.invoke({ question });
+  const promptResult = await prompt.invoke({ question });
+  const modelResult = await model.invoke(promptResult);
+  const parser = new StringOutputParser();
+  const betterQuestion = await parser.invoke(modelResult);
 
   return {
     question,

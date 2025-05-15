@@ -22,6 +22,7 @@ export default class TestGraph extends Command {
   static override flags = {
     // flag with no value (-f, --force)
     force: Flags.boolean({ char: "f" }),
+    url: Flags.string({ char: "u" }),
   };
 
   public async run(): Promise<void> {
@@ -31,12 +32,8 @@ export default class TestGraph extends Command {
         thread_id: "123",
       },
     };
-    if (args.type === "youtube") {
-      const parsedVideo = await processYouTubeVideo(
-        "https://youtu.be/ZaD_IoNhmXg?si=AMrXm08vqxkP48UW",
-        config
-      );
-      console.log(parsedVideo);
+    if (args.type === "youtube" && flags.url) {
+      const parsedVideo = await processYouTubeVideo(flags.url, config);
     }
 
     if (args.type === "graph" || !args.type) {

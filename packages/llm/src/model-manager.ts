@@ -29,7 +29,7 @@ export const modelConfig = {
     models: ["hermes-2-pro-llama-3-8b"] as const,
   },
   ollama: {
-    models: ["llama3.1"] as const,
+    models: ["llama3.1", "phi3.5"] as const,
   },
   openAI: {
     models: [
